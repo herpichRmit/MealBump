@@ -1,0 +1,192 @@
+[
+  {
+    "id": 1,
+    "title": "Eggs Benedict",
+    "desc": "Enjoy for breakfast to kickstart the day.",
+    "date": "2023-08-7",
+    "order": 1,
+    "type": "meal",
+    "timeLabel" : "Breakfast"
+  },
+  {
+    "id": 2,
+    "title": "Grilled Chicken Salad",
+    "desc": "Have for lunch to stay energized.",
+    "date": "2023-08-7",
+    "order": 2,
+    "type": "meal",
+    "timeLabel" : "Lunch"
+  },
+  {
+    "id": 3,
+    "title": "Spaghetti Bolognese",
+    "desc": "Dinner option for a satisfying evening meal.",
+    "date": "2023-08-7",
+    "order": 3,
+    "type": "meal",
+    "timeLabel" : "Dinner"
+  },
+  {
+    "id": 4,
+    "title": "Fruit Yogurt Parfait",
+    "desc": "Enjoy as a mid-morning snack.",
+    "date": "2023-08-7",
+    "order": 4,
+    "type": "meal",
+    "timeLabel" : "Snack"
+  },
+  {
+    "id": 5,
+    "title": "Oatmeal with Berries",
+    "desc": "Start your morning with a healthy breakfast.",
+    "date": "2023-08-8",
+    "order": 1,
+    "type": "meal",
+    "timeLabel" : "Breakfast"
+  },
+  {
+    "id": 6,
+    "title": "Caprese Panini",
+    "desc": "Lunch option for a flavorful and quick meal.",
+    "date": "2023-08-8",
+    "order": 2,
+    "type": "meal",
+    "timeLabel" : "Lunch"
+  },
+  {
+    "id": 7,
+    "title": "Baked Salmon",
+    "desc": "Dinner choice for a balanced and nutritious meal.",
+    "date": "2023-08-8",
+    "order": 3,
+    "type": "meal",
+    "timeLabel" : "Dinner"
+  },
+  {
+    "id": 8,
+    "title": "Trail Mix",
+    "desc": "Grab this snack for an afternoon energy boost.",
+    "date": "2023-08-8",
+    "order": 4,
+    "type": "meal",
+    "timeLabel" : "Snack"
+  },
+  {
+    "id": 9,
+    "title": "Pancakes",
+    "desc": "Indulge in a breakfast treat.",
+    "date": "2023-08-9",
+    "order": 1,
+    "type": "meal",
+    "timeLabel" : "Breakfast"
+  },
+  {
+    "id": 10,
+    "title": "Greek Salad",
+    "desc": "Enjoy a refreshing salad for lunch.",
+    "date": "2023-08-9",
+    "order": 2,
+    "type": "meal",
+    "timeLabel" : "Lunch"
+  },
+  {
+    "id": 11,
+    "title": "Stir-Fried Tofu",
+    "desc": "Delicious tofu dish for a light dinner.",
+    "date": "2023-08-9",
+    "order": 3,
+    "type": "meal",
+    "timeLabel" : "Dinner"
+  },
+  {
+    "id": 12,
+    "title": "Mixed Nuts",
+    "desc": "Satisfy hunger with this nutritious snack.",
+    "date": "2023-08-9",
+    "order": 4,
+    "type": "meal",
+    "timeLabel" : "Snack"
+  },
+  {
+     "id": 37,
+     "title": "French Toast",
+     "desc": "Start the day with a sweet breakfast delight.",
+     "date": "2023-08-10",
+     "order": 1,
+     "type": "meal",
+     "timeLabel" : "Breakfast"
+   },
+   {
+     "id": 38,
+     "title": "Quinoa Salad",
+     "desc": "Enjoy a protein-packed salad for lunch.",
+     "date": "2023-08-10",
+     "order": 2,
+     "type": "meal",
+     "timeLabel" : "Lunch"
+   },
+   {
+     "id": 39,
+     "title": "Grilled Steak",
+     "desc": "Savor a hearty dinner with a juicy steak.",
+     "date": "2023-08-10",
+     "order": 3,
+     "type": "meal",
+     "timeLabel" : "Dinner"
+   },
+   {
+     "id": 40,
+     "title": "Fruit Smoothie",
+     "desc": "Cool down with a refreshing afternoon smoothie.",
+     "date": "2023-08-10",
+     "order": 4,
+     "type": "meal",
+     "timeLabel" : "Snack"
+   },
+   {
+     "id": 41,
+     "title": "Avocado Toast",
+     "desc": "Enjoy a trendy and nutritious breakfast.",
+     "date": "2023-08-11",
+     "order": 1,
+     "type": "meal",
+     "timeLabel" : "Breakfast"
+   },
+   {
+     "id": 42,
+     "title": "Mediterranean Wrap",
+     "desc": "Lunch on-the-go with a flavorful wrap.",
+     "date": "2023-08-11",
+     "order": 2,
+     "type": "meal",
+     "timeLabel" : "Lunch"
+   },
+   {
+     "id": 43,
+     "title": "Baked Cod",
+     "desc": "Delight in a light and flaky fish dinner.",
+     "date": "2023-08-11",
+     "order": 3,
+     "type": "meal",
+     "timeLabel" : "Dinner"
+   },
+   {
+     "id": 44,
+     "title": "Yogurt with Berries",
+     "desc": "Enjoy a simple and healthy yogurt snack.",
+     "date": "2023-08-11",
+     "order": 4,
+     "type": "meal",
+     "timeLabel" : "Snack"
+   },
+   {
+     "id": 45,
+     "title": "Shopping Trip",
+     "desc": "IGA and woolies.",
+     "date": "2023-08-11",
+     "order": 5,
+     "type": "shoppingtrip",
+     "timeLabel" : "Late"
+   },
+]
+
