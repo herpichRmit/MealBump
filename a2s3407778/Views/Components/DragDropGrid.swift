@@ -13,7 +13,7 @@ struct DragDropGrid: View {
     
     let rows = Array(repeating: GridItem(.flexible(), spacing: 45), count: 2)
     
-    let event1 = Event(id: 1, title: "Birthday Party", desc: "Celebrate John's birthday", date: Date(), order: 1, type: .meal, timeLabel: "6:00 PM", foodItems: [["Cake", "Pizzas", "Soda"]])
+    let event1 = Event(id: 1, title: "Birthday Party", desc: "Celebrate John's birthday", date: Date(), order: 1, type: .meal, timeLabel: "Breakfast", foodItems: [["Cake", "Pizzas", "Soda"]])
 
     let event2 = Event(id: 2, title: "Grocery Shopping", desc: "Buy groceries for the week", date: Date().addingTimeInterval(86400), order: 2, type: .shoppingTrip, timeLabel: "10:00 AM", foodItems: [["Apples", "Milk", "Bread"]])
 
@@ -27,14 +27,13 @@ struct DragDropGrid: View {
     @State private var tuesdayEvents: [Event] = []
     @State private var wednesdayEvents: [Event] = []
 
-
     
     var body: some View {
         
         ScrollView(.vertical, showsIndicators: false){
             VStack{
                 
-                RowOfCards(title: "Monday", events: $mondayEvents)
+                RowOfCards(title: "Monday", day: "7", events: $mondayEvents)
                     .dropDestination(for: Event.self) { droppedEvents, location in
                         for event in droppedEvents{
                             tuesdayEvents.removeAll { $0.id == event.id }
@@ -45,7 +44,7 @@ struct DragDropGrid: View {
                         return true
                     }
                 
-                RowOfCards(title: "Tuesday", events: $tuesdayEvents)
+                RowOfCards(title: "Tuesday", day: "8", events: $tuesdayEvents)
                     .dropDestination(for: Event.self) { droppedEvents, location in
                         for event in droppedEvents{
                             mondayEvents.removeAll { $0.id == event.id }
@@ -57,7 +56,7 @@ struct DragDropGrid: View {
                         return true
                     }
                 
-                RowOfCards(title: "Wednesday", events: $wednesdayEvents)
+                RowOfCards(title: "Wednesday", day: "9", events: $wednesdayEvents)
                     .dropDestination(for: Event.self) { droppedEvents, location in
                         for event in droppedEvents{
                             mondayEvents.removeAll { $0.id == event.id }
@@ -130,6 +129,7 @@ struct DragDropGrid: View {
 struct RowOfCards : View {
     
     let title: String
+    let day: String
     @Binding var events: [Event]
     
     @State var isMoveable : Bool = true
@@ -142,6 +142,9 @@ struct RowOfCards : View {
         Text(title)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding( [.leading, .top])
+        Text(day)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding( [.leading])
         
         ScrollView(.horizontal, showsIndicators: false){
             ZStack{
@@ -160,8 +163,6 @@ struct RowOfCards : View {
                 
                 
                 HStack {
-                    
-                    
                     
                     ReorderableForEach($events, allowReordering: $isMoveable) { item, isDragged in
                         if dragHorizontal {
@@ -184,6 +185,13 @@ struct RowOfCards : View {
                     
                 }
                 .scenePadding( [.leading])
+                
+                RoundedRectangle(cornerRadius: 12)
+                    .frame(idealWidth: 370, maxWidth: .infinity, minHeight:150, maxHeight:150)
+                    .foregroundColor(Color(.clear))
+                    .onTapGesture(count: 2) {
+                        $dragHorizontal.wrappedValue.toggle()
+                    }
                 
             }
             .scenePadding( [.leading])
