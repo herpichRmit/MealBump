@@ -4,19 +4,40 @@
 //
 //  Created by Charles Blyton on 14/8/2023.
 //
-
+import CoreData
 import SwiftUI
+
+func hardcodeDate() -> Date {
+    // Hardcoding the default date to be 7th August where our dummy data is
+    
+    let formatter = DateFormatter()
+    formatter.dateFormat = "YYYY-MM-dd"
+    let anchor = formatter.date(from: "2023-08-07") ?? Date()
+    return anchor
+}
+
 
 struct DayView: View {
     
     // Date selected in the date picker
-    @State var selectedDate: Date = hardcodeDate()
+    @State var selectedDate: Date = Date() //Start with Today's Date
     
     // All of the events read from the json file into an Event Array
 //    @State var events: [Event] = Event.allEvents
     
     // An event array for today's events, Start with today
-    @State var todaysEvents: [Event] = FetchTodaysEvents(dateRequested: hardcodeDate())
+//    var todaysEvents: [Event] = FetchTodaysEvents(dateRequested: selectedDate)
+    
+    // Fetching all events from CoreData with a @FetchRequest, Using sortDescriptor to sort by name. Placing into Event Array called events
+    
+    let fetchRequest: NSFetchRequest<Event>
+    fetchRequest = Event.fetchRequest()
+    fetchRequest.predicate = NSPredicate(
+        format: "name LIKE %@", "Robert")
+    
+    @FetchRequest(sortDescriptors: [
+        SortDescriptor(\.name)]) var todaysEvents: FetchedResults<Event>
+    
     
     @State var isMenuShown = false
     @State var showActionSheet = false
@@ -50,10 +71,10 @@ struct DayView: View {
                 
                 List { // MARK: - Tile Scroll View
                     ForEach (todaysEvents) { event in
-                        EventTile(
-                            title: event.title,
-                            note: event.desc,
-                            eventType: event.timeLabel)
+                        DayEventTile(
+                            title: (event.name ?? "Unknown"),
+                            note: (event.note ?? "Unknown"),
+                            eventType: (event.time_period ?? "Unknown"))
                         .padding(.horizontal, 16.0)
                         .padding(.vertical, 4.0)
                     }
@@ -127,19 +148,7 @@ struct DayView: View {
     }
 }
 
-
-
-func hardcodeDate() -> Date {
-    // Hardcoding the default date to be 7th August where our dummy data is
-    
-    let formatter = DateFormatter()
-    formatter.dateFormat = "YYYY-MM-dd"
-    let anchor = formatter.date(from: "2023-08-07") ?? Date()
-    return anchor
-}
-
-
-
+/*
 func FetchTodaysEvents(dateRequested: Date) -> [Event] {
     
     let allData: [Event] = Bundle.main.decode(file: "TestData") //Getting all the data
@@ -159,71 +168,16 @@ func FetchTodaysEvents(dateRequested: Date) -> [Event] {
     }
     return todaysData
 }
+*/
 
-struct EventTile: View {
-    
-    var title: String
-    var note: String?
-    var eventType: String?
-    var icon: String?
-    
-    var body: some View {
-        
-        HStack{
-            
-            VStack(alignment: .leading) {
-                
-                if let icon = icon {
-                    Text("\(title)  \(Image(systemName: icon))")
-                        .font(.system(.headline))
-                } else {
-                    Text(title)
-                        .font(.system(.headline))
-                }
-                
-                if let note = note {
-                    Spacer()
-                    
-                    Text(note)
-                        .font(.footnote)
-                    Spacer()
-                    
-                }
-                
-                if let eventType = eventType {
-                    Text(eventType)
-                        .font(.bold(.subheadline)())
-                }
-            }
-            .padding(.horizontal, 15)
-            .padding(.vertical, 10)
-            
-            Spacer()
-            
-            VStack{
-                Spacer()
-                Image(systemName: "line.3.horizontal")
-                    .padding(20)
-                Spacer()
-            }
-        }
-        .onAppear(){
-            //            DateStringConverter()
-        }
-        .compositingGroup()
-        .background(Color.white.shadow(color: .black.opacity(0.3), radius: 3, x: 2, y: 2))
-        .border(.gray)
-    }
+/*
+func DateStringConverter(dateToConvert: Date) -> String {
+    var dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "YYYY-MM-dd"
+    var timeString = dateFormatter.string(from: Date())
+    return timeString
 }
-
-
-
-//func DateStringConverter(dateToConvert: Date) -> String {
-//    var dateFormatter = DateFormatter()
-//    dateFormatter.dateFormat = "YYYY-MM-dd"
-//    var timeString = dateFormatter.string(from: Date())
-//    return timeString
-//}
+*/
 
 struct DayView_Previews: PreviewProvider {
     static var previews: some View {

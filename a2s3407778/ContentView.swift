@@ -10,6 +10,14 @@ import SwiftUI
 
 
 struct ContentView: View {
+    
+    
+    // The same for all other entities in the Data Model (analogus to tables in the Database Schema)
+    @FetchRequest(sortDescriptors: []) var items: FetchedResults<Item>
+    @FetchRequest(sortDescriptors: []) var locations: FetchedResults<Location>
+    @FetchRequest(sortDescriptors: []) var meals: FetchedResults<Meal>
+    @FetchRequest(sortDescriptors: []) var users: FetchedResults<User>
+    
     var body: some View {
                  
         TabView{

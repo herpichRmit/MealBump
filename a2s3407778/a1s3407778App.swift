@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct a1s3407778App: App {
+    @StateObject private var dataController = DataController() //Creating state object of all CoreData Saved Data
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+            // Injecting the Coredata managedObjectContext into SwiftUI
+                .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
 }

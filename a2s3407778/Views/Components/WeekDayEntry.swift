@@ -10,7 +10,7 @@ import SwiftUIReorderableForEach // package as seen in https://iosexample.com/dr
 
 // DayEntry shows the weekday, weeknumber and holds all of the meal cards
 
-struct DayEntry: View {
+struct WeekDayEntry: View {
     @State var weekday : String?
     @State var dayNumber : String?
     @State var date : Date?
@@ -59,7 +59,7 @@ struct DayEntry: View {
                     // this swiftUI package allows for cards to be dragged and dropped, demonstrating future functionality that will be imbedded in the system
                     ReorderableForEach($dayInfo, allowReordering: $isMoveable) { item, isDragged in
                         if item.title != "n/a" {
-                            Card(event: item)
+                            WeekEventCard(event: item)
                         }
                     }
 

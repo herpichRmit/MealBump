@@ -45,7 +45,7 @@ struct WeekPlannerView: View {
                                 
                                 // create a row for each day
                                 ForEach(eventsByDay, id: \.self) { day in
-                                    DayEntry(dayInfo: day, isMenuShown: $isMenuShown, showActionSheet: $showActionSheet, showCreateMealSheet: $showCreateMealSheet, showCreateShopSheet: $showCreateShopSheet, showCreateOtherSheet: $showCreateOtherSheet, showSearchMealSheet: $showSearchMealSheet)
+                                    WeekDayEntry(dayInfo: day, isMenuShown: $isMenuShown, showActionSheet: $showActionSheet, showCreateMealSheet: $showCreateMealSheet, showCreateShopSheet: $showCreateShopSheet, showCreateOtherSheet: $showCreateOtherSheet, showSearchMealSheet: $showSearchMealSheet)
                                 }
                             }
                         }
