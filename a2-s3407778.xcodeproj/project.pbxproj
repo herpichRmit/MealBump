@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A815DDDD2ABD1F6300C1DE23 /* ReorderableStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A815DDDC2ABD1F6300C1DE23 /* ReorderableStack.swift */; };
 		A841AF4B2A89CC3200EE109B /* ShoppingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A841AF4A2A89CC3200EE109B /* ShoppingView.swift */; };
 		A8A03AFD2A91E5A2003EF9B9 /* NewFoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A03AFC2A91E5A2003EF9B9 /* NewFoodView.swift */; };
 		A8A03B002A930336003EF9B9 /* SwiftUIReorderableForEach in Frameworks */ = {isa = PBXBuildFile; productRef = A8A03AFF2A930336003EF9B9 /* SwiftUIReorderableForEach */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A815DDDC2ABD1F6300C1DE23 /* ReorderableStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReorderableStack.swift; sourceTree = "<group>"; };
 		A841AF4A2A89CC3200EE109B /* ShoppingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingView.swift; sourceTree = "<group>"; };
 		A8A03AFC2A91E5A2003EF9B9 /* NewFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFoodView.swift; sourceTree = "<group>"; };
 		A8A03B022A93054B003EF9B9 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				A8E6918B2AB855A2005F924C /* DragDropGrid.swift */,
 				A8E691902AB9140D005F924C /* Test.swift */,
 				A8E691922AB95FD1005F924C /* Test2.swift */,
+				A815DDDC2ABD1F6300C1DE23 /* ReorderableStack.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				A8A03B072A9305AC003EF9B9 /* DayEntry.swift in Sources */,
 				CD4EE6862A8E36BA008FD1AB /* ReadJSONData.swift in Sources */,
 				A8A03B032A93054B003EF9B9 /* Card.swift in Sources */,
+				A815DDDD2ABD1F6300C1DE23 /* ReorderableStack.swift in Sources */,
 				A8C6F4712A8EF88300ACC6C4 /* WeekPlannerView.swift in Sources */,
 				A8A03AFD2A91E5A2003EF9B9 /* NewFoodView.swift in Sources */,
 				A8E691912AB9140D005F924C /* Test.swift in Sources */,

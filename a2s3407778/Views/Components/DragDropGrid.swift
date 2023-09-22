@@ -7,135 +7,130 @@
 
 import SwiftUI
 import Algorithms
-import SwiftUIReorderableForEach
+
+struct testData {
+    
+    var week = [
+        [
+            Event(id: 1, title: "Birthday Party", desc: "Celebrate John's birthday", date: Date(), order: 1, type: .meal, timeLabel: "Breakfast", foodItems: [["Cake", "Pizzas", "Soda"]]),
+            Event(id: 2, title: "Grocery Shopping", desc: "Buy groceries for the week", date: Date().addingTimeInterval(86400), order: 2, type: .shoppingTrip, timeLabel: "10:00 AM", foodItems: [["Apples", "Milk", "Bread"]])
+        ],
+        [
+            Event(id: 3, title: "Lunch Meeting", desc: "Discuss project with the team", date: Date().addingTimeInterval(172800), order: 3, type: .meal, timeLabel: "12:30 PM", foodItems: [["Sandwiches", "Salad", "Water"]]),
+            Event(id: 4, title: "Skipped Breakfast", desc: "No time for breakfast today", date: Date().addingTimeInterval(259200), order: 4, type: .skippedMeal, timeLabel: "", foodItems: nil),
+            Event(id: 5, title: "Dinner with Friends", desc: "Enjoy a night out with friends", date: Date().addingTimeInterval(345600), order: 5, type: .meal, timeLabel: "7:00 PM", foodItems: [["Pasta", "Wine", "Dessert"]])
+        ]
+    
+    ]
+        
+}
 
 struct DragDropGrid: View {
     
-    let rows = Array(repeating: GridItem(.flexible(), spacing: 45), count: 2)
+    @State private var mondayEvents: [Event] = [
+        Event(id: 1, title: "Birthday Party", desc: "Celebrate John's birthday", date: Date(), order: 1, type: .meal, timeLabel: "Breakfast", foodItems: [["Cake", "Pizzas", "Soda"]]),
+        Event(id: 2, title: "Grocery Shopping", desc: "Buy groceries for the week", date: Date().addingTimeInterval(86400), order: 2, type: .shoppingTrip, timeLabel: "10:00 AM", foodItems: [["Apples", "Milk", "Bread"]])
+    ]
     
-    let event1 = Event(id: 1, title: "Birthday Party", desc: "Celebrate John's birthday", date: Date(), order: 1, type: .meal, timeLabel: "Breakfast", foodItems: [["Cake", "Pizzas", "Soda"]])
-
-    let event2 = Event(id: 2, title: "Grocery Shopping", desc: "Buy groceries for the week", date: Date().addingTimeInterval(86400), order: 2, type: .shoppingTrip, timeLabel: "10:00 AM", foodItems: [["Apples", "Milk", "Bread"]])
-
-    let event3 = Event(id: 3, title: "Lunch Meeting", desc: "Discuss project with the team", date: Date().addingTimeInterval(172800), order: 3, type: .meal, timeLabel: "12:30 PM", foodItems: [["Sandwiches", "Salad", "Water"]])
-
-    let event4 = Event(id: 4, title: "Skipped Breakfast", desc: "No time for breakfast today", date: Date().addingTimeInterval(259200), order: 4, type: .skippedMeal, timeLabel: "", foodItems: nil)
-
-    let event5 = Event(id: 5, title: "Dinner with Friends", desc: "Enjoy a night out with friends", date: Date().addingTimeInterval(345600), order: 5, type: .meal, timeLabel: "7:00 PM", foodItems: [["Pasta", "Wine", "Dessert"]])
-
-    @State private var mondayEvents: [Event] = []
-    @State private var tuesdayEvents: [Event] = []
-    @State private var wednesdayEvents: [Event] = []
-
+    @State private var tuesdayEvents: [Event] = [
+        Event(id: 3, title: "Lunch Meeting", desc: "Discuss project with the team", date: Date().addingTimeInterval(172800), order: 3, type: .meal, timeLabel: "12:30 PM", foodItems: [["Sandwiches", "Salad", "Water"]]),
+        Event(id: 4, title: "Skipped Breakfast", desc: "No time for breakfast today", date: Date().addingTimeInterval(259200), order: 4, type: .skippedMeal, timeLabel: "", foodItems: nil)
+    ]
+    
+    @State private var selectedEvent: [Event?] = []
+    @State private var animatedTrigger: Bool = false
+    @State private var cardPosition: CGPoint = CGPoint(x: 0, y: 0)
+    let cardStartPoint: CGPoint = CGPoint(x: 300, y: 600)
+    
+    // control what modal is being shown
     
     var body: some View {
         
-        ScrollView(.vertical, showsIndicators: false){
-            VStack{
+            ZStack{
+
+                if !selectedEvent.isEmpty {
+                    Card(event: selectedEvent[0]!)
+                        .animation(.easeInOut, value: animatedTrigger)
+                        .zIndex(1)
+                        .position(cardPosition) // where the card is double tapped
+                        .shadow(color: Color.white.opacity(0.07), radius: 15, x: 4, y: 10)
+                        .onAppear{
+                            animateCardSelect(location: cardPosition) // move card to spot
+                        }
+                }
                 
-                RowOfCards(title: "Monday", day: "7", events: $mondayEvents)
-                    .dropDestination(for: Event.self) { droppedEvents, location in
-                        for event in droppedEvents{
-                            tuesdayEvents.removeAll { $0.id == event.id }
-                            mondayEvents.append(event)
-                        }
-                        let totalEvents = mondayEvents
-                        mondayEvents = Array(totalEvents.uniqued())
-                        return true
-                    }
-                
-                RowOfCards(title: "Tuesday", day: "8", events: $tuesdayEvents)
-                    .dropDestination(for: Event.self) { droppedEvents, location in
-                        for event in droppedEvents{
-                            mondayEvents.removeAll { $0.id == event.id }
-                            tuesdayEvents.append(event)
-                        }
-                        let totalEvents = tuesdayEvents
-                        tuesdayEvents = Array(totalEvents.uniqued())
+                ScrollView(.vertical, showsIndicators: false){
+                    VStack{
                         
-                        return true
-                    }
-                
-                RowOfCards(title: "Wednesday", day: "9", events: $wednesdayEvents)
-                    .dropDestination(for: Event.self) { droppedEvents, location in
-                        for event in droppedEvents{
-                            mondayEvents.removeAll { $0.id == event.id }
-                            tuesdayEvents.append(event)
-                        }
-                        let totalEvents = tuesdayEvents
-                        tuesdayEvents = Array(totalEvents.uniqued())
+                        RowOfCards(title: "Monday", day: "7", events: $mondayEvents, selectedEvent: $selectedEvent, cardPosition: $cardPosition)
+                            .onTapGesture { location in
+                                if !selectedEvent.isEmpty {
+                                    animateCardPlace(location: location)
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                        mondayEvents.removeAll { $0.id == selectedEvent[0]!.id }
+                                        mondayEvents.append(selectedEvent[0]!)
+                                        selectedEvent.removeAll()
+                                        print("test")
+                                    }
+                                    
+                                }
+                            }
                         
-                        return true
-                    }
-                /*
-                RowOfCards(title: "Thursday", events: $wednesdayEvents)
-                    .dropDestination(for: Event.self) { droppedEvents, location in
-                        for event in droppedEvents{
-                            mondayEvents.removeAll { $0.id == event.id }
-                            tuesdayEvents.append(event)
-                        }
-                        let totalEvents = tuesdayEvents
-                        tuesdayEvents = Array(totalEvents.uniqued())
                         
-                        return true
-                    }
-                RowOfCards(title: "Friday", events: $wednesdayEvents)
-                    .dropDestination(for: Event.self) { droppedEvents, location in
-                        for event in droppedEvents{
-                            mondayEvents.removeAll { $0.id == event.id }
-                            tuesdayEvents.append(event)
-                        }
-                        let totalEvents = tuesdayEvents
-                        tuesdayEvents = Array(totalEvents.uniqued())
+                        RowOfCards(title: "Tuesday", day: "8", events: $tuesdayEvents, selectedEvent: $selectedEvent, cardPosition: $cardPosition)
+                            .onTapGesture { location in
+                                if !selectedEvent.isEmpty {
+                                    animateCardPlace(location: location)
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.115) {
+                                        tuesdayEvents.removeAll { $0.id == selectedEvent[0]!.id }
+                                        tuesdayEvents.append(selectedEvent[0]!)
+                                        selectedEvent.removeAll()
+                                        print("test")
+                                    }
+                                    
+                                }
+                            }
                         
-                        return true
-                    }
-                RowOfCards(title: "Saturday", events: $wednesdayEvents)
-                    .dropDestination(for: Event.self) { droppedEvents, location in
-                        for event in droppedEvents{
-                            mondayEvents.removeAll { $0.id == event.id }
-                            tuesdayEvents.append(event)
-                        }
-                        let totalEvents = tuesdayEvents
-                        tuesdayEvents = Array(totalEvents.uniqued())
                         
-                        return true
-                    }
-                RowOfCards(title: "Sunday", events: $wednesdayEvents)
-                    .dropDestination(for: Event.self) { droppedEvents, location in
-                        for event in droppedEvents{
-                            mondayEvents.removeAll { $0.id == event.id }
-                            tuesdayEvents.append(event)
-                        }
-                        let totalEvents = tuesdayEvents
-                        tuesdayEvents = Array(totalEvents.uniqued())
                         
-                        return true
+                        
+
+                        
                     }
-                 */
-                
-            }
-            .onAppear {
-                mondayEvents = [event1, event2, event3]
-                tuesdayEvents = [event4, event5]
-                print(mondayEvents)
-            }
-            
-            
+                    
+                }
+        
         }
     }
+    
+    func animateCardSelect(location: CGPoint) {
+            animatedTrigger.toggle()
+            cardPosition = location
+            withAnimation {
+                cardPosition = CGPoint(x:300, y:600)
+            }
+        }
+    
+    func animateCardPlace(location: CGPoint) {
+            animatedTrigger.toggle()
+            withAnimation {
+                cardPosition = location
+            }
+        }
+    
 }
+
 
 struct RowOfCards : View {
     
     let title: String
     let day: String
     @Binding var events: [Event]
+    @Binding var selectedEvent: [Event?]
+    @Binding var cardPosition: CGPoint
     
     @State var isMoveable : Bool = true
-    
-    @State var dragHorizontal : Bool = true
-    
+
     
     var body: some View {
         
@@ -149,49 +144,31 @@ struct RowOfCards : View {
         ScrollView(.horizontal, showsIndicators: false){
             ZStack{
                 
-                Circle()
-                    .frame(width: 10, height: 10)
-                    .foregroundColor(dragHorizontal ? .green : .red)
-                    .offset(x: -177)
-                
-                RoundedRectangle(cornerRadius: 12)
-                    .frame(idealWidth: 370, maxWidth: .infinity, minHeight:150, maxHeight:150)
-                    .foregroundColor(Color(.secondarySystemFill))
-                    .onTapGesture(count: 2) {
-                        $dragHorizontal.wrappedValue.toggle()
-                    }
-                
                 
                 HStack {
                     
-                    ReorderableForEach($events, allowReordering: $isMoveable) { item, isDragged in
-                        if dragHorizontal {
-                            Card(event: item)
-                                .draggable(item)
-                                .onTapGesture(count: 2) {
-                                    $dragHorizontal.wrappedValue.toggle()
+                    ReorderableStack($events, allowReordering: $isMoveable) { item, isDragged in
+                        Card(event: item)
+                            .onTapGesture(count: 2, coordinateSpace: .global) { location in
+                                print(location)
+                                cardPosition = location
+                                selectedEvent.append(item)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                    events.removeAll { $0.id == selectedEvent[0]!.id }
                                 }
-                        } else {
-                            Card(event: item)
-                                .onTapGesture(count: 2) {
-                                    $dragHorizontal.wrappedValue.toggle()
-                                }
-                        }
-                        
+                            }
                         
                     }
+                    
+                    
                     Spacer()
                     
                     
                 }
-                .scenePadding( [.leading])
                 
                 RoundedRectangle(cornerRadius: 12)
                     .frame(idealWidth: 370, maxWidth: .infinity, minHeight:150, maxHeight:150)
                     .foregroundColor(Color(.clear))
-                    .onTapGesture(count: 2) {
-                        $dragHorizontal.wrappedValue.toggle()
-                    }
                 
             }
             .scenePadding( [.leading])
@@ -199,6 +176,7 @@ struct RowOfCards : View {
         
         
     }
+    
     
 
 }

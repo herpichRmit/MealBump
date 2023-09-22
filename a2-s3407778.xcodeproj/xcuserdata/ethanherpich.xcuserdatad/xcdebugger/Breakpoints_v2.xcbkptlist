@@ -36,5 +36,113 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9C88B8DC-0F35-4F44-91F4-5BDCBB9A5653"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "a2s3407778/Views/Components/DragDropGrid.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "RowOfCards"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "9C88B8DC-0F35-4F44-91F4-5BDCBB9A5653 - 505c5545c9989016"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of a2_s3407778.RowOfCards.dragHorizontal : Swift.Bool"
+                  moduleName = "a2-s3407778"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ethanherpich/Documents/iPhone/a2-s3407778/a2s3407778/Views/Components/DragDropGrid.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "167"
+                  endingLineNumber = "167"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "9C88B8DC-0F35-4F44-91F4-5BDCBB9A5653 - ee98db87f9f61fc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "a2_s3407778.RowOfCards.dragHorizontal.getter : Swift.Bool"
+                  moduleName = "a2-s3407778"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ethanherpich/Documents/iPhone/a2-s3407778/a2s3407778/Views/Components/DragDropGrid.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "167"
+                  endingLineNumber = "167"
+                  offsetFromSymbolStart = "130">
+               </Location>
+               <Location
+                  uuid = "9C88B8DC-0F35-4F44-91F4-5BDCBB9A5653 - a22bb2a21f73b9e0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "a2_s3407778.RowOfCards.dragHorizontal.setter : Swift.Bool"
+                  moduleName = "a2-s3407778"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ethanherpich/Documents/iPhone/a2-s3407778/a2s3407778/Views/Components/DragDropGrid.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "167"
+                  endingLineNumber = "167"
+                  offsetFromSymbolStart = "110">
+               </Location>
+               <Location
+                  uuid = "9C88B8DC-0F35-4F44-91F4-5BDCBB9A5653 - 4ce152cc1a3ebbf1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "a2_s3407778.RowOfCards.dragHorizontal.modify : Swift.Bool"
+                  moduleName = "a2-s3407778"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ethanherpich/Documents/iPhone/a2-s3407778/a2s3407778/Views/Components/DragDropGrid.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "167"
+                  endingLineNumber = "167"
+                  offsetFromSymbolStart = "176">
+               </Location>
+               <Location
+                  uuid = "9C88B8DC-0F35-4F44-91F4-5BDCBB9A5653 - 2385c548be5417e0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "a2_s3407778.RowOfCards.dragHorizontal.modify : Swift.Bool with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "a2-s3407778"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ethanherpich/Documents/iPhone/a2-s3407778/a2s3407778/Views/Components/DragDropGrid.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "167"
+                  endingLineNumber = "167"
+                  offsetFromSymbolStart = "57">
+               </Location>
+               <Location
+                  uuid = "9C88B8DC-0F35-4F44-91F4-5BDCBB9A5653 - f7d0d38a0a57c4b8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "a2_s3407778.RowOfCards.$dragHorizontal.getter : SwiftUI.Binding&lt;Swift.Bool&gt;"
+                  moduleName = "a2-s3407778"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ethanherpich/Documents/iPhone/a2-s3407778/a2s3407778/Views/Components/DragDropGrid.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "167"
+                  endingLineNumber = "167"
+                  offsetFromSymbolStart = "173">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
