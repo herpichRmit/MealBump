@@ -15,8 +15,12 @@ struct DayEntry: View {
     @State var dayNumber : String?
     @State var date : Date?
     
-    // list of all events in the dat
-    @State var dayInfo : [Event]
+    // list of all events in the day
+    @State var events : [Event]
+    
+    // allows for select card functionality
+    @Binding var selectedEvent: [Event?]
+    @Binding var cardPosition: CGPoint
     
     // allows for reordering of cards
     @State var isMoveable : Bool = true
@@ -31,8 +35,8 @@ struct DayEntry: View {
     
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading) {
                 Text(weekday ?? "")
                     .font(.system(size: 16))
                 Text(dayNumber ?? "")
@@ -44,28 +48,37 @@ struct DayEntry: View {
                 // determine weekday from date
                 let dateFormatter = DateFormatter()
                 dateFormatter.setLocalizedDateFormatFromTemplate("EEEE")
-                weekday = dateFormatter.string(from: dayInfo[0].date)
+                weekday = dateFormatter.string(from: events[0].date)
                 
                 // determine day number from date
                 dateFormatter.setLocalizedDateFormatFromTemplate("d")
-                dayNumber = dateFormatter.string(from: dayInfo[0].date)
+                dayNumber = dateFormatter.string(from: events[0].date)
                 
             }
             
             // row of cards
             ScrollView(.horizontal, showsIndicators: false){
-                HStack(spacing: 10) {
+                HStack {
                     
                     // this swiftUI package allows for cards to be dragged and dropped, demonstrating future functionality that will be imbedded in the system
-                    ReorderableForEach($dayInfo, allowReordering: $isMoveable) { item, isDragged in
+                    ReorderableStack($events, allowReordering: $isMoveable) { item, isDragged in
                         if item.title != "n/a" {
                             Card(event: item)
+                                .onTapGesture(count: 2, coordinateSpace: .global) { location in
+                                    print(location)
+                                    cardPosition = location
+                                    selectedEvent.append(item)
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                        events.removeAll { $0.id == selectedEvent[0]!.id }
+                                    }
+                                }
+                            Spacer()
                         }
                     }
 
                     // sheet view contains all the different modal sheets and forms
                     SheetView(
-                        dayInfo: $dayInfo,
+                        events: $events,
                         isMenuShown: $isMenuShown,
                         showActionSheet: $showActionSheet,
                         showCreateMealSheet: $showCreateMealSheet,
@@ -75,15 +88,19 @@ struct DayEntry: View {
                     )
                     
                 }
-                .frame(height: 160, alignment: .top)
+                .frame(height: 140, alignment: .top)
                 .padding([.top, .leading], 2)
                 .padding([.trailing], 10)
             }
             
             
         }
-        .frame(width: 343, height: 180, alignment: .topLeading)
+        .frame(height: 150, alignment: .topLeading)
     }
 
     
 }
+
+    
+    
+

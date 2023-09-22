@@ -11,8 +11,7 @@ import SwiftUI
 struct a1s3407778App: App {
     var body: some Scene {
         WindowGroup {
-            //ContentView()
-            DragDropGrid()
+            ContentView()
         }
     }
 }

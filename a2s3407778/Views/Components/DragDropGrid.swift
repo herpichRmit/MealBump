@@ -42,7 +42,6 @@ struct DragDropGrid: View {
     @State private var cardPosition: CGPoint = CGPoint(x: 0, y: 0)
     let cardStartPoint: CGPoint = CGPoint(x: 300, y: 600)
     
-    // control what modal is being shown
     
     var body: some View {
         
@@ -99,7 +98,7 @@ struct DragDropGrid: View {
                     }
                     
                 }
-        
+
         }
     }
     
@@ -144,7 +143,6 @@ struct RowOfCards : View {
         ScrollView(.horizontal, showsIndicators: false){
             ZStack{
                 
-                
                 HStack {
                     
                     ReorderableStack($events, allowReordering: $isMoveable) { item, isDragged in
@@ -157,15 +155,9 @@ struct RowOfCards : View {
                                     events.removeAll { $0.id == selectedEvent[0]!.id }
                                 }
                             }
-                        
                     }
-                    
-                    
                     Spacer()
-                    
-                    
                 }
-                
                 RoundedRectangle(cornerRadius: 12)
                     .frame(idealWidth: 370, maxWidth: .infinity, minHeight:150, maxHeight:150)
                     .foregroundColor(Color(.clear))
@@ -173,11 +165,7 @@ struct RowOfCards : View {
             }
             .scenePadding( [.leading])
         }
-        
-        
     }
-    
-    
 
 }
 

@@ -60,7 +60,7 @@ struct DayView: View {
                     HStack{
                         Spacer()
                         SheetView(
-                            dayInfo: $todaysEvents,
+                            events: $todaysEvents,
                             isMenuShown: $isMenuShown,
                             showActionSheet: $showActionSheet,
                             showCreateMealSheet: $showCreateMealSheet,
