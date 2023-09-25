@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A815DDDD2ABD1F6300C1DE23 /* ReorderableStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A815DDDC2ABD1F6300C1DE23 /* ReorderableStack.swift */; };
 		A841AF4B2A89CC3200EE109B /* ShoppingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A841AF4A2A89CC3200EE109B /* ShoppingView.swift */; };
 		A8A03AFD2A91E5A2003EF9B9 /* NewFoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A03AFC2A91E5A2003EF9B9 /* NewFoodView.swift */; };
 		A8A03B002A930336003EF9B9 /* SwiftUIReorderableForEach in Frameworks */ = {isa = PBXBuildFile; productRef = A8A03AFF2A930336003EF9B9 /* SwiftUIReorderableForEach */; };
@@ -21,6 +22,8 @@
 		A8D446E22A9B13DF00F77403 /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D446E12A9B13DF00F77403 /* Bubble.swift */; };
 		A8D446E42A9B2EF500F77403 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D446E32A9B2EF500F77403 /* Event.swift */; };
 		A8D446E62A9B2F1800F77403 /* ShoppingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D446E52A9B2F1800F77403 /* ShoppingItem.swift */; };
+		A8E6918C2AB855A2005F924C /* DragDropGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E6918B2AB855A2005F924C /* DragDropGrid.swift */; };
+		A8E6918F2AB86947005F924C /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = A8E6918E2AB86947005F924C /* Algorithms */; };
 		CD17457F2A80D0DA00294186 /* a1s3407778App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD17457E2A80D0DA00294186 /* a1s3407778App.swift */; };
 		CD1745812A80D0DA00294186 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1745802A80D0DA00294186 /* ContentView.swift */; };
 		CD1745832A80D0DB00294186 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD1745822A80D0DB00294186 /* Assets.xcassets */; };
@@ -37,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A815DDDC2ABD1F6300C1DE23 /* ReorderableStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReorderableStack.swift; sourceTree = "<group>"; };
 		A841AF4A2A89CC3200EE109B /* ShoppingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingView.swift; sourceTree = "<group>"; };
 		A8A03AFC2A91E5A2003EF9B9 /* NewFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFoodView.swift; sourceTree = "<group>"; };
 		A8A03B022A93054B003EF9B9 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
@@ -50,6 +54,7 @@
 		A8D446E12A9B13DF00F77403 /* Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
 		A8D446E32A9B2EF500F77403 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		A8D446E52A9B2F1800F77403 /* ShoppingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItem.swift; sourceTree = "<group>"; };
+		A8E6918B2AB855A2005F924C /* DragDropGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragDropGrid.swift; sourceTree = "<group>"; };
 		CD17457B2A80D0DA00294186 /* a2-s3407778.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "a2-s3407778.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD17457E2A80D0DA00294186 /* a1s3407778App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = a1s3407778App.swift; sourceTree = "<group>"; };
 		CD1745802A80D0DA00294186 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8E6918F2AB86947005F924C /* Algorithms in Frameworks */,
 				A8A03B002A930336003EF9B9 /* SwiftUIReorderableForEach in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,6 +105,8 @@
 				A8A03B022A93054B003EF9B9 /* Card.swift */,
 				A8A03B042A930575003EF9B9 /* PlusButton.swift */,
 				A8A03B062A9305AC003EF9B9 /* DayEntry.swift */,
+				A8E6918B2AB855A2005F924C /* DragDropGrid.swift */,
+				A815DDDC2ABD1F6300C1DE23 /* ReorderableStack.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -195,6 +203,7 @@
 			name = "a2-s3407778";
 			packageProductDependencies = (
 				A8A03AFF2A930336003EF9B9 /* SwiftUIReorderableForEach */,
+				A8E6918E2AB86947005F924C /* Algorithms */,
 			);
 			productName = a1s3407778;
 			productReference = CD17457B2A80D0DA00294186 /* a2-s3407778.app */;
@@ -226,6 +235,7 @@
 			mainGroup = CD1745722A80D0DA00294186;
 			packageReferences = (
 				A8A03AFE2A930336003EF9B9 /* XCRemoteSwiftPackageReference "swiftui-reorderable-foreach" */,
+				A8E6918D2AB86947005F924C /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			productRefGroup = CD17457C2A80D0DA00294186 /* Products */;
 			projectDirPath = "";
@@ -268,11 +278,13 @@
 				CDB723442A98E03400876D79 /* RadialLayout.swift in Sources */,
 				A8D446E22A9B13DF00F77403 /* Bubble.swift in Sources */,
 				A8D446E62A9B2F1800F77403 /* ShoppingItem.swift in Sources */,
+				A8E6918C2AB855A2005F924C /* DragDropGrid.swift in Sources */,
 				CDB723412A98DF3F00876D79 /* ExampleOfCustomLayout.swift in Sources */,
 				A8A03B052A930575003EF9B9 /* PlusButton.swift in Sources */,
 				A8A03B072A9305AC003EF9B9 /* DayEntry.swift in Sources */,
 				CD4EE6862A8E36BA008FD1AB /* ReadJSONData.swift in Sources */,
 				A8A03B032A93054B003EF9B9 /* Card.swift in Sources */,
+				A815DDDD2ABD1F6300C1DE23 /* ReorderableStack.swift in Sources */,
 				A8C6F4712A8EF88300ACC6C4 /* WeekPlannerView.swift in Sources */,
 				A8A03AFD2A91E5A2003EF9B9 /* NewFoodView.swift in Sources */,
 				A8D446E42A9B2EF500F77403 /* Event.swift in Sources */,
@@ -489,6 +501,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		A8E6918D2AB86947005F924C /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -496,6 +516,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A8A03AFE2A930336003EF9B9 /* XCRemoteSwiftPackageReference "swiftui-reorderable-foreach" */;
 			productName = SwiftUIReorderableForEach;
+		};
+		A8E6918E2AB86947005F924C /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A8E6918D2AB86947005F924C /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

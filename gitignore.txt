@@ -5,6 +5,13 @@
 ## User settings
 .xcuserdata/
 UserInterfaceState.xcuserstate/
+<<<<<<< HEAD
+=======
+**/.xcuserstate/
+**/.DS_Store
+a2-s3407778.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcworkspace/xcuserdata/
+>>>>>>> replace-drag-drop-library
 
 ## Xcode 8 and earlier
 *.xcscmblueprint
