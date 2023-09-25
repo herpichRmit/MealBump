@@ -32,6 +32,8 @@ struct DayEntry: View {
     @Binding var showCreateShopSheet : Bool
     @Binding var showCreateOtherSheet : Bool
     @Binding var showSearchMealSheet : Bool
+    @Binding var buildActionSheet : Bool
+    @Binding var activateSheetPosition : CGPoint
     
     
     var body: some View {
@@ -65,7 +67,6 @@ struct DayEntry: View {
                         if item.title != "n/a" {
                             Card(event: item)
                                 .onTapGesture(count: 2, coordinateSpace: .global) { location in
-                                    print(location)
                                     cardPosition = location
                                     selectedEvent.append(item)
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -84,7 +85,9 @@ struct DayEntry: View {
                         showCreateMealSheet: $showCreateMealSheet,
                         showCreateShopSheet: $showCreateShopSheet,
                         showCreateOtherSheet: $showCreateOtherSheet,
-                        showSearchMealSheet: $showSearchMealSheet
+                        showSearchMealSheet: $showSearchMealSheet,
+                        buildActionSheet: $buildActionSheet,
+                        activateSheetPosition: $activateSheetPosition
                     )
                     
                 }

@@ -12,21 +12,27 @@ import SwiftUI
 struct InitialLayout: Layout {
     
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout Void) -> CGSize {
+        
         // accept the full proposed space, replacing any nil values with a sensible default
         return proposal.replacingUnspecifiedDimensions()
     }
     
+    
+    
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout Void) {
+        
+        // Map the flexibility property of each subview into an array.
+        let anchors = subviews.map { subview in
+            subview[StartPosition.self]
+        }
+        
         
         for (index, subview) in subviews.enumerated() {
             
+            let anchor = anchors[index]
             
-            let anchor = subviews[index][StartPosition.self]
-
-            print(anchor)
-            
-            // Calculate the center point of the subview based on the coordinates
-            let center = CGPoint(x: anchor.x + bounds.midX, y: anchor.y + bounds.maxY - 40 )
+            // Calculate the center point of the subview
+            let center = CGPoint(x: anchor.x + bounds.minX, y: anchor.y + bounds.minY - 50)
             
             // Place the subview at the calculated center point, anchoring at the center
             subview.place(at: center, anchor: .center, proposal: .unspecified)
@@ -38,18 +44,20 @@ struct InitialLayout: Layout {
 }
 
 struct StartPosition: LayoutValueKey {
-    static var defaultValue: CGPoint = CGPoint(x: 100, y: 100)
+    static var defaultValue: CGPoint = CGPoint(x: 0.0, y: 0.0)
 }
 
 extension View {
-    func anchor(_ anchor: CGPoint) -> some View {
-        self.layoutValue(key: StartPosition.self, value: anchor)
+    func anchor(_ value: CGPoint) -> some View {
+        layoutValue(key: StartPosition.self, value: value)
 
     }
 }
 
+/*
 extension LayoutSubview {
     var anchor: CGPoint {
         self[StartPosition.self]
     }
 }
+*/

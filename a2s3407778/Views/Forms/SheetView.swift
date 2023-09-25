@@ -69,13 +69,26 @@ struct SheetView: View {
     @Binding var showCreateShopSheet : Bool
     @Binding var showCreateOtherSheet : Bool
     @Binding var showSearchMealSheet : Bool
+    @Binding var buildActionSheet : Bool
+    @Binding var activateSheetPosition : CGPoint
     
     
     var body: some View {        
         
         // activating this button calls the custom action sheet (using custom layout) in weekPlannerView
-        PlusButton( function: { isMenuShown = true })
-        
+        PlusButton()
+            .onTapGesture(coordinateSpace: .global) { location in
+                buildActionSheet = true
+                activateSheetPosition = location
+                print("testing tap location measure")
+                print(activateSheetPosition)
+                
+                // delay so animtion is applied
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    print("delay end")
+                    isMenuShown = true
+                }
+            }
             .sheet(isPresented: $showCreateMealSheet) {
                 NavigationStack(){
                     // calls CreateMealSheet that is encapsulated in another file

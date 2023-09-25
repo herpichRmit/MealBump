@@ -18,7 +18,10 @@ struct ExampleOfCustomLayout: View {
             
             VStack{
                 //Ethan's Implementation of plus button
-                PlusButton(function: {isMenuShown.toggle()})
+                PlusButton()
+                    .onTapGesture(coordinateSpace: .global) { location in
+                        isMenuShown = true
+                    }
 
             }
             
