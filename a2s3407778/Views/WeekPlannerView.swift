@@ -20,6 +20,8 @@ struct WeekPlannerView: View {
     @State var showCreateShopSheet = false
     @State var showCreateOtherSheet = false
     @State var showSearchMealSheet = false
+    @State var buildActionSheet = false
+    @State var activateSheetPosition: CGPoint = .zero
     
     
     @State private var selectedEvent: [Event?] = []
@@ -72,7 +74,9 @@ struct WeekPlannerView: View {
                                         showCreateMealSheet: $showCreateMealSheet,
                                         showCreateShopSheet: $showCreateShopSheet,
                                         showCreateOtherSheet: $showCreateOtherSheet,
-                                        showSearchMealSheet: $showSearchMealSheet
+                                        showSearchMealSheet: $showSearchMealSheet,
+                                        buildActionSheet: $buildActionSheet,
+                                        activateSheetPosition: $activateSheetPosition
                                     )
                                     .onTapGesture { location in
                                         if !selectedEvent.isEmpty {
@@ -115,36 +119,64 @@ struct WeekPlannerView: View {
                     }
                     
                     
+                    
                     // When the plus button in DayEntry->sheetView is pressed, custom action sheet below is activated
-                    if isMenuShown {
-
-                        RadialLayout {
-                            Button {
-                                isMenuShown.toggle() //Hides the buttons once pressed
-                                showSearchMealSheet.toggle()
-                            } label: {
-                                Bubble(colour: Color("Color 1"), text: "Achive")
-                            }
-                            Button {
-                                isMenuShown.toggle()
-                                showCreateShopSheet.toggle()
-                            } label: {
-                                Bubble(colour: Color("Color 2"), text: "Shopping")
-                            }
-                            Button {
-                                isMenuShown.toggle()
-                                showCreateMealSheet.toggle()
-                            } label: {
-                                Bubble(colour: Color("Color 3"), text: "Meal")
-                            }
-                            Button {
-                                isMenuShown.toggle()
-                                showCreateOtherSheet.toggle()
-                            } label: {
-                                Bubble(colour: Color("Color 4"), text: "Other")
-                            }
+                    
+                    
+                    if buildActionSheet{
+                        
+                        // we want to build initial layout after button is pressed
+                        // then we want to switch instanly
+                        let layout = isMenuShown ? AnyLayout(RadialLayout()) : AnyLayout(InitialLayout())
+                        
+                        layout {
+                            Bubble(colour: Color("Color 1"), text: "Archive", active: isMenuShown)
+                                .onTapGesture{
+                                    isMenuShown.toggle() //Hides the buttons once pressed
+                                    showSearchMealSheet.toggle()
+                                }
+                                .onAppear(){
+                                    print("testB")
+                                    print(activateSheetPosition)
+                                }
+                                .layoutValue(key: StartPosition.self, value: activateSheetPosition)
+                            Bubble(colour: Color("Color 2"), text: "Shopping", active: isMenuShown)
+                                .onTapGesture{
+                                    isMenuShown.toggle() //Hides the buttons once pressed
+                                    showCreateShopSheet.toggle()
+                                }
+                                .onAppear(){
+                                    print("testB")
+                                    print(activateSheetPosition)
+                                }
+                                .layoutValue(key: StartPosition.self, value: activateSheetPosition)
+                            Bubble(colour: Color("Color 3"), text: "Meal", active: isMenuShown)
+                                .onTapGesture{
+                                    isMenuShown.toggle() //Hides the buttons once pressed
+                                    showCreateMealSheet.toggle()
+                                }
+                                .onAppear(){
+                                    print("testB")
+                                    print(activateSheetPosition)
+                                }
+                                .layoutValue(key: StartPosition.self, value: activateSheetPosition)
+                            Bubble(colour: Color("Color 4"), text: "Other", active: isMenuShown)
+                                .onTapGesture{
+                                    isMenuShown.toggle() //Hides the buttons once pressed
+                                    showCreateOtherSheet.toggle()
+                                }
+                                .onAppear(){
+                                    print("testB")
+                                    print(activateSheetPosition)
+                                }
+                                .layoutValue(key: StartPosition.self, value: activateSheetPosition)
+                            
                         }
+                        .animation(.easeInOut(duration: 0.2))
+                        
                     }
+                    
+                    
             }
             
             

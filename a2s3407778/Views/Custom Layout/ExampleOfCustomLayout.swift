@@ -18,7 +18,10 @@ struct ExampleOfCustomLayout: View {
             
             VStack{
                 //Ethan's Implementation of plus button
-                PlusButton(function: {isMenuShown.toggle()})
+                PlusButton()
+                    .onTapGesture(coordinateSpace: .global) { location in
+                        isMenuShown = true
+                    }
 
             }
             
@@ -31,22 +34,22 @@ struct ExampleOfCustomLayout: View {
                     Button {
                         isMenuShown.toggle() //Hides the buttons once pressed
                     } label: {
-                        Bubble(colour: .blue, text: "Create  Meal")
+                        Bubble(colour: .blue, text: "Create  Meal", active: isMenuShown)
                     }
                     Button {
                         isMenuShown.toggle()
                     } label: {
-                        Bubble(colour: .red, text: "Shopping Trip")
+                        Bubble(colour: .red, text: "Shopping Trip", active: isMenuShown)
                     }
                     Button {
                         isMenuShown.toggle()
                     } label: {
-                        Bubble(colour: .green, text: "Add From Achive")
+                        Bubble(colour: .green, text: "Add From Achive", active: isMenuShown)
                     }
                     Button {
                         isMenuShown.toggle()
                     } label: {
-                        Bubble(colour: .purple, text: "Create Other")
+                        Bubble(colour: .purple, text: "Create Other", active: isMenuShown)
                     }
                 }
             }
