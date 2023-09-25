@@ -79,7 +79,7 @@ struct SheetView: View {
             .sheet(isPresented: $showCreateMealSheet) {
                 NavigationStack(){
                     // calls CreateMealSheet that is encapsulated in another file
-                    CreateMealSheet(name: $name, timePeriod: $timePeriod, note: $note, servings: $servings, foodItems: $newFoodItems, allFoodItems: $allFoodItems)
+                    NewMealSheet(name: $name, timePeriod: $timePeriod, note: $note, servings: $servings, foodItems: $newFoodItems, allFoodItems: $allFoodItems)
                         .navigationTitle("Create meal")
                         .navigationBarTitleDisplayMode(.inline)
                         .navigationBarItems(leading: Button("Back", action: { showCreateMealSheet.toggle() } ))

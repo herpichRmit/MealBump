@@ -14,7 +14,6 @@ struct a1s3407778App: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-            // Injecting the Coredata managedObjectContext into SwiftUI
                 .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }

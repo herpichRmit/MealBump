@@ -7,14 +7,14 @@
 import CoreData
 import SwiftUI
 
-func hardcodeDate() -> Date {
-    // Hardcoding the default date to be 7th August where our dummy data is
-    
-    let formatter = DateFormatter()
-    formatter.dateFormat = "YYYY-MM-dd"
-    let anchor = formatter.date(from: "2023-08-07") ?? Date()
-    return anchor
-}
+//func hardcodeDate() -> Date {
+//    // Hardcoding the default date to be 7th August where our dummy data is
+//
+//    let formatter = DateFormatter()
+//    formatter.dateFormat = "YYYY-MM-dd"
+//    let anchor = formatter.date(from: "2023-08-07") ?? Date()
+//    return anchor
+//}
 
 
 struct DayView: View {
@@ -22,22 +22,15 @@ struct DayView: View {
     // Date selected in the date picker
     @State var selectedDate: Date = Date() //Start with Today's Date
     
-    // All of the events read from the json file into an Event Array
-//    @State var events: [Event] = Event.allEvents
+    @Environment(\.managedObjectContext) var moc //This is for saving data
     
-    // An event array for today's events, Start with today
-//    var todaysEvents: [Event] = FetchTodaysEvents(dateRequested: selectedDate)
-    
-    // Fetching all events from CoreData with a @FetchRequest, Using sortDescriptor to sort by name. Placing into Event Array called events
-    
-    let fetchRequest: NSFetchRequest<Event>
-    fetchRequest = Event.fetchRequest()
-    fetchRequest.predicate = NSPredicate(
-        format: "name LIKE %@", "Robert")
-    
-    @FetchRequest(sortDescriptors: [
-        SortDescriptor(\.name)]) var todaysEvents: FetchedResults<Event>
-    
+    //This is for retreiving saved data, sorting by date
+    @FetchRequest(
+        sortDescriptors: [],
+        predicate: NSPredicate(format: "date == selectedDate")
+    ) var todaysEvents: FetchedResults<EventCore>
+
+
     
     @State var isMenuShown = false
     @State var showActionSheet = false
@@ -58,7 +51,7 @@ struct DayView: View {
                 
                 DatePicker(selectedDate: $selectedDate)
                     .onChange(of: selectedDate){ newValue in
-                        todaysEvents = FetchTodaysEvents(dateRequested: selectedDate)
+                        //                        todaysEvents = FetchTodaysEvents(dateRequested: selectedDate)
                     }
                 
                     .padding(.horizontal)
@@ -74,21 +67,21 @@ struct DayView: View {
                         DayEventTile(
                             title: (event.name ?? "Unknown"),
                             note: (event.note ?? "Unknown"),
-                            eventType: (event.time_period ?? "Unknown"))
+                            eventType: (event.timePeriod ?? "Unknown"))
                         .padding(.horizontal, 16.0)
-                        .padding(.vertical, 4.0)
+                        .patical, 4.0)
                     }
                     HStack{
                         Spacer()
-                        SheetView(
-                            dayInfo: $todaysEvents,
-                            isMenuShown: $isMenuShown,
-                            showActionSheet: $showActionSheet,
-                            showCreateMealSheet: $showCreateMealSheet,
-                            showCreateShopSheet: $showCreateShopSheet,
-                            showCreateOtherSheet: $showCreateOtherSheet,
-                            showSearchMealSheet: $showSearchMealSheet
-                        )
+                        //                        SheetView(
+                        //                            dayInfo: $allEvents,
+                        //                            isMenuShown: $isMenuShown,
+                        //                            showActionSheet: $showActionSheet,
+                        //                            showCreateMealSheet: $showCreateMealSheet,
+                        //                            showCreateShopSheet: $showCreateShopSheet,
+                        //                            showCreateOtherSheet: $showCreateOtherSheet,
+                        //                            showSearchMealSheet: $showSearchMealSheet
+                        //                        )
                         Spacer()
                     }
                 }
@@ -146,38 +139,46 @@ struct DayView: View {
             
         }
     }
-}
-
-/*
-func FetchTodaysEvents(dateRequested: Date) -> [Event] {
-    
-    let allData: [Event] = Bundle.main.decode(file: "TestData") //Getting all the data
-    var todaysData: [Event] = []  //Initialising an empy array
-    
-    // Creating a date formatter that extracts a string of the date from the date object
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "YYYY-MM-dd"
-    let dateString: String = dateFormatter.string(from: dateRequested)
-    
-    
-    for event in allData { //Loop to only get events from today
-        //Comparing String to string as comparing entire date object will not find match
-        if (dateFormatter.string(from: event.date) == dateString){
-            todaysData.append(event)
+    func addRandomEventsToToday(){
+        // Creates 4 random events on today's date and saves to moc
+        
+        let name = ["Eggs Benedict",
+                    "Grilled Chicken Salad",
+                    "Spaghetti Bolognese",
+                    "Fruit Yogurt Parfait",
+                    "Oatmeal with Berries",
+                    "Caprese Panini",
+                    "Baked Salmon",
+                    "Trail Mix"]
+        let note = ["Enjoy for breakfast to kickstart the day.",
+                    "Have for lunch to stay energized.",
+                    "Dinner option for a satisfying evening meal.",
+                    "Enjoy as a mid-morning snack."]
+        let order = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        let timePeriod = ["Snack","Breakfast", "Lunch", "Dinnner", "", ""] //Some events have nil values here
+        let type = ["meal", "meal", "Shopping Trip", "Meal", "Meal"] //Multiple meals because there are most likely more meals than shopping trips
+        
+        for _ in 1...4 { // Looping 4 times
+            
+            let chosenName = name.randomElement()! //Force Unwrap ok here because there will always be data
+            // Date doesn't change so don't need date here
+            let chosenNote = note.randomElement()!
+            let chosenOrder = order.randomElement()!
+            let chosenTimePeriod = timePeriod.randomElement()!
+            let chosenType = type.randomElement()!
+            
+            let newEvent = EventCore(context: moc)
+            newEvent.date = Date() //Today's date
+            newEvent.name = chosenName
+            newEvent.note = chosenNote
+            newEvent.order = Int16(chosenOrder)
+            newEvent.timePeriod = chosenTimePeriod
+            newEvent.type = chosenType
+            
+            try? moc.save()
         }
     }
-    return todaysData
 }
-*/
-
-/*
-func DateStringConverter(dateToConvert: Date) -> String {
-    var dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "YYYY-MM-dd"
-    var timeString = dateFormatter.string(from: Date())
-    return timeString
-}
-*/
 
 struct DayView_Previews: PreviewProvider {
     static var previews: some View {
