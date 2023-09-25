@@ -100,25 +100,25 @@ struct DayView: View {
                         isMenuShown.toggle() //Hides the buttons once pressed
                         showSearchMealSheet.toggle()
                     } label: {
-                        Bubble(colour: Color("Color 1"), text: "Achive")
+                        Bubble(colour: Color("Color 1"), text: "Achive", active: isMenuShown)
                     }
                     Button {
                         isMenuShown.toggle()
                         showCreateShopSheet.toggle()
                     } label: {
-                        Bubble(colour: Color("Color 2"), text: "Shopping")
+                        Bubble(colour: Color("Color 2"), text: "Shopping", active: isMenuShown)
                     }
                     Button {
                         isMenuShown.toggle()
                         showCreateMealSheet.toggle()
                     } label: {
-                        Bubble(colour: Color("Color 3"), text: "Meal")
+                        Bubble(colour: Color("Color 3"), text: "Meal", active: isMenuShown)
                     }
                     Button {
                         isMenuShown.toggle()
                         showCreateOtherSheet.toggle()
                     } label: {
-                        Bubble(colour: Color("Color 4"), text: "Other")
+                        Bubble(colour: Color("Color 4"), text: "Other", active: isMenuShown)
                     }
                 }
             }

@@ -23,6 +23,7 @@ struct RadialLayout: Layout { // This is the actual layout.... everything else i
         let angleIncrement = CGFloat.pi / CGFloat(subviews.count + 1)
         
         for (index, subview) in subviews.enumerated() {
+            
             // Calculate the angle for the current index
             let angle = angleIncrement * CGFloat(index + 1)
             
@@ -37,6 +38,8 @@ struct RadialLayout: Layout { // This is the actual layout.... everything else i
             
             // Place the subview at the calculated center point, anchoring at the center
             subview.place(at: center, anchor: .center, proposal: .unspecified)
+            
+            
         }
     }
     

@@ -116,34 +116,44 @@ struct WeekPlannerView: View {
                     
                     
                     // When the plus button in DayEntry->sheetView is pressed, custom action sheet below is activated
+                    
+                    let layout = isMenuShown ? AnyLayout(RadialLayout()) : AnyLayout(InitialLayout())
+                    
+                    layout {
+                        Button {
+                            isMenuShown.toggle() //Hides the buttons once pressed
+                            showSearchMealSheet.toggle()
+                        } label: {
+                            Bubble(colour: Color("Color 1"), text: "Achive", active: isMenuShown)
+                                .anchor(CGPoint(x: 100, y: 100)) // measure tap position somehow
+                        }
+                        Button {
+                            isMenuShown.toggle()
+                            showCreateShopSheet.toggle()
+                        } label: {
+                            Bubble(colour: Color("Color 2"), text: "Shopping", active: isMenuShown)
+                                .anchor(CGPoint(x: 100, y: 100))
+                        }
+                        Button {
+                            isMenuShown.toggle()
+                            showCreateMealSheet.toggle()
+                        } label: {
+                            Bubble(colour: Color("Color 3"), text: "Meal", active: isMenuShown)
+                                .anchor(CGPoint(x: 100, y: 100))
+                        }
+                        Button {
+                            isMenuShown.toggle()
+                            showCreateOtherSheet.toggle()
+                        } label: {
+                            Bubble(colour: Color("Color 4"), text: "Other", active: isMenuShown)
+                                .anchor(CGPoint(x: 100, y: 100))
+                        }
+                    }
+                    .animation(.easeInOut(duration: 0.2))
+                    
+                    
                     if isMenuShown {
 
-                        RadialLayout {
-                            Button {
-                                isMenuShown.toggle() //Hides the buttons once pressed
-                                showSearchMealSheet.toggle()
-                            } label: {
-                                Bubble(colour: Color("Color 1"), text: "Achive")
-                            }
-                            Button {
-                                isMenuShown.toggle()
-                                showCreateShopSheet.toggle()
-                            } label: {
-                                Bubble(colour: Color("Color 2"), text: "Shopping")
-                            }
-                            Button {
-                                isMenuShown.toggle()
-                                showCreateMealSheet.toggle()
-                            } label: {
-                                Bubble(colour: Color("Color 3"), text: "Meal")
-                            }
-                            Button {
-                                isMenuShown.toggle()
-                                showCreateOtherSheet.toggle()
-                            } label: {
-                                Bubble(colour: Color("Color 4"), text: "Other")
-                            }
-                        }
                     }
             }
             

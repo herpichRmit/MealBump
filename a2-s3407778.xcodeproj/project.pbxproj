@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A815DDDD2ABD1F6300C1DE23 /* ReorderableStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A815DDDC2ABD1F6300C1DE23 /* ReorderableStack.swift */; };
+		A815DDDF2AC1351000C1DE23 /* InitialLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A815DDDE2AC1350F00C1DE23 /* InitialLayout.swift */; };
 		A841AF4B2A89CC3200EE109B /* ShoppingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A841AF4A2A89CC3200EE109B /* ShoppingView.swift */; };
 		A8A03AFD2A91E5A2003EF9B9 /* NewFoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A03AFC2A91E5A2003EF9B9 /* NewFoodView.swift */; };
 		A8A03B002A930336003EF9B9 /* SwiftUIReorderableForEach in Frameworks */ = {isa = PBXBuildFile; productRef = A8A03AFF2A930336003EF9B9 /* SwiftUIReorderableForEach */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		A815DDDC2ABD1F6300C1DE23 /* ReorderableStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReorderableStack.swift; sourceTree = "<group>"; };
+		A815DDDE2AC1350F00C1DE23 /* InitialLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialLayout.swift; sourceTree = "<group>"; };
 		A841AF4A2A89CC3200EE109B /* ShoppingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingView.swift; sourceTree = "<group>"; };
 		A8A03AFC2A91E5A2003EF9B9 /* NewFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFoodView.swift; sourceTree = "<group>"; };
 		A8A03B022A93054B003EF9B9 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				CDB723402A98DF3F00876D79 /* ExampleOfCustomLayout.swift */,
 				CDB723432A98E03400876D79 /* RadialLayout.swift */,
 				A8D446E12A9B13DF00F77403 /* Bubble.swift */,
+				A815DDDE2AC1350F00C1DE23 /* InitialLayout.swift */,
 			);
 			path = "Custom Layout";
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				A8A03B072A9305AC003EF9B9 /* DayEntry.swift in Sources */,
 				CD4EE6862A8E36BA008FD1AB /* ReadJSONData.swift in Sources */,
 				A8A03B032A93054B003EF9B9 /* Card.swift in Sources */,
+				A815DDDF2AC1351000C1DE23 /* InitialLayout.swift in Sources */,
 				A815DDDD2ABD1F6300C1DE23 /* ReorderableStack.swift in Sources */,
 				A8C6F4712A8EF88300ACC6C4 /* WeekPlannerView.swift in Sources */,
 				A8A03AFD2A91E5A2003EF9B9 /* NewFoodView.swift in Sources */,
