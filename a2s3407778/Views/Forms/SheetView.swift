@@ -88,7 +88,6 @@ struct SheetView: View {
                         .navigationBarItems(trailing: Button("Done", action: {
                             // when done is press append event to dayInfo
                             
-                            var newEvent = EventCore
                             dayInfo.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: dayInfo[0].date, order: 100, type: TypeEnum.meal, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
                             
                             // clearing values

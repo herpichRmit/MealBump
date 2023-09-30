@@ -54,15 +54,15 @@ struct DayView: View {
                 
                 HStack{
                     Spacer()
-                                            SheetView(
-//                                                dayInfo: $allEvents,
-                                                isMenuShown: $isMenuShown,
-                                                showActionSheet: $showActionSheet,
-                                                showCreateMealSheet: $showCreateMealSheet,
-                                                showCreateShopSheet: $showCreateShopSheet,
-                                                showCreateOtherSheet: $showCreateOtherSheet,
-                                                showSearchMealSheet: $showSearchMealSheet
-                                            )
+//                                            SheetView(
+////                                                dayInfo: $allEvents,
+//                                                isMenuShown: $isMenuShown,
+//                                                showActionSheet: $showActionSheet,
+//                                                showCreateMealSheet: $showCreateMealSheet,
+//                                                showCreateShopSheet: $showCreateShopSheet,
+//                                                showCreateOtherSheet: $showCreateOtherSheet,
+//                                                showSearchMealSheet: $showSearchMealSheet
+//                                            )
                     Spacer()
                 }
             }
