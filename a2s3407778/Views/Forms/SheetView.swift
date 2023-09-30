@@ -64,20 +64,33 @@ struct SheetView: View {
     @State var allFoodItems: [[String]] = [["Beef 80% lean","250g","Meat","Butcher"], ["Apple","5 or 6","Fruit","Woolworths"], ["Milk","200ml","Dairy","Coles"]] // populate
     
     // used to control which modal is open
-    @Binding var dayInfo : [Event]
+    @Binding var events : [Event]
     @Binding var isMenuShown : Bool
     @Binding var showActionSheet : Bool
     @Binding var showCreateMealSheet : Bool
     @Binding var showCreateShopSheet : Bool
     @Binding var showCreateOtherSheet : Bool
     @Binding var showSearchMealSheet : Bool
+    @Binding var buildActionSheet : Bool
+    @Binding var activateSheetPosition : CGPoint
     
     
     var body: some View {        
         
         // activating this button calls the custom action sheet (using custom layout) in weekPlannerView
-        PlusButton( function: { isMenuShown = true })
-        
+        PlusButton()
+            .onTapGesture(coordinateSpace: .global) { location in
+                buildActionSheet = true
+                activateSheetPosition = location
+                print("testing tap location measure")
+                print(activateSheetPosition)
+                
+                // delay so animtion is applied
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    print("delay end")
+                    isMenuShown = true
+                }
+            }
             .sheet(isPresented: $showCreateMealSheet) {
                 NavigationStack(){
                     // calls CreateMealSheet that is encapsulated in another file
@@ -86,9 +99,17 @@ struct SheetView: View {
                         .navigationBarTitleDisplayMode(.inline)
                         .navigationBarItems(leading: Button("Back", action: { showCreateMealSheet.toggle() } ))
                         .navigationBarItems(trailing: Button("Done", action: {
+<<<<<<< HEAD
                             // when done is press append event to dayInfo
                             
                             dayInfo.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: dayInfo[0].date, order: 100, type: TypeEnum.meal, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
+||||||| 0cacb4a
+                            // when done is press append event to dayInfo
+                            dayInfo.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: dayInfo[0].date, order: 100, type: TypeEnum.meal, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
+=======
+                            // when done is press append event to events
+                            events.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: events[0].date, order: 100, type: TypeEnum.meal, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
+>>>>>>> main
                             
                             // clearing values
                             name = nil
@@ -120,7 +141,7 @@ struct SheetView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarItems(leading: Button("Back", action: { showCreateShopSheet.toggle() } ))
                     .navigationBarItems(trailing: Button("Done", action: {
-                        dayInfo.append(Event(id: Int.random(in:50..<4000), title: "Shopping trip", desc: note ?? "", date: dayInfo[0].date, order: 99, type: TypeEnum.shoppingTrip, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
+                        events.append(Event(id: Int.random(in:50..<4000), title: "Shopping trip", desc: note ?? "", date: events[0].date, order: 99, type: TypeEnum.shoppingTrip, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
                         showCreateShopSheet.toggle()
                     }))
                     

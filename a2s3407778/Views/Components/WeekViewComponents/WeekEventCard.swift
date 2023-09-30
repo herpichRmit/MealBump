@@ -24,7 +24,7 @@ struct WeekEventCard: View {
             }
             
         }
-        .frame(width: 100, height: 100, alignment: .topLeading)
+        .frame(width: 100, height: 80, alignment: .topLeading)
         .padding(10)
         .background(
             RoundedRectangle(cornerRadius: 14)
