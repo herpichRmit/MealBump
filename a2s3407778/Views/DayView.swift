@@ -4,40 +4,26 @@
 //
 //  Created by Charles Blyton on 14/8/2023.
 //
+import Foundation
 import CoreData
 import SwiftUI
 
-//func hardcodeDate() -> Date {
-//    // Hardcoding the default date to be 7th August where our dummy data is
-//
-//    let formatter = DateFormatter()
-//    formatter.dateFormat = "YYYY-MM-dd"
-//    let anchor = formatter.date(from: "2023-08-07") ?? Date()
-//    return anchor
-//}
-
-
 struct DayView: View {
+    //    MARK: - Variables and FetchRequests
     
     // Date selected in the date picker
     @State var selectedDate: Date = Date() //Start with Today's Date
-    
-    @Environment(\.managedObjectContext) var moc //This is for saving data
-    
-    //This is for retreiving saved data, sorting by date
-    @FetchRequest(
-        sortDescriptors: [],
-        predicate: NSPredicate(format: "date == selectedDate")
-    ) var todaysEvents: FetchedResults<EventCore>
+        
+    @Environment(\.managedObjectContext) private var viewContext // For accessing CoreData
 
-
-    
     @State var isMenuShown = false
     @State var showActionSheet = false
     @State var showCreateMealSheet = false
     @State var showCreateShopSheet = false
     @State var showCreateOtherSheet = false
     @State var showSearchMealSheet = false
+    
+    //    MARK: - View Body
     
     var body: some View {
         ZStack {
@@ -47,101 +33,97 @@ struct DayView: View {
                         .font(.title2)
                         .padding()
                     Spacer()
+                    EditButton()
+                    Button { //Plus Button adding new random item (for testing)
+                        addRandomEventToToday()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                    .padding()
                 }
                 
                 DatePicker(selectedDate: $selectedDate)
-                    .onChange(of: selectedDate){ newValue in
-                        //                        todaysEvents = FetchTodaysEvents(dateRequested: selectedDate)
-                    }
-                
                     .padding(.horizontal)
                     .padding(.bottom, 30)
                 
-                
                 Spacer()
+                
                 Text("\(selectedDate.formatted(.dateTime.weekday(.wide).day().month().year()))").font(.callout)
                 
+                DayFilteredList(filter: selectedDate)
                 
-                List { // MARK: - Tile Scroll View
-                    ForEach (todaysEvents) { event in
-                        DayEventTile(
-                            title: (event.name ?? "Unknown"),
-                            note: (event.note ?? "Unknown"),
-                            eventType: (event.timePeriod ?? "Unknown"))
-                        .padding(.horizontal, 16.0)
-                        .patical, 4.0)
-                    }
-                    HStack{
-                        Spacer()
-                        //                        SheetView(
-                        //                            dayInfo: $allEvents,
-                        //                            isMenuShown: $isMenuShown,
-                        //                            showActionSheet: $showActionSheet,
-                        //                            showCreateMealSheet: $showCreateMealSheet,
-                        //                            showCreateShopSheet: $showCreateShopSheet,
-                        //                            showCreateOtherSheet: $showCreateOtherSheet,
-                        //                            showSearchMealSheet: $showSearchMealSheet
-                        //                        )
-                        Spacer()
-                    }
-                }
-                
-                .listStyle(.plain)
-                .listRowSeparator(.hidden)
-            }
-            
-            // Used to exit blur background and exit popup if tapped outside of buttons
-            if isMenuShown {
-                VStack(alignment: .leading){
-                    HStack {
-                        Spacer()
-                    }
+                HStack{
+                    Spacer()
+                                            SheetView(
+//                                                dayInfo: $allEvents,
+                                                isMenuShown: $isMenuShown,
+                                                showActionSheet: $showActionSheet,
+                                                showCreateMealSheet: $showCreateMealSheet,
+                                                showCreateShopSheet: $showCreateShopSheet,
+                                                showCreateOtherSheet: $showCreateOtherSheet,
+                                                showSearchMealSheet: $showSearchMealSheet
+                                            )
                     Spacer()
                 }
-                .background(.regularMaterial)
-                .opacity(0.9)
-                .blur(radius: 10, opaque: false)
-                .onTapGesture {
-                    isMenuShown = false
-                }
             }
-            
-            // Custom action sheet
-            // when plus button is pressed, custom action sheet is activated
-            if isMenuShown {
-                RadialLayout {
-                    Button {
-                        isMenuShown.toggle() //Hides the buttons once pressed
-                        showSearchMealSheet.toggle()
-                    } label: {
-                        Bubble(colour: Color("Color 1"), text: "Achive")
-                    }
-                    Button {
-                        isMenuShown.toggle()
-                        showCreateShopSheet.toggle()
-                    } label: {
-                        Bubble(colour: Color("Color 2"), text: "Shopping")
-                    }
-                    Button {
-                        isMenuShown.toggle()
-                        showCreateMealSheet.toggle()
-                    } label: {
-                        Bubble(colour: Color("Color 3"), text: "Meal")
-                    }
-                    Button {
-                        isMenuShown.toggle()
-                        showCreateOtherSheet.toggle()
-                    } label: {
-                        Bubble(colour: Color("Color 4"), text: "Other")
-                    }
-                }
-            }
-            
         }
-    }
-    func addRandomEventsToToday(){
-        // Creates 4 random events on today's date and saves to moc
         
+        // Used to exit blur background and exit popup if tapped outside of buttons
+        if isMenuShown {
+            VStack(alignment: .leading){
+                HStack {
+                    Spacer()
+                }
+                Spacer()
+            }
+            .background(.regularMaterial)
+            .opacity(0.9)
+            .blur(radius: 10, opaque: false)
+            .onTapGesture {
+                isMenuShown = false
+            }
+        }
+        
+        // Custom action sheet
+        // when plus button is pressed, custom action sheet is activated
+        if isMenuShown {
+            RadialLayout {
+                Button {
+                    isMenuShown.toggle() //Hides the buttons once pressed
+                    showSearchMealSheet.toggle()
+                } label: {
+                    Bubble(colour: Color("Color 1"), text: "Achive")
+                }
+                Button {
+                    isMenuShown.toggle()
+                    showCreateShopSheet.toggle()
+                } label: {
+                    Bubble(colour: Color("Color 2"), text: "Shopping")
+                }
+                Button {
+                    isMenuShown.toggle()
+                    showCreateMealSheet.toggle()
+                } label: {
+                    Bubble(colour: Color("Color 3"), text: "Meal")
+                }
+                Button {
+                    isMenuShown.toggle()
+                    showCreateOtherSheet.toggle()
+                } label: {
+                    Bubble(colour: Color("Color 4"), text: "Other")
+                }
+            }
+        }
+        
+    }
+    
+    
+    //    MARK: - Helper Functions
+    
+    fileprivate func addRandomEventToToday(){
+        // Creates 4 random events on today's date and saves to viewContext
+        
+        // Setting random information to use to create events
         let name = ["Eggs Benedict",
                     "Grilled Chicken Salad",
                     "Spaghetti Bolognese",
@@ -155,35 +137,43 @@ struct DayView: View {
                     "Dinner option for a satisfying evening meal.",
                     "Enjoy as a mid-morning snack."]
         let order = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        let timePeriod = ["Snack","Breakfast", "Lunch", "Dinnner", "", ""] //Some events have nil values here
-        let type = ["meal", "meal", "Shopping Trip", "Meal", "Meal"] //Multiple meals because there are most likely more meals than shopping trips
+        let timePeriod = ["Snack","Breakfast", "Lunch", "Dinner", "", ""]
+        let type = ["meal", "meal", "Shopping Trip", "Meal", "Meal"]
         
-        for _ in 1...4 { // Looping 4 times
-            
-            let chosenName = name.randomElement()! //Force Unwrap ok here because there will always be data
-            // Date doesn't change so don't need date here
-            let chosenNote = note.randomElement()!
-            let chosenOrder = order.randomElement()!
-            let chosenTimePeriod = timePeriod.randomElement()!
-            let chosenType = type.randomElement()!
-            
-            let newEvent = EventCore(context: moc)
-            newEvent.date = Date() //Today's date
-            newEvent.name = chosenName
-            newEvent.note = chosenNote
-            newEvent.order = Int16(chosenOrder)
-            newEvent.timePeriod = chosenTimePeriod
-            newEvent.type = chosenType
-            
-            try? moc.save()
-        }
-    }
+        // Picking random elements
+        let chosenName = name.randomElement()! //Force Unwrap ok here because there will always be data
+        let chosenNote = note.randomElement()!
+        let chosenOrder = order.randomElement()!
+        let chosenTimePeriod = timePeriod.randomElement()!
+        let chosenType = type.randomElement()!
+        
+        // Adding data to new EventCore Object
+        let newEvent = EventCore(context: viewContext) //New object with the CoreData ViewContext
+        newEvent.date = selectedDate //Add events to the selected date
+        newEvent.name = chosenName
+        newEvent.note = chosenNote
+        newEvent.order = Int16(chosenOrder)
+        newEvent.timePeriod = chosenTimePeriod
+        newEvent.type = chosenType
+        
+        // Saving data
+        do {
+            try viewContext.save() //Saving data to the persistent store
+        } catch {
+            let nserror = error as NSError
+            fatalError("Saving Error: \(nserror), \(nserror.userInfo)")
+        }        }
+    
 }
 
-struct DayView_Previews: PreviewProvider {
-    static var previews: some View {
-        DayView()
-    }
-}
+//struct DayView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        // All this stuff is to allow the preview to work with coredata
+//        let context = PersistenceController.preview.container.viewContext
+//        let newLaunch = EventCore(context: context)
+//        newLaunch.name = "Not sure what this is about here"
+//        return DayView()
+//    }
+//}
 
 

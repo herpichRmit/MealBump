@@ -23,6 +23,7 @@
 		CD1745812A80D0DA00294186 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1745802A80D0DA00294186 /* ContentView.swift */; };
 		CD1745832A80D0DB00294186 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD1745822A80D0DB00294186 /* Assets.xcassets */; };
 		CD1745862A80D0DB00294186 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD1745852A80D0DB00294186 /* Preview Assets.xcassets */; };
+		CD202AC02AC2B4F000425AC0 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD202ABF2AC2B4F000425AC0 /* Persistence.swift */; };
 		CD31540C2A97277B00CE461F /* ReadShoppingItemsJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD31540B2A97277B00CE461F /* ReadShoppingItemsJSON.swift */; };
 		CD48D8802A93374600E5B757 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = CD48D87F2A93374600E5B757 /* Documentation.docc */; };
 		CD4EE6862A8E36BA008FD1AB /* ReadJSONData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4EE6852A8E36BA008FD1AB /* ReadJSONData.swift */; };
@@ -31,8 +32,6 @@
 		CD8067B82AC062CF00A1ECC5 /* ShoppingItems.json in Resources */ = {isa = PBXBuildFile; fileRef = CD8067B32AC062CF00A1ECC5 /* ShoppingItems.json */; };
 		CD8067B92AC062CF00A1ECC5 /* TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = CD8067B42AC062CF00A1ECC5 /* TestData.json */; };
 		CD8067BB2AC062F200A1ECC5 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8067BA2AC062F200A1ECC5 /* Event.swift */; };
-		CD8067D62AC15FBC00A1ECC5 /* ShoppingItemCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8067D42AC15FBC00A1ECC5 /* ShoppingItemCore+CoreDataClass.swift */; };
-		CD8067D72AC15FBC00A1ECC5 /* ShoppingItemCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8067D52AC15FBC00A1ECC5 /* ShoppingItemCore+CoreDataProperties.swift */; };
 		CD8067DA2AC1B0AB00A1ECC5 /* DateFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8067D92AC1B0AB00A1ECC5 /* DateFunctions.swift */; };
 		CD96433A2ABBF26200A1D990 /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD9643382ABBF26200A1D990 /* Main.xcdatamodeld */; };
 		CD96433C2ABBF85400A1D990 /* DataControllerCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD96433B2ABBF85400A1D990 /* DataControllerCoreData.swift */; };
@@ -40,6 +39,7 @@
 		CDB6BC7F2A8F3654009A05F7 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB6BC7E2A8F3654009A05F7 /* DatePicker.swift */; };
 		CDB723412A98DF3F00876D79 /* ExampleOfCustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB723402A98DF3F00876D79 /* ExampleOfCustomLayout.swift */; };
 		CDB723442A98E03400876D79 /* RadialLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB723432A98E03400876D79 /* RadialLayout.swift */; };
+		CDCB4CD72AC3948C006F1F05 /* DayFilteredList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB4CD62AC3948C006F1F05 /* DayFilteredList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +59,7 @@
 		CD1745802A80D0DA00294186 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CD1745822A80D0DB00294186 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD1745852A80D0DB00294186 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CD202ABF2AC2B4F000425AC0 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		CD31540B2A97277B00CE461F /* ReadShoppingItemsJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadShoppingItemsJSON.swift; sourceTree = "<group>"; };
 		CD31540F2A974D1800CE461F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CD48D87F2A93374600E5B757 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
@@ -68,8 +69,6 @@
 		CD8067B32AC062CF00A1ECC5 /* ShoppingItems.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ShoppingItems.json; sourceTree = "<group>"; };
 		CD8067B42AC062CF00A1ECC5 /* TestData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestData.json; sourceTree = "<group>"; };
 		CD8067BA2AC062F200A1ECC5 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		CD8067D42AC15FBC00A1ECC5 /* ShoppingItemCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ShoppingItemCore+CoreDataClass.swift"; path = "a2s3407778/ShoppingItemCore+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CD8067D52AC15FBC00A1ECC5 /* ShoppingItemCore+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ShoppingItemCore+CoreDataProperties.swift"; path = "a2s3407778/ShoppingItemCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CD8067D92AC1B0AB00A1ECC5 /* DateFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFunctions.swift; sourceTree = "<group>"; };
 		CD9643392ABBF26200A1D990 /* Main.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Main.xcdatamodel; sourceTree = "<group>"; };
 		CD96433B2ABBF85400A1D990 /* DataControllerCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataControllerCoreData.swift; sourceTree = "<group>"; };
@@ -77,6 +76,7 @@
 		CDB6BC7E2A8F3654009A05F7 /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
 		CDB723402A98DF3F00876D79 /* ExampleOfCustomLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleOfCustomLayout.swift; sourceTree = "<group>"; };
 		CDB723432A98E03400876D79 /* RadialLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadialLayout.swift; sourceTree = "<group>"; };
+		CDCB4CD62AC3948C006F1F05 /* DayFilteredList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFilteredList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,11 +107,9 @@
 		A8A03B012A930521003EF9B9 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				CDB6BC7E2A8F3654009A05F7 /* DatePicker.swift */,
-				A8A03B022A93054B003EF9B9 /* WeekEventCard.swift */,
+				CDCB4CD92AC39E69006F1F05 /* WeekViewComponents */,
+				CDCB4CD82AC39E52006F1F05 /* DayViewComponents */,
 				A8A03B042A930575003EF9B9 /* PlusButton.swift */,
-				A8A03B062A9305AC003EF9B9 /* WeekDayEntry.swift */,
-				CD96433D2ABC129000A1D990 /* DayEventTile.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -131,8 +129,6 @@
 		CD1745722A80D0DA00294186 = {
 			isa = PBXGroup;
 			children = (
-				CD8067D42AC15FBC00A1ECC5 /* ShoppingItemCore+CoreDataClass.swift */,
-				CD8067D52AC15FBC00A1ECC5 /* ShoppingItemCore+CoreDataProperties.swift */,
 				CD48D87F2A93374600E5B757 /* Documentation.docc */,
 				CD17457D2A80D0DA00294186 /* a2s3407778 */,
 				CD17457C2A80D0DA00294186 /* Products */,
@@ -150,8 +146,8 @@
 		CD17457D2A80D0DA00294186 /* a2s3407778 */ = {
 			isa = PBXGroup;
 			children = (
-				CD8067D82AC1B09000A1ECC5 /* Helpers */,
 				CD31540F2A974D1800CE461F /* Info.plist */,
+				CD8067D82AC1B09000A1ECC5 /* Helpers */,
 				CD6ED8F02A8A473400FD6A25 /* Model */,
 				A841AF432A89C74300EE109B /* Views */,
 				CD17457E2A80D0DA00294186 /* a1s3407778App.swift */,
@@ -181,6 +177,7 @@
 				CD96433B2ABBF85400A1D990 /* DataControllerCoreData.swift */,
 				CD4EE6852A8E36BA008FD1AB /* ReadJSONData.swift */,
 				CD31540B2A97277B00CE461F /* ReadShoppingItemsJSON.swift */,
+				CD202ABF2AC2B4F000425AC0 /* Persistence.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -201,6 +198,25 @@
 				A8D446E12A9B13DF00F77403 /* Bubble.swift */,
 			);
 			path = "Custom Layout";
+			sourceTree = "<group>";
+		};
+		CDCB4CD82AC39E52006F1F05 /* DayViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				CDCB4CD62AC3948C006F1F05 /* DayFilteredList.swift */,
+				CDB6BC7E2A8F3654009A05F7 /* DatePicker.swift */,
+				CD96433D2ABC129000A1D990 /* DayEventTile.swift */,
+			);
+			path = DayViewComponents;
+			sourceTree = "<group>";
+		};
+		CDCB4CD92AC39E69006F1F05 /* WeekViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				A8A03B022A93054B003EF9B9 /* WeekEventCard.swift */,
+				A8A03B062A9305AC003EF9B9 /* WeekDayEntry.swift */,
+			);
+			path = WeekViewComponents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,14 +317,14 @@
 				A8A03B072A9305AC003EF9B9 /* WeekDayEntry.swift in Sources */,
 				CD8067DA2AC1B0AB00A1ECC5 /* DateFunctions.swift in Sources */,
 				CD4EE6862A8E36BA008FD1AB /* ReadJSONData.swift in Sources */,
-				CD8067D72AC15FBC00A1ECC5 /* ShoppingItemCore+CoreDataProperties.swift in Sources */,
+				CDCB4CD72AC3948C006F1F05 /* DayFilteredList.swift in Sources */,
 				CD96433E2ABC129000A1D990 /* DayEventTile.swift in Sources */,
 				A8A03B032A93054B003EF9B9 /* WeekEventCard.swift in Sources */,
 				A8C6F4712A8EF88300ACC6C4 /* WeekPlannerView.swift in Sources */,
 				CD96433A2ABBF26200A1D990 /* Main.xcdatamodeld in Sources */,
-				CD8067D62AC15FBC00A1ECC5 /* ShoppingItemCore+CoreDataClass.swift in Sources */,
 				A8A03AFD2A91E5A2003EF9B9 /* NewFoodView.swift in Sources */,
 				CDB6BC7F2A8F3654009A05F7 /* DatePicker.swift in Sources */,
+				CD202AC02AC2B4F000425AC0 /* Persistence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

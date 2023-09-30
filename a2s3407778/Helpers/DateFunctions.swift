@@ -8,15 +8,15 @@
 import Foundation
 
 // Function to convert a date to a string
-func DateToString(date: Date) -> String {
+func dateToString(date: Date) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "YYYY-MM-dd"
-    let timeString = dateFormatter.string(from: Date())
+    let timeString = dateFormatter.string(from: date)
     return timeString
 }
 
 // Function to convert a string to a date
-func StringToDate(dateString: String) -> Date {
+func stringToDate(dateString: String) -> Date {
   
     let dateFormatter = DateFormatter() // Create dateformatter object
     dateFormatter.dateFormat = "yyyy-MM-dd" // Set the date formatter format
@@ -24,6 +24,6 @@ func StringToDate(dateString: String) -> Date {
     if let date = dateFormatter.date(from: dateString) {
         return date
     } else {
-        print("Invalid date format") // The conversion could fail, if it does print to terminal
+        fatalError("Invalid date format") // If the conversion fails, crash the program
     }
 }

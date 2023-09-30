@@ -47,6 +47,8 @@ import SwiftUI
 
 struct SheetView: View {
     
+    @Environment(\.managedObjectContext) private var viewContext // For accessing CoreData
+    
     // Creating a new meal
     @State var name: String?
     @State var note: String?
@@ -85,6 +87,8 @@ struct SheetView: View {
                         .navigationBarItems(leading: Button("Back", action: { showCreateMealSheet.toggle() } ))
                         .navigationBarItems(trailing: Button("Done", action: {
                             // when done is press append event to dayInfo
+                            
+                            var newEvent = EventCore
                             dayInfo.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: dayInfo[0].date, order: 100, type: TypeEnum.meal, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
                             
                             // clearing values
