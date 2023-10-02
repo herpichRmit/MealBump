@@ -64,6 +64,13 @@ struct WeekPlannerView: View {
                             VStack(alignment: .leading, spacing: 20) {
                                 
                                 // create a row for each day
+<<<<<<< HEAD
+                                ForEach(eventsByDay, id: \.self) { day in
+                                    WeekDayEntry(dayInfo: day, isMenuShown: $isMenuShown, showActionSheet: $showActionSheet, showCreateMealSheet: $showCreateMealSheet, showCreateShopSheet: $showCreateShopSheet, showCreateOtherSheet: $showCreateOtherSheet, showSearchMealSheet: $showSearchMealSheet)
+||||||| 0cacb4a
+                                ForEach(eventsByDay, id: \.self) { day in
+                                    DayEntry(dayInfo: day, isMenuShown: $isMenuShown, showActionSheet: $showActionSheet, showCreateMealSheet: $showCreateMealSheet, showCreateShopSheet: $showCreateShopSheet, showCreateOtherSheet: $showCreateOtherSheet, showSearchMealSheet: $showSearchMealSheet)
+=======
                                 ForEach(Array(eventsByDay.enumerated()), id: \.element) { (index, day) in
                                     DayEntry(
                                         events: day,
@@ -92,6 +99,7 @@ struct WeekPlannerView: View {
                                             }
                                         }
                                     }
+>>>>>>> main
                                 }
 
                                 

@@ -8,10 +8,33 @@
 import SwiftUI
 
 @main
+
+// Created following Kodeko Guide
+ struct a1s3407778App: App {
+     let persistenceController = PersistenceController.shared
+     var body: some Scene {
+         WindowGroup {
+             ContentView()
+                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+         }
+     }
+ }
+
+
+
+
+
+
+// Created following Paul Hudson's Guide
+/*
 struct a1s3407778App: App {
+    @StateObject private var dataController = DataController() //Creating state object of all CoreData Saved Data
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
 }
+*/

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Card: View {
+struct WeekEventCard: View {
     
     @State var event: Event
     

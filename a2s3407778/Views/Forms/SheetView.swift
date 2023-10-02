@@ -99,8 +99,18 @@ struct SheetView: View {
                         .navigationBarTitleDisplayMode(.inline)
                         .navigationBarItems(leading: Button("Back", action: { showCreateMealSheet.toggle() } ))
                         .navigationBarItems(trailing: Button("Done", action: {
+<<<<<<< HEAD
+                            // when done is press append event to dayInfo
+                            
+                            var newEvent = EventCore
+                            dayInfo.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: dayInfo[0].date, order: 100, type: TypeEnum.meal, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
+||||||| 0cacb4a
+                            // when done is press append event to dayInfo
+                            dayInfo.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: dayInfo[0].date, order: 100, type: TypeEnum.meal, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
+=======
                             // when done is press append event to events
                             events.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: events[0].date, order: 100, type: TypeEnum.meal, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
+>>>>>>> main
                             
                             // clearing values
                             name = nil

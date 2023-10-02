@@ -9,23 +9,24 @@ import SwiftUI
 
 
 struct DatePicker: View {
-//    State variable for trying to make scrolling and pagination work
-//    @State var weeks: [[Date]] = []
+    //    State variable for trying to make scrolling and pagination work
+    //    @State var weeks: [[Date]] = []
     
     @Binding var selectedDate: Date
     
     var body: some View {
+        // MARK: Attempted to create a paginated horizontal scrolling view for each week of dates. After research this appears to be very easy in ios17 with a .scrollTargetLayout() and .scrollTargetBehavior(). Can implement this when permitted to upgrade to xcode15
         
         // Generating this week's dates
         let currentWeek = generateDateArray(selectedDate: selectedDate)
         
-        // Generating Next week's dates
-        //            let nextWeek = generateDateArray(
-        //                selectedDate: Calendar.current.date(byAdding: .weekOfYear, value: 1, to: selectedDate)!)
-        
-        // Generating last week's dates
-        //            let previousWeek = generateDateArray(
-        //                selectedDate: Calendar.current.date(byAdding: .weekOfYear, value: -1, to: selectedDate)!)
+        //        //         Generating Next week's dates
+        //        let nextWeek = generateDateArray(
+        //            selectedDate: Calendar.current.date(byAdding: .weekOfYear, value: 1, to: selectedDate)!)
+        //
+        //        //         Generating last week's dates
+        //        let previousWeek = generateDateArray(
+        //            selectedDate: Calendar.current.date(byAdding: .weekOfYear, value: -1, to: selectedDate)!)
         
         HStack{
             ForEach(currentWeek, id: \.self) { week in
@@ -35,38 +36,7 @@ struct DatePicker: View {
     }
 }
 
-// TODO: Attempt at making dates scrollable and paginated, not complete yet
-//        ScrollView(.horizontal) {
-//            HStack {
-//                ForEach(weeks, id: \.self) { week in
-//                    HStack{
-//                        ForEach((0...6), id: \.self) { // For all 7 of the dates in the array
-//                            DateTile(selectedDate: $selectedDate, todaysEvents: $todaysEvents, date: week[$0]) //Make a dateTile with that date
-//                        }
-//                    }
-//                    .frame(width: UIScreen.main.bounds.width)
-//                }
-//            }
-//        }
-//        .onAppear{
-//            let nextWeek = generateDateArray(
-//                selectedDate: Calendar.current.date(byAdding: .weekOfYear, value: 1, to: selectedDate)!)
-//
-//            // Generating this week's dates
-//            let currentWeek = generateDateArray(selectedDate: selectedDate)
-//
-//            let previousWeek = generateDateArray(
-//                selectedDate: Calendar.current.date(byAdding: .weekOfYear, value: -1, to: selectedDate)!)
-//
-//            weeks = [previousWeek, currentWeek, nextWeek]
-//        }
-//    }
-//}
-
-
 struct DateTile: View  {
-    
-    // TODO: I think having the buttons in here might be causing the double tapping bug, but haven't been able to solve it yet
     
     @Binding var selectedDate: Date
     
@@ -74,17 +44,18 @@ struct DateTile: View  {
     
     var body: some View {
         
-        if date.formatted(date: .numeric, time: .omitted) == selectedDate.formatted(date: .numeric, time: .omitted) {
+        // Choosing if selected dateTile or unselected dateTile is shown
+        if dateToString(date: date) == dateToString(date: selectedDate) {
             
             // Currently Selected Tile
             Button {
                 selectedDate = date
-                //todaysEvents = FetchTodaysEvents(dateRequested: selectedDate)
                 
             } label: {
                 ZStack{
                     Circle()
                         .fill(.indigo)
+                        .frame(width: 45, height:45)
                     VStack{
                         // Formatting the date to get the shortened day letters
                         Text(date.formatted(Date.FormatStyle().weekday(.short)))
@@ -101,10 +72,12 @@ struct DateTile: View  {
         } else { // Non Selected Tile
             Button {
                 selectedDate = date
+                
             } label: {
                 ZStack{
                     Circle()
                         .fill(.white)
+                        .frame(width: 45, height:45)
                     VStack{
                         // Formatting the date to get the shortened day letters
                         Text(date.formatted(Date.FormatStyle().weekday(.short)))
@@ -122,7 +95,9 @@ struct DateTile: View  {
     }
 }
 
+// Calculating the 7 dates to be shown based on the selected date
 func generateDateArray(selectedDate: Date) -> [Date] {
+    
     // Setting a calendar that starts on monday rather than gregorian
     let myCalendar = Calendar(identifier: .iso8601)
     
