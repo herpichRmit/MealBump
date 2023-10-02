@@ -6,65 +6,37 @@
 //
 
 
-// SheetView contains all the modals and forms to manage meal data
-
-/*
-     Can create a meal using the following
-     
-     name = "meal name"
-     note = "meal note"
-     timePeriod = "meal time period"
-     date = <default to todays date>    // ommitted from milestone 1 demo
-     order = <passed in value>          // ommitted from milestone 1 demo
-     foodItems = []
-     
-     need to receive following from searchFoodView
-     
-     ["item","measure","category","location"]
-     
-     then append to a list of foodItems
-     
-     foodItems = [
-        ["item","measure","category","location"]
-     ]
-     
-     then be able to add those foodItems to an event object
-     
-     {
-       "id": <generate>,
-       "name": "meal name"
-       "note": "meal note",
-       "date": "2023-18-17", (whatever date format is)
-       "order": 3,
-       "timePeriod": "meal",
-        "foodItems": [ ["item","measure","category","location"], ["item","measure","category","location"]]
-     }
- 
- */
-
-
 import SwiftUI
 
+
+
 struct SheetView: View {
+ 
     
-    @Environment(\.managedObjectContext) private var viewContext // For accessing CoreData
+    @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
     
+    @FetchRequest var events: FetchedResults<EventCore> //New Request to initialize in init()
+    
+
+    
+
     // Creating a new meal
     @State var name: String?
     @State var note: String?
     @State var timePeriod: String?
-    @State var date = Date()
+    //@State var date = Date()
     @State var servings: Int?
     
     // foodItems represents all current items within a meal
-    @State var newFoodItems: [[String]] = [[]]
+    //@State var newFoodItems: [[String]] = [[]]
     
     // allFoodItems represents all current items within database
     // example foods are hardcoded for the milestone 1 demo
-    @State var allFoodItems: [[String]] = [["Beef 80% lean","250g","Meat","Butcher"], ["Apple","5 or 6","Fruit","Woolworths"], ["Milk","200ml","Dairy","Coles"]] // populate
+    //@State var allFoodItems: [[String]] = [["Beef 80% lean","250g","Meat","Butcher"], ["Apple","5 or 6","Fruit","Woolworths"], ["Milk","200ml","Dairy","Coles"]] // populate
     
     // used to control which modal is open
-    @Binding var events : [Event]
+    //@Binding var events : [Event]
+    @Binding var date : Date
     @Binding var isMenuShown : Bool
     @Binding var showActionSheet : Bool
     @Binding var showCreateMealSheet : Bool
@@ -74,6 +46,29 @@ struct SheetView: View {
     @Binding var buildActionSheet : Bool
     @Binding var activateSheetPosition : CGPoint
     
+    init(){
+        // Sort order by order
+        let orderSort = NSSortDescriptor(key: "order", ascending: true)
+        
+        // Constructing filter predicate
+        let calendar = Calendar.current
+        let start = calendar.startOfDay(for: date)
+        let end = calendar.date(byAdding: .day, value: 1, to: start)
+        
+        let predicate = NSPredicate(format: "date >= %@ AND date < %@", start as NSDate, end! as NSDate)
+        // Need to get range because dates have times associated with them
+        
+        //        // %K and %@ are format specifiers
+        //        // %K var arg substitution for a keypath (coredata attribute)
+        //        // %@ var arg substitution for an object
+        
+        // Underscore means we are changing the wrapper itsself rather than the value stored
+        _events = FetchRequest<EventCore>(
+            sortDescriptors: [orderSort],
+            predicate: predicate)
+    }
+    
+    //TODO: update shopping list as well as events
     
     var body: some View {        
         
@@ -94,7 +89,7 @@ struct SheetView: View {
             .sheet(isPresented: $showCreateMealSheet) {
                 NavigationStack(){
                     // calls CreateMealSheet that is encapsulated in another file
-                    NewMealSheet(name: $name, timePeriod: $timePeriod, note: $note, servings: $servings, foodItems: $newFoodItems, allFoodItems: $allFoodItems)
+                    NewMealSheet(date: date, name: $name, timePeriod: $timePeriod, note: $note /*servings: $servings*/ )
                         .navigationTitle("Create meal")
                         .navigationBarTitleDisplayMode(.inline)
                         .navigationBarItems(leading: Button("Back", action: { showCreateMealSheet.toggle() } ))
@@ -108,7 +103,7 @@ struct SheetView: View {
                             dayInfo.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: dayInfo[0].date, order: 100, type: TypeEnum.meal, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
                              */
                             // when done is press append event to events
-                            events.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: events[0].date, order: 100, type: TypeEnum.meal, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
+                            addNewEvent(date: date, name: name ?? "", note: note ?? "", order: 100, timePeriod: timePeriod ?? "", type: "Meal")
                             
                             // clearing values
                             name = nil
@@ -140,7 +135,7 @@ struct SheetView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarItems(leading: Button("Back", action: { showCreateShopSheet.toggle() } ))
                     .navigationBarItems(trailing: Button("Done", action: {
-                        events.append(Event(id: Int.random(in:50..<4000), title: "Shopping trip", desc: note ?? "", date: events[0].date, order: 99, type: TypeEnum.shoppingTrip, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
+                        addNewEvent(date: date, name: name ?? "", note: note ?? "", order: 100, timePeriod: timePeriod ?? "", type: "Shopping Trip")
                         showCreateShopSheet.toggle()
                     }))
                     
@@ -153,4 +148,24 @@ struct SheetView: View {
                 }
             }
     }
+    
+    func addNewEvent(date: Date, name: String, note: String, order: Int16, timePeriod: String, type: String) {
+        // Adding data to new EventCore Object
+        let newEvent = EventCore(context: viewContext) //New object with the CoreData ViewContext
+        newEvent.date = date //Add events to the selected date
+        newEvent.name = name
+        newEvent.note = note
+        newEvent.order = Int16(order)
+        newEvent.timePeriod = timePeriod
+        newEvent.type = type
+        
+        // Saving data
+        do {
+            try viewContext.save() //Saving data to the persistent store
+        } catch {
+            let nserror = error as NSError
+            fatalError("Saving Error: \(nserror), \(nserror.userInfo)")
+        }
+    }
+
 }

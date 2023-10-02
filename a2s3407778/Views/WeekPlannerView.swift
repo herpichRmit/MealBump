@@ -66,7 +66,8 @@ struct WeekPlannerView: View {
                             // create a row for each day
                                     ForEach(Array(eventsByDay.enumerated()), id: \.element) { (index, day) in
                                         WeekDayEntry(
-                                            events: day,
+                                            //events: day,
+                                            date: Date(),
                                             selectedEvent: $selectedEvent,
                                             cardPosition: $cardPosition,
                                             isMenuShown: $isMenuShown,

@@ -13,7 +13,7 @@ struct DayFilteredList: View {
     
     @FetchRequest var fetchRequest: FetchedResults<EventCore> //New Request to initialize in init()
     
-    @State private var activeItemIds: [Int] = []
+//    @State private var activeItemIds: [Int] = []
     
     init(filter: Date){
         // Sort order by order

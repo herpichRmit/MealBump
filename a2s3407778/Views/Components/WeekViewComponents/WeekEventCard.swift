@@ -9,16 +9,18 @@ import SwiftUI
 
 struct WeekEventCard: View {
     
-    @State var event: Event
+    let title: String
+    let timePeriod: String
+    let type: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10){
             
-            Text(event.title)
+            Text(title)
                 .font(.system(size: 13).weight(.semibold))
-            Text(event.timeLabel)
+            Text(timePeriod)
                 .font(.system(size: 11))
-            if event.type == TypeEnum.shoppingTrip {
+            if type == "shoppingTrip" {
                 Image(systemName: "cart")
                     .font(.system(size: 11))
             }

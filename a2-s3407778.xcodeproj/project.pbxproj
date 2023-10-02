@@ -31,6 +31,10 @@
 		CD48D8802A93374600E5B757 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = CD48D87F2A93374600E5B757 /* Documentation.docc */; };
 		CD4EE6862A8E36BA008FD1AB /* ReadJSONData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4EE6852A8E36BA008FD1AB /* ReadJSONData.swift */; };
 		CD6ED8EF2A8A458B00FD6A25 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6ED8EE2A8A458A00FD6A25 /* DayView.swift */; };
+		CD71A2A02ACA99C500E0F09E /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 74140E67286313DAF1079CDF /* Algorithms */; };
+		CD71A2A32ACA9AD800E0F09E /* EventCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD71A2A12ACA9AD800E0F09E /* EventCore+CoreDataClass.swift */; };
+		CD71A2A42ACA9AD800E0F09E /* EventCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD71A2A22ACA9AD800E0F09E /* EventCore+CoreDataProperties.swift */; };
+		CD71A2A62ACAAFF000E0F09E /* EventCoreFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD71A2A52ACAAFF000E0F09E /* EventCoreFunctions.swift */; };
 		CD8067B72AC062CF00A1ECC5 /* ShoppingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8067B22AC062CF00A1ECC5 /* ShoppingItem.swift */; };
 		CD8067B82AC062CF00A1ECC5 /* ShoppingItems.json in Resources */ = {isa = PBXBuildFile; fileRef = CD8067B32AC062CF00A1ECC5 /* ShoppingItems.json */; };
 		CD8067B92AC062CF00A1ECC5 /* TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = CD8067B42AC062CF00A1ECC5 /* TestData.json */; };
@@ -71,6 +75,9 @@
 		CD48D87F2A93374600E5B757 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
 		CD4EE6852A8E36BA008FD1AB /* ReadJSONData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadJSONData.swift; sourceTree = "<group>"; };
 		CD6ED8EE2A8A458A00FD6A25 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
+		CD71A2A12ACA9AD800E0F09E /* EventCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "EventCore+CoreDataClass.swift"; path = "a2s3407778/EventCore+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CD71A2A22ACA9AD800E0F09E /* EventCore+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "EventCore+CoreDataProperties.swift"; path = "a2s3407778/EventCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CD71A2A52ACAAFF000E0F09E /* EventCoreFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCoreFunctions.swift; sourceTree = "<group>"; };
 		CD8067B22AC062CF00A1ECC5 /* ShoppingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingItem.swift; sourceTree = "<group>"; };
 		CD8067B32AC062CF00A1ECC5 /* ShoppingItems.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ShoppingItems.json; sourceTree = "<group>"; };
 		CD8067B42AC062CF00A1ECC5 /* TestData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestData.json; sourceTree = "<group>"; };
@@ -90,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD71A2A02ACA99C500E0F09E /* Algorithms in Frameworks */,
 				A8A03B002A930336003EF9B9 /* SwiftUIReorderableForEach in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,6 +145,8 @@
 		CD1745722A80D0DA00294186 = {
 			isa = PBXGroup;
 			children = (
+				CD71A2A12ACA9AD800E0F09E /* EventCore+CoreDataClass.swift */,
+				CD71A2A22ACA9AD800E0F09E /* EventCore+CoreDataProperties.swift */,
 				CD48D87F2A93374600E5B757 /* Documentation.docc */,
 				CD17457D2A80D0DA00294186 /* a2s3407778 */,
 				CD17457C2A80D0DA00294186 /* Products */,
@@ -194,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				CD8067D92AC1B0AB00A1ECC5 /* DateFunctions.swift */,
+				CD71A2A52ACAAFF000E0F09E /* EventCoreFunctions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -278,7 +289,7 @@
 			mainGroup = CD1745722A80D0DA00294186;
 			packageReferences = (
 				A8A03AFE2A930336003EF9B9 /* XCRemoteSwiftPackageReference "swiftui-reorderable-foreach" */,
-				18BE89679E2A64710E58EBB8 /* XCRemoteSwiftPackageReference "swift-algorithms.git" */,
+				18BE89679E2A64710E58EBB8 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			productRefGroup = CD17457C2A80D0DA00294186 /* Products */;
 			projectDirPath = "";
@@ -315,14 +326,17 @@
 				CD31540C2A97277B00CE461F /* ReadShoppingItemsJSON.swift in Sources */,
 				CD6ED8EF2A8A458B00FD6A25 /* DayView.swift in Sources */,
 				CD1745812A80D0DA00294186 /* ContentView.swift in Sources */,
+				CD71A2A32ACA9AD800E0F09E /* EventCore+CoreDataClass.swift in Sources */,
 				A8C6F4772A8F0E6500ACC6C4 /* EditFoodView.swift in Sources */,
 				A841AF4B2A89CC3200EE109B /* ShoppingView.swift in Sources */,
 				CD8067BB2AC062F200A1ECC5 /* Event.swift in Sources */,
+				CD71A2A42ACA9AD800E0F09E /* EventCore+CoreDataProperties.swift in Sources */,
 				CD96433C2ABBF85400A1D990 /* DataControllerCoreData.swift in Sources */,
 				CD17457F2A80D0DA00294186 /* a1s3407778App.swift in Sources */,
 				A8A03B0D2A9307CE003EF9B9 /* NewMealSheet.swift in Sources */,
 				CDB723442A98E03400876D79 /* RadialLayout.swift in Sources */,
 				A8D446E22A9B13DF00F77403 /* Bubble.swift in Sources */,
+				CD71A2A62ACAAFF000E0F09E /* EventCoreFunctions.swift in Sources */,
 				CDB723412A98DF3F00876D79 /* ExampleOfCustomLayout.swift in Sources */,
 				A8A03B052A930575003EF9B9 /* PlusButton.swift in Sources */,
 				A8A03B072A9305AC003EF9B9 /* WeekDayEntry.swift in Sources */,
@@ -543,7 +557,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		18BE89679E2A64710E58EBB8 /* XCRemoteSwiftPackageReference "swift-algorithms.git" */ = {
+		18BE89679E2A64710E58EBB8 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-algorithms.git";
 			requirement = {
@@ -559,7 +573,7 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		DEC6585FA4BA743C219E6845 /* XCRemoteSwiftPackageReference "swift-algorithms.git" */ = {
+		DEC6585FA4BA743C219E6845 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-algorithms.git";
 			requirement = {
@@ -572,7 +586,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		74140E67286313DAF1079CDF /* Algorithms */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DEC6585FA4BA743C219E6845 /* XCRemoteSwiftPackageReference "swift-algorithms.git" */;
+			package = DEC6585FA4BA743C219E6845 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
 			productName = Algorithms;
 		};
 		A8A03AFF2A930336003EF9B9 /* SwiftUIReorderableForEach */ = {
