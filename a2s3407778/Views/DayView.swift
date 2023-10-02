@@ -22,8 +22,6 @@ struct DayView: View {
     @State var showCreateShopSheet = false
     @State var showCreateOtherSheet = false
     @State var showSearchMealSheet = false
-    @State var buildActionSheet = false
-    @State var activateSheetPosition: CGPoint = .zero
     
     //    MARK: - View Body
     
@@ -54,7 +52,6 @@ struct DayView: View {
                 
                 DayFilteredList(filter: selectedDate)
                 
-<<<<<<< HEAD
                 HStack{
                     Spacer()
 //                                            SheetView(
@@ -66,174 +63,9 @@ struct DayView: View {
 //                                                showCreateOtherSheet: $showCreateOtherSheet,
 //                                                showSearchMealSheet: $showSearchMealSheet
 //                                            )
-||||||| 0cacb4a
-                List { // MARK: - Tile Scroll View
-                    ForEach (todaysEvents) { event in
-                        EventTile(
-                            title: event.title,
-                            note: event.desc,
-                            eventType: event.timeLabel)
-                        .padding(.horizontal, 16.0)
-                        .padding(.vertical, 4.0)
-                    }
-                    HStack{
-                        Spacer()
-                        SheetView(
-                            dayInfo: $todaysEvents,
-                            isMenuShown: $isMenuShown,
-                            showActionSheet: $showActionSheet,
-                            showCreateMealSheet: $showCreateMealSheet,
-                            showCreateShopSheet: $showCreateShopSheet,
-                            showCreateOtherSheet: $showCreateOtherSheet,
-                            showSearchMealSheet: $showSearchMealSheet
-                        )
-                        Spacer()
-                    }
-                }
-                
-                .listStyle(.plain)
-                .listRowSeparator(.hidden)
-            }
-            
-            // Used to exit blur background and exit popup if tapped outside of buttons
-            if isMenuShown {
-                VStack(alignment: .leading){
-                    HStack {
-                        Spacer()
-                    }
-=======
-                List { // MARK: - Tile Scroll View
-                    ForEach (todaysEvents) { event in
-                        EventTile(
-                            title: event.title,
-                            note: event.desc,
-                            eventType: event.timeLabel)
-                        .padding(.horizontal, 16.0)
-                        .padding(.vertical, 4.0)
-                    }
-                    HStack{
-                        Spacer()
-                        SheetView(
-                            events: $todaysEvents,
-                            isMenuShown: $isMenuShown,
-                            showActionSheet: $showActionSheet,
-                            showCreateMealSheet: $showCreateMealSheet,
-                            showCreateShopSheet: $showCreateShopSheet,
-                            showCreateOtherSheet: $showCreateOtherSheet,
-                            showSearchMealSheet: $showSearchMealSheet,
-                            buildActionSheet: $buildActionSheet,
-                            activateSheetPosition: $activateSheetPosition
-                        )
-                        Spacer()
-                    }
-                }
-                
-                .listStyle(.plain)
-                .listRowSeparator(.hidden)
-            }
-            
-            // Used to exit blur background and exit popup if tapped outside of buttons
-            if isMenuShown {
-                VStack(alignment: .leading){
-                    HStack {
-                        Spacer()
-                    }
->>>>>>> main
                     Spacer()
                 }
             }
-<<<<<<< HEAD
-||||||| 0cacb4a
-            
-            // Custom action sheet
-            // when plus button is pressed, custom action sheet is activated
-            if isMenuShown {
-                RadialLayout {
-                    Button {
-                        isMenuShown.toggle() //Hides the buttons once pressed
-                        showSearchMealSheet.toggle()
-                    } label: {
-                        Bubble(colour: Color("Color 1"), text: "Achive")
-                    }
-                    Button {
-                        isMenuShown.toggle()
-                        showCreateShopSheet.toggle()
-                    } label: {
-                        Bubble(colour: Color("Color 2"), text: "Shopping")
-                    }
-                    Button {
-                        isMenuShown.toggle()
-                        showCreateMealSheet.toggle()
-                    } label: {
-                        Bubble(colour: Color("Color 3"), text: "Meal")
-                    }
-                    Button {
-                        isMenuShown.toggle()
-                        showCreateOtherSheet.toggle()
-                    } label: {
-                        Bubble(colour: Color("Color 4"), text: "Other")
-                    }
-                }
-            }
-            
-=======
-            
-            // Custom action sheet
-            // when plus button is pressed, custom action sheet is activated
-            if buildActionSheet{
-                
-                // we want to build initial layout after button is pressed
-                // then we want to switch instanly
-                let layout = isMenuShown ? AnyLayout(RadialLayout()) : AnyLayout(InitialLayout())
-                
-                layout {
-                    Bubble(colour: Color("Color 1"), text: "Archive", active: isMenuShown)
-                        .onTapGesture{
-                            isMenuShown.toggle() //Hides the buttons once pressed
-                            showSearchMealSheet.toggle()
-                        }
-                        .onAppear(){
-                            print("testB")
-                            print(activateSheetPosition)
-                        }
-                        .layoutValue(key: StartPosition.self, value: activateSheetPosition)
-                    Bubble(colour: Color("Color 2"), text: "Shopping", active: isMenuShown)
-                        .onTapGesture{
-                            isMenuShown.toggle() //Hides the buttons once pressed
-                            showCreateShopSheet.toggle()
-                        }
-                        .onAppear(){
-                            print("testB")
-                            print(activateSheetPosition)
-                        }
-                        .layoutValue(key: StartPosition.self, value: activateSheetPosition)
-                    Bubble(colour: Color("Color 3"), text: "Meal", active: isMenuShown)
-                        .onTapGesture{
-                            isMenuShown.toggle() //Hides the buttons once pressed
-                            showCreateMealSheet.toggle()
-                        }
-                        .onAppear(){
-                            print("testB")
-                            print(activateSheetPosition)
-                        }
-                        .layoutValue(key: StartPosition.self, value: activateSheetPosition)
-                    Bubble(colour: Color("Color 4"), text: "Other", active: isMenuShown)
-                        .onTapGesture{
-                            isMenuShown.toggle() //Hides the buttons once pressed
-                            showCreateOtherSheet.toggle()
-                        }
-                        .onAppear(){
-                            print("testB")
-                            print(activateSheetPosition)
-                        }
-                        .layoutValue(key: StartPosition.self, value: activateSheetPosition)
-                    
-                }
-                .animation(.easeInOut(duration: 0.2))
-                
-            }
-            
->>>>>>> main
         }
         
         // Used to exit blur background and exit popup if tapped outside of buttons
@@ -260,25 +92,25 @@ struct DayView: View {
                     isMenuShown.toggle() //Hides the buttons once pressed
                     showSearchMealSheet.toggle()
                 } label: {
-                    Bubble(colour: Color("Color 1"), text: "Achive")
+                    Bubble(colour: Color("Color 1"), text: "Achive", active: true)
                 }
                 Button {
                     isMenuShown.toggle()
                     showCreateShopSheet.toggle()
                 } label: {
-                    Bubble(colour: Color("Color 2"), text: "Shopping")
+                    Bubble(colour: Color("Color 2"), text: "Shopping", active: true)
                 }
                 Button {
                     isMenuShown.toggle()
                     showCreateMealSheet.toggle()
                 } label: {
-                    Bubble(colour: Color("Color 3"), text: "Meal")
+                    Bubble(colour: Color("Color 3"), text: "Meal", active: true)
                 }
                 Button {
                     isMenuShown.toggle()
                     showCreateOtherSheet.toggle()
                 } label: {
-                    Bubble(colour: Color("Color 4"), text: "Other")
+                    Bubble(colour: Color("Color 4"), text: "Other", active: true)
                 }
             }
         }

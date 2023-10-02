@@ -48,7 +48,7 @@ struct DragDropGrid: View {
             ZStack{
 
                 if !selectedEvent.isEmpty {
-                    Card(event: selectedEvent[0]!)
+                    WeekEventCard(event: selectedEvent[0]!)
                         .animation(.easeInOut, value: animatedTrigger)
                         .zIndex(1)
                         .position(cardPosition) // where the card is double tapped
@@ -146,7 +146,7 @@ struct RowOfCards : View {
                 HStack {
                     
                     ReorderableStack($events, allowReordering: $isMoveable) { item, isDragged in
-                        Card(event: item)
+                        WeekEventCard(event: item)
                             .onTapGesture(count: 2, coordinateSpace: .global) { location in
                                 print(location)
                                 cardPosition = location

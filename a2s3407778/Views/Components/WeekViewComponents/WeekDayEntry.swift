@@ -35,6 +35,8 @@ struct WeekDayEntry: View {
     @Binding var buildActionSheet : Bool
     @Binding var activateSheetPosition : CGPoint
     
+
+    
     
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
@@ -65,12 +67,8 @@ struct WeekDayEntry: View {
                     // this swiftUI package allows for cards to be dragged and dropped, demonstrating future functionality that will be imbedded in the system
                     ReorderableStack($events, allowReordering: $isMoveable) { item, isDragged in
                         if item.title != "n/a" {
-<<<<<<< HEAD:a2s3407778/Views/Components/WeekViewComponents/WeekDayEntry.swift
+
                             WeekEventCard(event: item)
-||||||| 0cacb4a:a2s3407778/Views/Components/DayEntry.swift
-                            Card(event: item)
-=======
-                            Card(event: item)
                                 .onTapGesture(count: 2, coordinateSpace: .global) { location in
                                     cardPosition = location
                                     selectedEvent.append(item)
@@ -79,7 +77,7 @@ struct WeekDayEntry: View {
                                     }
                                 }
                             Spacer()
->>>>>>> main:a2s3407778/Views/Components/DayEntry.swift
+
                         }
                     }
 
