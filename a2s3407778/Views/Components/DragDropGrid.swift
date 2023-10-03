@@ -5,6 +5,7 @@
 //  Created by Ethan Herpich on 18/9/2023.
 //
 
+/*
 import SwiftUI
 import Algorithms
 
@@ -48,7 +49,7 @@ struct DragDropGrid: View {
             ZStack{
 
                 if !selectedEvent.isEmpty {
-                    WeekEventCard(event: selectedEvent[0]!)
+                    WeekEventCard(title: selectedEvent., timePeriod: <#T##String#>, type: <#T##String#>)
                         .animation(.easeInOut, value: animatedTrigger)
                         .zIndex(1)
                         .position(cardPosition) // where the card is double tapped
@@ -177,3 +178,4 @@ struct DragDropGrid_Previews: PreviewProvider {
     }
 }
 
+*/

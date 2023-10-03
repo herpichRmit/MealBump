@@ -9,40 +9,53 @@ import SwiftUI
 
 struct WeekPlannerView: View {
     
+    @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
+    @EnvironmentObject var settings: DateObservableObject
+    
     // All of the events read from the json file
-    var events: [Event] = Event.allEvents
-    @State var eventsByDay : [[Event]]
+    //var events: [Event] = Event.allEvents
+    var datesInWeek : [Date]
     
     // Controls if a modal is being shown and which one
-    @State var isMenuShown = false
-    @State var showActionSheet = false
-    @State var showCreateMealSheet = false
-    @State var showCreateShopSheet = false
-    @State var showCreateOtherSheet = false
-    @State var showSearchMealSheet = false
+//    @State var isMenuShown = false
+//    @State var showActionSheet = false
+//    @State var showCreateMealSheet = false
+//    @State var showCreateShopSheet = false
+//    @State var showCreateOtherSheet = false
+//    @State var showSearchMealSheet = false
     @State var buildActionSheet = false
     @State var activateSheetPosition: CGPoint = .zero
     
     
-    @State private var selectedEvent: [Event?] = []
+    @State private var selectedEvent: EventCore?
     @State private var animatedTrigger: Bool = false
     @State private var cardPosition: CGPoint = CGPoint(x: 0, y: 0)
     let cardStartPoint: CGPoint = CGPoint(x: 300, y: 600)
     
     // Partition events into several arrays of events by day
+    
     init() {
-        self.eventsByDay = partitionByDate(events: events)
+        //self.datesInWeek = partitionByDate(currentDate: settings.selectedDate)
+        self.datesInWeek = generateDateArray(selectedDate: settings.selectedDate)
     }
+     
+    
+    
     
     var body: some View {
         
         NavigationView {
             ZStack(){
                 
-                if !selectedEvent.isEmpty {
-                    WeekEventCard(title: <#T##String#>, timePeriod: <#T##String#>, type: <#T##String#>)
+                if selectedEvent != nil {
+                    WeekEventCard(
+                        title: selectedEvent?.name ?? "Unknown title",
+                        timePeriod: selectedEvent?.timePeriod ?? "Unknown timePeriod",
+                        type: selectedEvent?.type ?? "Unknown type"
+                    )
                         .animation(.easeInOut, value: animatedTrigger)
                         .zIndex(1)
+                        .position(cardPosition) // where the card is double tapped
                         .position(cardPosition) // where the card is double tapped
                         .shadow(color: Color.white.opacity(0.07), radius: 15, x: 4, y: 10)
                         .onAppear{
@@ -63,33 +76,41 @@ struct WeekPlannerView: View {
                     ScrollView(.vertical, showsIndicators: false){
                         VStack(alignment: .leading, spacing: 20) {
                             
+                            // pass in 0..7 dates
+                            // within WeekDayEntry -> fetch request
+                            
                             // create a row for each day
-                                    ForEach(Array(eventsByDay.enumerated()), id: \.element) { (index, day) in
+                                    ForEach(datesInWeek, id: \.self) { day in
+                                        //WeekDayEntry(filter: day, selectedEvent: selectedEvent!, cardPosition: cardPosition, buildActionSheet: buildActionSheet, activateSheetPosition: activateSheetPosition)
+                                        
                                         WeekDayEntry(
-                                            //events: day,
-                                            date: Date(),
-                                            selectedEvent: $selectedEvent,
-                                            cardPosition: $cardPosition,
-                                            isMenuShown: $isMenuShown,
-                                            showActionSheet: $showActionSheet,
-                                            showCreateMealSheet: $showCreateMealSheet,
-                                            showCreateShopSheet: $showCreateShopSheet,
-                                            showCreateOtherSheet: $showCreateOtherSheet,
-                                            showSearchMealSheet: $showSearchMealSheet,
-                                            buildActionSheet: $buildActionSheet,
-                                            activateSheetPosition: $activateSheetPosition
+                                            filter: day//,
+//                                            selectedEvent: $selectedEvent,
+//                                            cardPosition: $cardPosition,
+//                                            buildActionSheet: $buildActionSheet,
+//                                            activateSheetPosition: $activateSheetPosition
                                         )
                                         .onTapGesture { location in
-                                            if !selectedEvent.isEmpty {
+                                            // dropping card
+                                            if selectedEvent != nil {
                                                 animateCardPlace(location: location)
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                                    
+                                                    // changing selectedEvent to have new date
+                                                    
+                                                    // call update event with new date
+                                                    
+                                                    selectedEvent?.date = day
+                                                    
+                                                    /*
                                                     var updatedDay = eventsByDay[index] // Create a mutable copy
                                                     updatedDay.removeAll {
-                                                        $0.id == selectedEvent[0]!.id
+                                                        $0.id == selectedEvent[0]!.id // delete date from original day
                                                     }
-                                                    updatedDay.append(selectedEvent[0]!)
-                                                    eventsByDay[index] = updatedDay // Update the original array
-                                                    selectedEvent.removeAll()
+                                                    updatedDay.append(selectedEvent[0]!) // save event to new day
+                                                    eventsByDay[index] = updatedDay
+                                                    selectedEvent.removeAll() // clear selected event
+                                                     */
                                                 }
                                             }
                                         }
@@ -105,7 +126,7 @@ struct WeekPlannerView: View {
                         }
                         
                         // Used to exit blur background and exit popup if tapped outside of buttons
-                        if isMenuShown {
+                        if settings.isMenuShown {
                             VStack(alignment: .leading){
                                 HStack {
                                     Spacer()
@@ -116,7 +137,7 @@ struct WeekPlannerView: View {
                             .opacity(0.9)
                             .blur(radius: 10, opaque: false)
                             .onTapGesture {
-                                isMenuShown = false
+                                settings.isMenuShown = false
                             }
                         }
                         
@@ -129,43 +150,43 @@ struct WeekPlannerView: View {
                             
                             // we want to build initial layout after button is pressed
                             // then we want to switch instanly
-                            let layout = isMenuShown ? AnyLayout(RadialLayout()) : AnyLayout(InitialLayout())
+                            let layout = settings.isMenuShown ? AnyLayout(RadialLayout()) : AnyLayout(InitialLayout())
                             
                             layout {
-                                Bubble(colour: Color("Color 1"), text: "Archive", active: isMenuShown)
+                                Bubble(colour: Color("Color 1"), text: "Archive", active: settings.isMenuShown)
                                     .onTapGesture{
-                                        isMenuShown.toggle() //Hides the buttons once pressed
-                                        showSearchMealSheet.toggle()
+                                        settings.isMenuShown.toggle() //Hides the buttons once pressed
+                                        settings.showSearchMealSheet.toggle()
                                     }
                                     .onAppear(){
                                         print("testB")
                                         print(activateSheetPosition)
                                     }
                                     .layoutValue(key: StartPosition.self, value: activateSheetPosition)
-                                Bubble(colour: Color("Color 2"), text: "Shopping", active: isMenuShown)
+                                Bubble(colour: Color("Color 2"), text: "Shopping", active: settings.isMenuShown)
                                     .onTapGesture{
-                                        isMenuShown.toggle() //Hides the buttons once pressed
-                                        showCreateShopSheet.toggle()
+                                        settings.isMenuShown.toggle() //Hides the buttons once pressed
+                                        settings.showCreateShopSheet.toggle()
                                     }
                                     .onAppear(){
                                         print("testB")
                                         print(activateSheetPosition)
                                     }
                                     .layoutValue(key: StartPosition.self, value: activateSheetPosition)
-                                Bubble(colour: Color("Color 3"), text: "Meal", active: isMenuShown)
+                                Bubble(colour: Color("Color 3"), text: "Meal", active: settings.isMenuShown)
                                     .onTapGesture{
-                                        isMenuShown.toggle() //Hides the buttons once pressed
-                                        showCreateMealSheet.toggle()
+                                        settings.isMenuShown.toggle() //Hides the buttons once pressed
+                                        settings.showCreateMealSheet.toggle()
                                     }
                                     .onAppear(){
                                         print("testB")
                                         print(activateSheetPosition)
                                     }
                                     .layoutValue(key: StartPosition.self, value: activateSheetPosition)
-                                Bubble(colour: Color("Color 4"), text: "Other", active: isMenuShown)
+                                Bubble(colour: Color("Color 4"), text: "Other", active: settings.isMenuShown)
                                     .onTapGesture{
-                                        isMenuShown.toggle() //Hides the buttons once pressed
-                                        showCreateOtherSheet.toggle()
+                                        settings.isMenuShown.toggle() //Hides the buttons once pressed
+                                        settings.showCreateOtherSheet.toggle()
                                     }
                                     .onAppear(){
                                         print("testB")
@@ -212,8 +233,8 @@ func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
     )
 }
 
-
-func partitionByDate(events: [Event] ) -> [[Event]] {
+/*
+func partitionByDate(currentDate: Date) -> [[Event]] {
     
     var dayArrEvents : [Event] = []
     var weekOfDays : [[Event]] = []
@@ -253,6 +274,7 @@ func partitionByDate(events: [Event] ) -> [[Event]] {
     return weekOfDays
     
 }
+ */
 
 
 

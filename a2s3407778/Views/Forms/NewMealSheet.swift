@@ -10,7 +10,7 @@ import SwiftUI
 struct NewMealSheet: View {
     
     // bindings for values required to create a new meal
-    let date : Date
+    //let date : Date = // Date for current array
     @Binding var name : String?
     @Binding var timePeriod : String?
     @Binding var note : String?

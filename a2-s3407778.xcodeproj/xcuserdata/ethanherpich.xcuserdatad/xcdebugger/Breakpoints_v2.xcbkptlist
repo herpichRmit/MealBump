@@ -46,10 +46,10 @@
             filePath = "a2s3407778/Views/Components/DragDropGrid.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "RowOfCards"
-            landmarkType = "14">
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "selectedEvent"
+            landmarkType = "24">
             <Locations>
                <Location
                   uuid = "9C88B8DC-0F35-4F44-91F4-5BDCBB9A5653 - 505c5545c9989016"
