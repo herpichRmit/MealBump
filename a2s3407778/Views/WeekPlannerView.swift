@@ -40,7 +40,7 @@ struct WeekPlannerView: View {
             ZStack(){
                 
                 if !selectedEvent.isEmpty {
-                    WeekEventCard(event: selectedEvent[0]!)
+                    WeekEventCard(title: <#T##String#>, timePeriod: <#T##String#>, type: <#T##String#>)
                         .animation(.easeInOut, value: animatedTrigger)
                         .zIndex(1)
                         .position(cardPosition) // where the card is double tapped

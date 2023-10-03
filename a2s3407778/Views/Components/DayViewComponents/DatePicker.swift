@@ -9,17 +9,16 @@ import SwiftUI
 
 
 struct DatePicker: View {
-    //    State variable for trying to make scrolling and pagination work
-    //    @State var weeks: [[Date]] = []
     
-    @Binding var selectedDate: Date
-    
+    @EnvironmentObject var settings: DateObservableObject
+
     var body: some View {
-        // MARK: Attempted to create a paginated horizontal scrolling view for each week of dates. After research this appears to be very easy in ios17 with a .scrollTargetLayout() and .scrollTargetBehavior(). Can implement this when permitted to upgrade to xcode15
         
         // Generating this week's dates
-        let currentWeek = generateDateArray(selectedDate: selectedDate)
+        let currentWeek = generateDateArray(selectedDate: settings.selectedDate)
         
+        
+    // MARK: Attempted to create a paginated horizontal scrolling view for each week of dates. After research this appears to be very easy in ios17 with a .scrollTargetLayout() and .scrollTargetBehavior(). Can implement this when permitted to upgrade to xcode15
         //        //         Generating Next week's dates
         //        let nextWeek = generateDateArray(
         //            selectedDate: Calendar.current.date(byAdding: .weekOfYear, value: 1, to: selectedDate)!)
@@ -30,26 +29,26 @@ struct DatePicker: View {
         
         HStack{
             ForEach(currentWeek, id: \.self) { week in
-                DateTile(selectedDate: $selectedDate, date: week) //Make a dateTile with that date
+                DateTile(date: week) //Make a dateTile with that date
             }
         }
     }
 }
 
 struct DateTile: View  {
-    
-    @Binding var selectedDate: Date
-    
+        
+    @EnvironmentObject var settings: DateObservableObject
+
     var date: Date
     
     var body: some View {
         
         // Choosing if selected dateTile or unselected dateTile is shown
-        if dateToString(date: date) == dateToString(date: selectedDate) {
+        if dateToString(date: date) == dateToString(date: settings.selectedDate) {
             
-            // Currently Selected Tile
+            // Currently Selected Tile (Blue Circle Background)
             Button {
-                selectedDate = date
+                settings.selectedDate = date
                 
             } label: {
                 ZStack{
@@ -69,9 +68,9 @@ struct DateTile: View  {
                 }
             }
             
-        } else { // Non Selected Tile
+        } else { // Non Selected Tile (White background)
             Button {
-                selectedDate = date
+                settings.selectedDate = date
                 
             } label: {
                 ZStack{

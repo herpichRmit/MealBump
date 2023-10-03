@@ -10,11 +10,13 @@ import SwiftUI
 
 struct DayView: View {
     //    MARK: - Variables and FetchRequests
-    
-    // Date selected in the date picker
-    @State var selectedDate: Date = Date() //Start with Today's Date
-        
+
+    // You don't initialise an environment object as it has already been initialized in ContentView()
+    // I just named it settings to have a unique name so we don't get confused, but the name is local to this view. It can be anything...
+    @EnvironmentObject var settings: DateObservableObject
+            
     @Environment(\.managedObjectContext) private var viewContext // For accessing CoreData
+    
 
     @State var isMenuShown = false
     @State var showActionSheet = false
@@ -42,15 +44,17 @@ struct DayView: View {
                     .padding()
                 }
                 
-                DatePicker(selectedDate: $selectedDate)
+                DatePicker()
+//                    .environmentObject(settings)
                     .padding(.horizontal)
                     .padding(.bottom, 30)
                 
                 Spacer()
                 
-                Text("\(selectedDate.formatted(.dateTime.weekday(.wide).day().month().year()))").font(.callout)
+                Text("\(settings.selectedDate.formatted(.dateTime.weekday(.wide).day().month().year()))").font(.callout)
                 
-                DayFilteredList(filter: selectedDate)
+                //Must pass the date from here to the DayFilteredList's init(), because we need to know the date first in order to construct the fetch request inside DayFilteredList()
+                DayFilteredList(filter: settings.selectedDate)
                 
                 HStack{
                     Spacer()
@@ -149,7 +153,7 @@ struct DayView: View {
         
         // Adding data to new EventCore Object
         let newEvent = EventCore(context: viewContext) //New object with the CoreData ViewContext
-        newEvent.date = selectedDate //Add events to the selected date
+        newEvent.date = settings.selectedDate //Add events to the selected date
         newEvent.name = chosenName
         newEvent.note = chosenNote
         newEvent.order = Int16(chosenOrder)

@@ -8,14 +8,7 @@
 import SwiftUI
 
 
-
 struct ContentView: View {
-    
-    
-    // The same for all other entities in the Data Model (analogus to tables in the Database Schema)
-//    @FetchRequest(sortDescriptors: []) var items: FetchedResults<ShoppingItem>
-//    @FetchRequest(sortDescriptors: []) var meals: FetchedResults<Meal>
-    
     
     var body: some View {
                  
@@ -36,7 +29,6 @@ struct ContentView: View {
                     Text("Weekly")
                 }
         }
-        
     }
 }
 

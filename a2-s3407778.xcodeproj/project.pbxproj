@@ -35,6 +35,7 @@
 		CD71A2A32ACA9AD800E0F09E /* EventCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD71A2A12ACA9AD800E0F09E /* EventCore+CoreDataClass.swift */; };
 		CD71A2A42ACA9AD800E0F09E /* EventCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD71A2A22ACA9AD800E0F09E /* EventCore+CoreDataProperties.swift */; };
 		CD71A2A62ACAAFF000E0F09E /* EventCoreFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD71A2A52ACAAFF000E0F09E /* EventCoreFunctions.swift */; };
+		CD71A2A82ACAD60F00E0F09E /* DateObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD71A2A72ACAD60F00E0F09E /* DateObservableObject.swift */; };
 		CD8067B72AC062CF00A1ECC5 /* ShoppingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8067B22AC062CF00A1ECC5 /* ShoppingItem.swift */; };
 		CD8067B82AC062CF00A1ECC5 /* ShoppingItems.json in Resources */ = {isa = PBXBuildFile; fileRef = CD8067B32AC062CF00A1ECC5 /* ShoppingItems.json */; };
 		CD8067B92AC062CF00A1ECC5 /* TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = CD8067B42AC062CF00A1ECC5 /* TestData.json */; };
@@ -78,6 +79,7 @@
 		CD71A2A12ACA9AD800E0F09E /* EventCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "EventCore+CoreDataClass.swift"; path = "a2s3407778/EventCore+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CD71A2A22ACA9AD800E0F09E /* EventCore+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "EventCore+CoreDataProperties.swift"; path = "a2s3407778/EventCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CD71A2A52ACAAFF000E0F09E /* EventCoreFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCoreFunctions.swift; sourceTree = "<group>"; };
+		CD71A2A72ACAD60F00E0F09E /* DateObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateObservableObject.swift; sourceTree = "<group>"; };
 		CD8067B22AC062CF00A1ECC5 /* ShoppingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingItem.swift; sourceTree = "<group>"; };
 		CD8067B32AC062CF00A1ECC5 /* ShoppingItems.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ShoppingItems.json; sourceTree = "<group>"; };
 		CD8067B42AC062CF00A1ECC5 /* TestData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestData.json; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				CD4EE6852A8E36BA008FD1AB /* ReadJSONData.swift */,
 				CD31540B2A97277B00CE461F /* ReadShoppingItemsJSON.swift */,
 				CD202ABF2AC2B4F000425AC0 /* Persistence.swift */,
+				CD71A2A72ACAD60F00E0F09E /* DateObservableObject.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				CD8067BB2AC062F200A1ECC5 /* Event.swift in Sources */,
 				CD71A2A42ACA9AD800E0F09E /* EventCore+CoreDataProperties.swift in Sources */,
 				CD96433C2ABBF85400A1D990 /* DataControllerCoreData.swift in Sources */,
+				CD71A2A82ACAD60F00E0F09E /* DateObservableObject.swift in Sources */,
 				CD17457F2A80D0DA00294186 /* a1s3407778App.swift in Sources */,
 				A8A03B0D2A9307CE003EF9B9 /* NewMealSheet.swift in Sources */,
 				CDB723442A98E03400876D79 /* RadialLayout.swift in Sources */,

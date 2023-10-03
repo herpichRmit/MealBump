@@ -14,9 +14,7 @@ struct WeekDayEntry: View {
     @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
     
     @FetchRequest var events: FetchedResults<EventCore> //New Request to initialize in init()
-    
-//    @State private var activeItemIds: [Int] = []
-    
+        
     @State var data : [EventCore]
     
     @State var weekday : String?

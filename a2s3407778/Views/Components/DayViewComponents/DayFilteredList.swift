@@ -9,6 +9,7 @@ import SwiftUI
 import CoreData
 
 struct DayFilteredList: View {
+    
     @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
     
     @FetchRequest var fetchRequest: FetchedResults<EventCore> //New Request to initialize in init()

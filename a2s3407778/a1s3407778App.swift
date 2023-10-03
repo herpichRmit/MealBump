@@ -11,10 +11,15 @@ import SwiftUI
 
 // Created following Kodeko Guide
  struct a1s3407778App: App {
+     
      let persistenceController = PersistenceController.shared
+     
+     @StateObject var settings = DateObservableObject()
+     
      var body: some Scene {
          WindowGroup {
              ContentView()
+                 .environmentObject(settings)
                  .environment(\.managedObjectContext, persistenceController.container.viewContext)
          }
      }
