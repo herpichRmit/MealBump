@@ -15,43 +15,45 @@ struct WeekDayEntry: View {
     
     @FetchRequest var events: FetchedResults<EventCore> //New Request to initialize in init()
         
-    @State var data : [EventCore]
+    //@State var data : [EventCore]
     
-    @State var weekday : String?
-    @State var dayNumber : String?
+    var weekday : String?
+    var dayNumber : String?
     //@State var date : Date?
     
     // list of all events in the day
     //@State var events : [Event]
-    @State var date : Date
+    //@State var date : Date
     
     // allows for select card functionality
-    @Binding var selectedEvent: [Event?]
+    @Binding var selectedEvent: EventCore
     @Binding var cardPosition: CGPoint
     
     // allows for reordering of cards
     @State var isMoveable : Bool = true
     
     // control what modal is being shown
-    @Binding var isMenuShown : Bool
-    @Binding var showActionSheet : Bool
-    @Binding var showCreateMealSheet : Bool
-    @Binding var showCreateShopSheet : Bool
-    @Binding var showCreateOtherSheet : Bool
-    @Binding var showSearchMealSheet : Bool
-    @Binding var buildActionSheet : Bool
-    @Binding var activateSheetPosition : CGPoint
+//    @Binding var isMenuShown : Bool
+//    @Binding var showActionSheet : Bool
+//    @Binding var showCreateMealSheet : Bool
+//    @Binding var showCreateShopSheet : Bool
+//    @Binding var showCreateOtherSheet : Bool
+//    @Binding var showSearchMealSheet : Bool
+//    @Binding var buildActionSheet : Bool
+//    @Binding var activateSheetPosition : CGPoint
+
+    var currDate : Date
     
-    
-    
-    
-    init(){
+    init(filter: Date/*, selectedEvent: EventCore, cardPosition: CGPoint, buildActionSheet : Bool, activateSheetPosition : CGPoint*/){
         // Sort order by order
+        
+        self.currDate = filter
+        
         let orderSort = NSSortDescriptor(key: "order", ascending: true)
         
         // Constructing filter predicate
         let calendar = Calendar.current
-        let start = calendar.startOfDay(for: date)
+        let start = calendar.startOfDay(for: filter)
         let end = calendar.date(byAdding: .day, value: 1, to: start)
         
         let predicate = NSPredicate(format: "date >= %@ AND date < %@", start as NSDate, end! as NSDate)
@@ -83,11 +85,11 @@ struct WeekDayEntry: View {
                 // determine weekday from date
                 let dateFormatter = DateFormatter()
                 dateFormatter.setLocalizedDateFormatFromTemplate("EEEE")
-                weekday = dateFormatter.string(from: events[0].date)
+                //weekday = dateFormatter.string(from: currDate)
                 
                 // determine day number from date
                 dateFormatter.setLocalizedDateFormatFromTemplate("d")
-                dayNumber = dateFormatter.string(from: events[0].date)
+                //dayNumber = dateFormatter.string(from: currDate)
                 
             }
             
@@ -107,10 +109,13 @@ struct WeekDayEntry: View {
                                           type: item.type ?? "Unknown Type")
                                     .onTapGesture(count: 2, coordinateSpace: .global) { location in
                                         cardPosition = location
-                                        selectedEvent.append(item)
+                                        selectedEvent = item
+                                        
+                                        /*
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                             events.removeAll { $0.id == selectedEvent[0]!.id }
                                         }
+                                         */
                                     }
                                 Spacer()
 //                            }
@@ -129,16 +134,17 @@ struct WeekDayEntry: View {
                         
                         // sheet view contains all the different modal sheets and forms
                         SheetView(
-                            date: $date,
-                            isMenuShown: $isMenuShown,
-                            showActionSheet: $showActionSheet,
-                            showCreateMealSheet: $showCreateMealSheet,
-                            showCreateShopSheet: $showCreateShopSheet,
-                            showCreateOtherSheet: $showCreateOtherSheet,
-                            showSearchMealSheet: $showSearchMealSheet,
-                            buildActionSheet: $buildActionSheet,
-                            activateSheetPosition: $activateSheetPosition
-                        )
+//                            date: date,
+//                            isMenuShown: $isMenuShown,
+//                            showActionSheet: $showActionSheet,
+//                            showCreateMealSheet: $showCreateMealSheet,
+//                            showCreateShopSheet: $showCreateShopSheet,
+//                            showCreateOtherSheet: $showCreateOtherSheet,
+//                            showSearchMealSheet: $showSearchMealSheet,
+//                            buildActionSheet: $buildActionSheet,
+//                            activateSheetPosition: $activateSheetPosition,
+//                            date: date,
+                            filter: currDate)
                         
                     }
                     .frame(height: 140, alignment: .top)

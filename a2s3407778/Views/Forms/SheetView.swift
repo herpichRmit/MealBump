@@ -14,6 +14,7 @@ struct SheetView: View {
  
     
     @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
+    @EnvironmentObject var settings: DateObservableObject
     
     @FetchRequest var events: FetchedResults<EventCore> //New Request to initialize in init()
     
@@ -36,23 +37,29 @@ struct SheetView: View {
     
     // used to control which modal is open
     //@Binding var events : [Event]
-    @Binding var date : Date
-    @Binding var isMenuShown : Bool
-    @Binding var showActionSheet : Bool
-    @Binding var showCreateMealSheet : Bool
-    @Binding var showCreateShopSheet : Bool
-    @Binding var showCreateOtherSheet : Bool
-    @Binding var showSearchMealSheet : Bool
+//    @Binding var date : Date
+//    @Binding var isMenuShown : Bool
+//    @Binding var showActionSheet : Bool
+//    @Binding var showCreateMealSheet : Bool
+//    @Binding var showCreateShopSheet : Bool
+//    @Binding var showCreateOtherSheet : Bool
+//    @Binding var showSearchMealSheet : Bool
     @Binding var buildActionSheet : Bool
     @Binding var activateSheetPosition : CGPoint
     
-    init(){
+    
+    var currDate = Date()
+    
+    init(filter: Date){
+        
+        currDate = filter
+        
         // Sort order by order
         let orderSort = NSSortDescriptor(key: "order", ascending: true)
         
         // Constructing filter predicate
         let calendar = Calendar.current
-        let start = calendar.startOfDay(for: date)
+        let start = calendar.startOfDay(for: filter)
         let end = calendar.date(byAdding: .day, value: 1, to: start)
         
         let predicate = NSPredicate(format: "date >= %@ AND date < %@", start as NSDate, end! as NSDate)
@@ -83,16 +90,16 @@ struct SheetView: View {
                 // delay so animtion is applied
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     print("delay end")
-                    isMenuShown = true
+                    settings.isMenuShown = true
                 }
             }
-            .sheet(isPresented: $showCreateMealSheet) {
+            .sheet(isPresented: $settings.showCreateMealSheet) {
                 NavigationStack(){
                     // calls CreateMealSheet that is encapsulated in another file
-                    NewMealSheet(date: date, name: $name, timePeriod: $timePeriod, note: $note /*servings: $servings*/ )
+                    NewMealSheet(name: $name, timePeriod: $timePeriod, note: $note /*servings: $servings*/ )
                         .navigationTitle("Create meal")
                         .navigationBarTitleDisplayMode(.inline)
-                        .navigationBarItems(leading: Button("Back", action: { showCreateMealSheet.toggle() } ))
+                        .navigationBarItems(leading: Button("Back", action: { settings.showCreateMealSheet.toggle() } ))
                         .navigationBarItems(trailing: Button("Done", action: {
                             // when done is press append event to dayInfo
                             
@@ -103,7 +110,7 @@ struct SheetView: View {
                             dayInfo.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: dayInfo[0].date, order: 100, type: TypeEnum.meal, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
                              */
                             // when done is press append event to events
-                            addNewEvent(date: date, name: name ?? "", note: note ?? "", order: 100, timePeriod: timePeriod ?? "", type: "Meal")
+                            addNewEvent(date: currDate, name: name ?? "", note: note ?? "", order: 100, timePeriod: timePeriod ?? "", type: "Meal")
                             
                             // clearing values
                             name = nil
@@ -111,18 +118,18 @@ struct SheetView: View {
                             note = nil
                             servings = nil
                             
-                            showCreateMealSheet = false
+                            settings.showCreateMealSheet = false
                         }))
                 }
             }
             // Ommited from milestone 1 presentation
-            .sheet(isPresented: $showSearchMealSheet) {
+            .sheet(isPresented: $settings.showSearchMealSheet) {
                 Form {
-                    Button("Dismiss", action: { showSearchMealSheet.toggle() })
+                    Button("Dismiss", action: { settings.showSearchMealSheet.toggle() })
                 }
             }
             // Creating a shopping trip event
-            .sheet(isPresented: $showCreateShopSheet) {
+            .sheet(isPresented: $settings.showCreateShopSheet) {
                 NavigationStack(){
                     Form {
                         Section(){
@@ -133,18 +140,18 @@ struct SheetView: View {
                     }
                     .navigationTitle("Create shopping trip")
                     .navigationBarTitleDisplayMode(.inline)
-                    .navigationBarItems(leading: Button("Back", action: { showCreateShopSheet.toggle() } ))
+                    .navigationBarItems(leading: Button("Back", action: { settings.showCreateShopSheet.toggle() } ))
                     .navigationBarItems(trailing: Button("Done", action: {
-                        addNewEvent(date: date, name: name ?? "", note: note ?? "", order: 100, timePeriod: timePeriod ?? "", type: "Shopping Trip")
-                        showCreateShopSheet.toggle()
+                        addNewEvent(date: currDate, name: name ?? "", note: note ?? "", order: 100, timePeriod: timePeriod ?? "", type: "Shopping Trip")
+                        settings.showCreateShopSheet.toggle()
                     }))
                     
                 }
             }
             // Ommited from milestone 1 presentation
-            .sheet(isPresented: $showCreateOtherSheet) {
+            .sheet(isPresented: $settings.showCreateOtherSheet) {
                 Form {
-                    Button("Dismiss", action: { showCreateOtherSheet.toggle() })
+                    Button("Dismiss", action: { settings.showCreateOtherSheet.toggle() })
                 }
             }
     }
