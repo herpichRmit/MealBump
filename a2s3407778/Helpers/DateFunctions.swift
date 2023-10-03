@@ -28,6 +28,18 @@ func stringToDate(dateString: String) -> Date {
     }
 }
 
+func weekdayFromDate (date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.setLocalizedDateFormatFromTemplate("EEEE")
+    return dateFormatter.string(from: date)
+}
+func dayNumberFromDate (date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.setLocalizedDateFormatFromTemplate("d")
+    return dateFormatter.string(from: date)
+    
+}
+
 // Calculating the 7 dates to be shown based on the selected date
 func generateDateArray(selectedDate: Date) -> [Date] {
     

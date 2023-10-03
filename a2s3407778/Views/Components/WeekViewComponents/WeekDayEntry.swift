@@ -14,40 +14,32 @@ struct WeekDayEntry: View {
     @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
     
     @FetchRequest var events: FetchedResults<EventCore> //New Request to initialize in init()
-        
-    //@State var data : [EventCore]
     
-    var weekday : String?
-    var dayNumber : String?
-    //@State var date : Date?
-    
-    // list of all events in the day
-    //@State var events : [Event]
-    //@State var date : Date
+    @EnvironmentObject var settings: DateObservableObject
+
     
     // allows for select card functionality
-    @Binding var selectedEvent: EventCore
-    @Binding var cardPosition: CGPoint
+//    @Binding var selectedEvent: EventCore
+//    @Binding var cardPosition: CGPoint
     
     // allows for reordering of cards
-    @State var isMoveable : Bool = true
+//    @State var isMoveable : Bool = true
     
     // control what modal is being shown
-//    @Binding var isMenuShown : Bool
-//    @Binding var showActionSheet : Bool
-//    @Binding var showCreateMealSheet : Bool
-//    @Binding var showCreateShopSheet : Bool
-//    @Binding var showCreateOtherSheet : Bool
-//    @Binding var showSearchMealSheet : Bool
-//    @Binding var buildActionSheet : Bool
-//    @Binding var activateSheetPosition : CGPoint
-
-    var currDate : Date
+    //    @Binding var isMenuShown : Bool
+    //    @Binding var showActionSheet : Bool
+    //    @Binding var showCreateMealSheet : Bool
+    //    @Binding var showCreateShopSheet : Bool
+    //    @Binding var showCreateOtherSheet : Bool
+    //    @Binding var showSearchMealSheet : Bool
+    //    @Binding var buildActionSheet : Bool
+    //    @Binding var activateSheetPosition : CGPoint
     
-    init(filter: Date/*, selectedEvent: EventCore, cardPosition: CGPoint, buildActionSheet : Bool, activateSheetPosition : CGPoint*/){
+    let dateToDisplay: Date
+    
+    init(filter: Date){
         // Sort order by order
-        
-        self.currDate = filter
+        self.dateToDisplay = filter
         
         let orderSort = NSSortDescriptor(key: "order", ascending: true)
         
@@ -68,96 +60,75 @@ struct WeekDayEntry: View {
             sortDescriptors: [orderSort],
             predicate: predicate)
     }
-
+    
     
     
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
+            
+            // Weekday Headings
             VStack(alignment: .leading) {
-                Text(weekday ?? "")
+                Text(weekdayFromDate(date: dateToDisplay))
                     .font(.system(size: 16))
-                Text(dayNumber ?? "")
+                Text(dayNumberFromDate(date: dateToDisplay))
                     .font(.system(size: 19))
-            }
-            .onAppear(){
-                // Caculate weekday and week number value by checking the date of the first event in the day
-                
-                // determine weekday from date
-                let dateFormatter = DateFormatter()
-                dateFormatter.setLocalizedDateFormatFromTemplate("EEEE")
-                //weekday = dateFormatter.string(from: currDate)
-                
-                // determine day number from date
-                dateFormatter.setLocalizedDateFormatFromTemplate("d")
-                //dayNumber = dateFormatter.string(from: currDate)
-                
             }
             
             // row of cards
             ScrollView(.horizontal, showsIndicators: false){
                 HStack {
-                    
-                    // this swiftUI package allows for cards to be dragged and dropped, demonstrating future functionality that will be imbedded in the system
-                    
-                    
                     ForEach (events) { item in
                         HStack{
-//                            if item.title != "n/a" {
-                                
                             WeekEventCard(title: item.name ?? "Unknown Name",
                                           timePeriod: item.timePeriod ?? "Unknown Time Period",
                                           type: item.type ?? "Unknown Type")
-                                    .onTapGesture(count: 2, coordinateSpace: .global) { location in
-                                        cardPosition = location
-                                        selectedEvent = item
-                                        
-                                        /*
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                            events.removeAll { $0.id == selectedEvent[0]!.id }
-                                        }
-                                         */
-                                    }
-                                Spacer()
-//                            }
-                                //                    VStack{ // Added for testing date and order sorting
-                                //                        Text("\(item.order)") // To Test the order sorting is working
-                                //                        Text(dateToString(date: item.date!)) // TO Test date seperation is working
-                                //                    }
+                            .onTapGesture(count: 2, coordinateSpace: .global) { location in
+//                                cardPosition = location
+//                                selectedEvent = item
+                                
+                                /*
+                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                 events.removeAll { $0.id == selectedEvent[0]!.id }
+                                 }
+                                 */
                             }
-                                .listRowSeparator(.hidden)
-                            
+                            Spacer()
+                            //                            }
+                            //                    VStack{ // Added for testing date and order sorting
+                            //                        Text("\(item.order)") // To Test the order sorting is working
+                            //                        Text(dateToString(date: item.date!)) // TO Test date seperation is working
+                            //                    }
                         }
-                        .onDelete(perform: deleteEvent)
-                        .onMove(perform: moveActiveTodos)
-                        
-                        
-                        
-                        // sheet view contains all the different modal sheets and forms
-                        SheetView(
-//                            date: date,
-//                            isMenuShown: $isMenuShown,
-//                            showActionSheet: $showActionSheet,
-//                            showCreateMealSheet: $showCreateMealSheet,
-//                            showCreateShopSheet: $showCreateShopSheet,
-//                            showCreateOtherSheet: $showCreateOtherSheet,
-//                            showSearchMealSheet: $showSearchMealSheet,
-//                            buildActionSheet: $buildActionSheet,
-//                            activateSheetPosition: $activateSheetPosition,
-//                            date: date,
-                            filter: currDate)
+                        .listRowSeparator(.hidden)
                         
                     }
-                    .frame(height: 140, alignment: .top)
-                    .padding([.top, .leading], 2)
-                    .padding([.trailing], 10)
+                    .onDelete(perform: deleteEvent)
+                    .onMove(perform: moveActiveTodos)
+                    
+                    
+                    
+                    // sheet view contains all the different modal sheets and forms
+                    //                        SheetView(
+                    //                            date: date,
+                    //                            isMenuShown: $isMenuShown,
+                    //                            showActionSheet: $showActionSheet,
+                    //                            showCreateMealSheet: $showCreateMealSheet,
+                    //                            showCreateShopSheet: $showCreateShopSheet,
+                    //                            showCreateOtherSheet: $showCreateOtherSheet,
+                    //                            showSearchMealSheet: $showSearchMealSheet,
+                    //                            buildActionSheet: $buildActionSheet,
+                    //                            activateSheetPosition: $activateSheetPosition,
+                    //                            date: date,
+                    //                            filter: currDate)
+                    
                 }
-                
-                
+                .frame(height: 140, alignment: .top)
+                .padding([.top, .leading], 2)
+                .padding([.trailing], 10)
             }
-            .frame(height: 150, alignment: .topLeading)
         }
-        
-        
+        .frame(height: 150, alignment: .topLeading)
+    }
     
     func moveActiveTodos( from source: IndexSet, to destination: Int) {
         // Make an array of items from fetched results
@@ -196,6 +167,6 @@ struct WeekDayEntry: View {
     }
 }
 
-    
-    
+
+
 
