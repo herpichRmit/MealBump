@@ -152,8 +152,12 @@ struct ShoppingView: View {
     }
     
     func saveData(){
-        try? viewContext.save() //Save the data to CoreData, if you don't have this it won't stay the same upon restarting the app
-    }
+        do {
+            try viewContext.save() //Saving data to the persistent store
+        } catch {
+            let nserror = error as NSError
+            fatalError("Saving Error: \(nserror), \(nserror.userInfo)")
+        }    }
     
 }
 

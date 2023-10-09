@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import UniformTypeIdentifiers
 import SwiftUI
-
+import UniformTypeIdentifiers
 
 extension EventCore {
 

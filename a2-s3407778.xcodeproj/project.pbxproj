@@ -198,6 +198,7 @@
 		CD6ED8F02A8A473400FD6A25 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CD71A2A52ACAAFF000E0F09E /* CoreDataFunctions.swift */,
 				CD71A2A12ACA9AD800E0F09E /* EventCore+CoreDataClass.swift */,
 				CD7B34C12AD3F9F80060B4BB /* EventCore+CoreDataProperties.swift */,
 				CD9643382ABBF26200A1D990 /* Main.xcdatamodeld */,
@@ -213,7 +214,6 @@
 			isa = PBXGroup;
 			children = (
 				CD8067D92AC1B0AB00A1ECC5 /* DateFunctions.swift */,
-				CD71A2A52ACAAFF000E0F09E /* EventCoreFunctions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -345,7 +345,7 @@
 				CDB723442A98E03400876D79 /* RadialLayout.swift in Sources */,
 				A8D446E22A9B13DF00F77403 /* Bubble.swift in Sources */,
 				A83880332AD3E70F00C4FB77 /* NewOtherEventSheet.swift in Sources */,
-				CD71A2A62ACAAFF000E0F09E /* EventCoreFunctions.swift in Sources */,
+				CD71A2A62ACAAFF000E0F09E /* CoreDataFunctions.swift in Sources */,
 				CDB723412A98DF3F00876D79 /* ExampleOfCustomLayout.swift in Sources */,
 				A8A03B052A930575003EF9B9 /* PlusButton.swift in Sources */,
 				A838802C2AD3DB3600C4FB77 /* CustomMenu.swift in Sources */,

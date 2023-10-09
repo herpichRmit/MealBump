@@ -53,6 +53,8 @@ struct NewMealSheet: View {
                 
                 Section(){
                     // list all food items here
+                    
+                    // tap food view
     
                     // allows user to add a food they have used before
                     NavigationLink(destination: SearchFoodView()) {
@@ -108,7 +110,8 @@ struct NewMealSheet: View {
         } catch {
             let nserror = error as NSError
             fatalError("Saving Error: \(nserror), \(nserror.userInfo)")
-        }}
+        }
+    }
     
 }
 
