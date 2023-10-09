@@ -8,7 +8,8 @@
 
 import Foundation
 import CoreData
-
+import SwiftUI
+import UniformTypeIdentifiers
 
 extension EventCore {
 
@@ -28,4 +29,16 @@ extension EventCore {
 
 extension EventCore : Identifiable {
 
+}
+
+extension EventCore : Transferable {
+    
+    static public var transferRepresentation: some TransferRepresentation{
+        CodableRepresentation(contentType: .event)
+    }
+}
+
+
+extension CodingUserInfoKey {
+  static let managedObjectContext = CodingUserInfoKey(rawValue: "managedObjectContext")!
 }

@@ -10,12 +10,14 @@ import SwiftUI
 
 struct NewFoodView: View {
     
+    // Managed Object Context to read the coredata objects
+    @Environment(\.managedObjectContext) private var viewContext
+    
     @Environment(\.dismiss) var dismiss
     
-    @State var name : String?
-    @State var note : String?
-    @State var category : String?
-    @State var location : String?
+    @State var name : String = ""
+    @State var note : String = ""
+    @State var category : String = ""
     let types = ["None","Dairy", "Fruit", "Vegetables", "Meat", "Bakery", "Other"]
     
     var body: some View {
@@ -23,11 +25,11 @@ struct NewFoodView: View {
             Form {
                 
                 Section(){
-                    TextField("Name", text: $name ?? "")
-                    TextField("Amount", text: $note ?? "")
+                    TextField("Name", text: $name)
+                    TextField("Amount", text: $note)
                 }
                 Section(){
-                    Picker("Category", selection: $category ?? ""){
+                    Picker("Category", selection: $category){
                         ForEach(types, id: \.self) {
                             Text($0)
                         }
@@ -48,12 +50,22 @@ struct NewFoodView: View {
     }
     
     func addFood() {
-        /*
-         
-         Functionlity to add food to coreData
-         
-         */
+        let newShoppingItem = ShoppingItemCore(context: viewContext)
+        newShoppingItem.name = name
+        newShoppingItem.measure = note
+        newShoppingItem.category = category
+        newShoppingItem.checked = false
         
+        saveData()
+    }
+    
+    func saveData(){
+        do {
+            try viewContext.save() //Saving data to the persistent store
+        } catch {
+            let nserror = error as NSError
+            fatalError("Saving Error: \(nserror), \(nserror.userInfo)")
+        }
     }
     
     

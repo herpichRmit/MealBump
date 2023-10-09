@@ -111,7 +111,8 @@ struct DayView: View {
         } catch {
             let nserror = error as NSError
             fatalError("Saving Error: \(nserror), \(nserror.userInfo)")
-        }        }
+        }
+    }
     
 }
 
