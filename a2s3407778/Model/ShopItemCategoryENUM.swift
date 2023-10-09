@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+enum category: String {
+    case Dairy, Produce, Meat, Pasta, Fish, Lollies, Drinks, Other, Stationary, Cleaning, Household, Personal, Spices, Bakery
+}

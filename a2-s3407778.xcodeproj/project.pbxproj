@@ -36,9 +36,10 @@
 		CD6ED8EF2A8A458B00FD6A25 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6ED8EE2A8A458A00FD6A25 /* DayView.swift */; };
 		CD71A2A02ACA99C500E0F09E /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 74140E67286313DAF1079CDF /* Algorithms */; };
 		CD71A2A32ACA9AD800E0F09E /* EventCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD71A2A12ACA9AD800E0F09E /* EventCore+CoreDataClass.swift */; };
-		CD71A2A42ACA9AD800E0F09E /* EventCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD71A2A22ACA9AD800E0F09E /* EventCore+CoreDataProperties.swift */; };
 		CD71A2A62ACAAFF000E0F09E /* EventCoreFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD71A2A52ACAAFF000E0F09E /* EventCoreFunctions.swift */; };
 		CD71A2A82ACAD60F00E0F09E /* DateObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD71A2A72ACAD60F00E0F09E /* DateObservableObject.swift */; };
+		CD7B34B82AD3F2180060B4BB /* ShopItemCategoryENUM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7B34B72AD3F2180060B4BB /* ShopItemCategoryENUM.swift */; };
+		CD7B34C22AD3F9F80060B4BB /* EventCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7B34C12AD3F9F80060B4BB /* EventCore+CoreDataProperties.swift */; };
 		CD8067DA2AC1B0AB00A1ECC5 /* DateFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8067D92AC1B0AB00A1ECC5 /* DateFunctions.swift */; };
 		CD96433A2ABBF26200A1D990 /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD9643382ABBF26200A1D990 /* Main.xcdatamodeld */; };
 		CD96433C2ABBF85400A1D990 /* DataControllerCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD96433B2ABBF85400A1D990 /* DataControllerCoreData.swift */; };
@@ -79,9 +80,10 @@
 		CD48D87F2A93374600E5B757 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
 		CD6ED8EE2A8A458A00FD6A25 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		CD71A2A12ACA9AD800E0F09E /* EventCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventCore+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CD71A2A22ACA9AD800E0F09E /* EventCore+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CD71A2A52ACAAFF000E0F09E /* EventCoreFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCoreFunctions.swift; sourceTree = "<group>"; };
 		CD71A2A72ACAD60F00E0F09E /* DateObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateObservableObject.swift; sourceTree = "<group>"; };
+		CD7B34B72AD3F2180060B4BB /* ShopItemCategoryENUM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItemCategoryENUM.swift; sourceTree = "<group>"; };
+		CD7B34C12AD3F9F80060B4BB /* EventCore+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EventCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CD8067D92AC1B0AB00A1ECC5 /* DateFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFunctions.swift; sourceTree = "<group>"; };
 		CD9643392ABBF26200A1D990 /* Main.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Main.xcdatamodel; sourceTree = "<group>"; };
 		CD96433B2ABBF85400A1D990 /* DataControllerCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataControllerCoreData.swift; sourceTree = "<group>"; };
@@ -197,11 +199,12 @@
 			isa = PBXGroup;
 			children = (
 				CD71A2A12ACA9AD800E0F09E /* EventCore+CoreDataClass.swift */,
-				CD71A2A22ACA9AD800E0F09E /* EventCore+CoreDataProperties.swift */,
+				CD7B34C12AD3F9F80060B4BB /* EventCore+CoreDataProperties.swift */,
 				CD9643382ABBF26200A1D990 /* Main.xcdatamodeld */,
 				CD96433B2ABBF85400A1D990 /* DataControllerCoreData.swift */,
 				CD202ABF2AC2B4F000425AC0 /* Persistence.swift */,
 				CD71A2A72ACAD60F00E0F09E /* DateObservableObject.swift */,
+				CD7B34B72AD3F2180060B4BB /* ShopItemCategoryENUM.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -333,7 +336,6 @@
 				CD71A2A32ACA9AD800E0F09E /* EventCore+CoreDataClass.swift in Sources */,
 				A8C6F4772A8F0E6500ACC6C4 /* EditFoodView.swift in Sources */,
 				A841AF4B2A89CC3200EE109B /* ShoppingView.swift in Sources */,
-				CD71A2A42ACA9AD800E0F09E /* EventCore+CoreDataProperties.swift in Sources */,
 				CD96433C2ABBF85400A1D990 /* DataControllerCoreData.swift in Sources */,
 				CD71A2A82ACAD60F00E0F09E /* DateObservableObject.swift in Sources */,
 				A83880352AD3E73900C4FB77 /* MealFromArchiveSheet.swift in Sources */,
@@ -353,8 +355,10 @@
 				CD96433E2ABC129000A1D990 /* DayEventTile.swift in Sources */,
 				A8A03B032A93054B003EF9B9 /* WeekEventCard.swift in Sources */,
 				A8C6F4712A8EF88300ACC6C4 /* WeekPlannerView.swift in Sources */,
+				CD7B34B82AD3F2180060B4BB /* ShopItemCategoryENUM.swift in Sources */,
 				A838802E2AD3DC3200C4FB77 /* AnimationOverlay.swift in Sources */,
 				CD96433A2ABBF26200A1D990 /* Main.xcdatamodeld in Sources */,
+				CD7B34C22AD3F9F80060B4BB /* EventCore+CoreDataProperties.swift in Sources */,
 				A8A03AFD2A91E5A2003EF9B9 /* NewFoodView.swift in Sources */,
 				CDB6BC7F2A8F3654009A05F7 /* DatePicker.swift in Sources */,
 				CD202AC02AC2B4F000425AC0 /* Persistence.swift in Sources */,
