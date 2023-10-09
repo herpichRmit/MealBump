@@ -17,35 +17,6 @@ struct NewFoodView: View {
     @State var category : String?
     @State var location : String?
     let types = ["None","Dairy", "Fruit", "Vegetables", "Meat", "Bakery", "Other"]
-    let locations = ["None","Woolworths", "Coles", "IGA", "Butcher"]
-    
-    /*
-     
-     Each food will have these properties
-     
-     name : string from TextField
-     amount : string from TextField
-     category : string from Picker
-     locaction : string from Picker
-     
-     This view will then add all details to an array
-     
-     ["item","measure","category","location"]
-     
-     Then it will append it to the binding foodItems
-     
-     foodItems = [
-        ["item","measure","category","location"]
-     ]
-     
-     
-     */
-    
-    
-    @Binding var foodItems: [[String]]
-    
-    
-    
     
     var body: some View {
         NavigationStack{
@@ -61,11 +32,7 @@ struct NewFoodView: View {
                             Text($0)
                         }
                     }
-                    Picker("Location", selection: $location ?? ""){
-                        ForEach(locations, id: \.self) {
-                            Text($0)
-                        }
-                    }
+                    
                 }
                 
             }
@@ -81,22 +48,14 @@ struct NewFoodView: View {
     }
     
     func addFood() {
-        let currentFood = [name ?? "", note ?? "", category ?? "", location ?? ""]
-        
-        foodItems.append(currentFood)
-        
-        print(currentFood)
-        print(foodItems)
+        /*
+         
+         Functionlity to add food to coreData
+         
+         */
         
     }
     
     
 }
 
-/*
- struct EditFoodView_Previews: PreviewProvider {
- static var previews: some View {
- EditFoodView(foodItems: )
- }
- }
- */

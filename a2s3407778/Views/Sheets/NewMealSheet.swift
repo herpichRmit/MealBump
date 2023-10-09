@@ -40,6 +40,7 @@ struct NewMealSheet: View {
                 
                 // Date and serving pickers ommitted until full functionality is implemented
                 Section(){
+                    Text("Date and serving pickers")
                     //                DatePicker("Date", selection: $date, displayedComponents: [.date])
                     //                    .datePickerStyle(.compact)
                     //                Picker("Servings", selection: $servings ?? 1){
@@ -50,31 +51,22 @@ struct NewMealSheet: View {
                     //                }
                 }
                 
-                //            Section(){
-                //                if foodItems != [[]] {
-                //
-                //                    // iterates through all foodItems in the meal and displays them as links
-                //                    // allows user to edit the details of each food component
-                //                    ForEach(foodItems, id: \.self) { item in
-                //                        if item != [] {
-                //                            NavigationLink(destination: EditFoodView(currentItem: item, foodItems: $foodItems)) {
-                //                                Text(item[0])
-                //                            }
-                //                        }
-                //                    }
-                //                }
-                //
-                //                // allows user to add a food they have used before
-                //                NavigationLink(destination: SearchFoodView(foodItems: $foodItems, allFoodItems: $allFoodItems)) { // showNestedView: $showNestedView,  isActive: $showNestedView
-                //                    Button("Add food from previous meal", action: { print() }) //showNestedView = true; print(showNestedView)
-                //                }
-                //
-                //                // allows user to add a new food to the meal
-                //                NavigationLink(destination: NewFoodView(foodItems: $foodItems)) {
-                //                    Button("Add new food", action: { print() })
-                //                }
+                Section(){
+                    // list all food items here
+    
+                    // allows user to add a food they have used before
+                    NavigationLink(destination: SearchFoodView()) {
+                        Button("Add food from previous meal", action: { print() })
+                    }
+                    
+                    // allows user to add a new food to the meal
+                    NavigationLink(destination: NewFoodView()) {
+                        Button("Add new food", action: { print() })
+                    }
+    
+                    
                 
-                //}
+                }
                 
             }
             .navigationTitle("Create meal")
