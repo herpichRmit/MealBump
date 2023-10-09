@@ -19,8 +19,6 @@
 //    @FetchRequest var events: FetchedResults<EventCore> //New Request to initialize in init()
 //
 //
-//
-//
 //    // Creating a new meal
 //    @State var name: String?
 //    @State var note: String?
@@ -47,28 +45,28 @@
 //    @Binding var buildActionSheet : Bool
 //    @Binding var activateSheetPosition : CGPoint
 //
-//    init(filter: Date){
-//
-//        // Sort order by order
-//        let orderSort = NSSortDescriptor(key: "order", ascending: true)
-//
-//        // Constructing filter predicate
-//        let calendar = Calendar.current
-//        let start = calendar.startOfDay(for: filter)
-//        let end = calendar.date(byAdding: .day, value: 1, to: start)
-//
-//        let predicate = NSPredicate(format: "date >= %@ AND date < %@", start as NSDate, end! as NSDate)
-//        // Need to get range because dates have times associated with them
-//
-//        //        // %K and %@ are format specifiers
-//        //        // %K var arg substitution for a keypath (coredata attribute)
-//        //        // %@ var arg substitution for an object
-//
-//        // Underscore means we are changing the wrapper itsself rather than the value stored
-//        _events = FetchRequest<EventCore>(
-//            sortDescriptors: [orderSort],
-//            predicate: predicate)
-//    }
+////    init(filter: Date){
+////
+////        // Sort order by order
+////        let orderSort = NSSortDescriptor(key: "order", ascending: true)
+////
+////        // Constructing filter predicate
+////        let calendar = Calendar.current
+////        let start = calendar.startOfDay(for: filter)
+////        let end = calendar.date(byAdding: .day, value: 1, to: start)
+////
+////        let predicate = NSPredicate(format: "date >= %@ AND date < %@", start as NSDate, end! as NSDate)
+////        // Need to get range because dates have times associated with them
+////
+////        //        // %K and %@ are format specifiers
+////        //        // %K var arg substitution for a keypath (coredata attribute)
+////        //        // %@ var arg substitution for an object
+////
+////        // Underscore means we are changing the wrapper itsself rather than the value stored
+////        _events = FetchRequest<EventCore>(
+////            sortDescriptors: [orderSort],
+////            predicate: predicate)
+////    }
 //
 //    //TODO: update shopping list as well as events
 //

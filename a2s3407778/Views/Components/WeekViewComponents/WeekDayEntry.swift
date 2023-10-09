@@ -12,29 +12,9 @@ import SwiftUIReorderableForEach // package as seen in https://iosexample.com/dr
 
 struct WeekDayEntry: View {
     @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
-    
     @FetchRequest var events: FetchedResults<EventCore> //New Request to initialize in init()
-    
     @EnvironmentObject var settings: DateObservableObject
 
-    
-    // allows for select card functionality
-//    @Binding var selectedEvent: EventCore
-//    @Binding var cardPosition: CGPoint
-    
-    // allows for reordering of cards
-//    @State var isMoveable : Bool = true
-    
-    // control what modal is being shown
-    //    @Binding var isMenuShown : Bool
-    //    @Binding var showActionSheet : Bool
-    //    @Binding var showCreateMealSheet : Bool
-    //    @Binding var showCreateShopSheet : Bool
-    //    @Binding var showCreateOtherSheet : Bool
-    //    @Binding var showSearchMealSheet : Bool
-    //    @Binding var buildActionSheet : Bool
-    //    @Binding var activateSheetPosition : CGPoint
-    
     let dateToDisplay: Date
     
     init(filter: Date){
@@ -105,21 +85,7 @@ struct WeekDayEntry: View {
                     .onDelete(perform: deleteEvent)
                     .onMove(perform: moveActiveTodos)
                     
-                    
-                    
-                    // sheet view contains all the different modal sheets and forms
-                    //                        SheetView(
-                    //                            date: date,
-                    //                            isMenuShown: $isMenuShown,
-                    //                            showActionSheet: $showActionSheet,
-                    //                            showCreateMealSheet: $showCreateMealSheet,
-                    //                            showCreateShopSheet: $showCreateShopSheet,
-                    //                            showCreateOtherSheet: $showCreateOtherSheet,
-                    //                            showSearchMealSheet: $showSearchMealSheet,
-                    //                            buildActionSheet: $buildActionSheet,
-                    //                            activateSheetPosition: $activateSheetPosition,
-                    //                            date: date,
-                    //                            filter: currDate)
+                    CustomMenu()
                     
                 }
                 .frame(height: 140, alignment: .top)

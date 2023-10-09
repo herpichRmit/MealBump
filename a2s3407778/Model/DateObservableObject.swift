@@ -13,10 +13,11 @@ import Foundation
 
 final class DateObservableObject: ObservableObject {
     @Published var selectedDate: Date = Date()
-    @Published var isMenuShown = false
-    @Published var showActionSheet = false
+    @Published var showActionMenu = false
     @Published var showCreateMealSheet = false
     @Published var showCreateShopSheet = false
     @Published var showCreateOtherSheet = false
     @Published var showSearchMealSheet = false
+    @Published var animateActionMenu = false
+    @Published var activateSheetPosition: CGPoint = .zero
 }

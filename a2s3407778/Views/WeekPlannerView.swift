@@ -23,8 +23,8 @@ struct WeekPlannerView: View {
     //    @State var showCreateShopSheet = false
     //    @State var showCreateOtherSheet = false
     //    @State var showSearchMealSheet = false
-    @State var buildActionSheet = false
-    @State var activateSheetPosition: CGPoint = .zero
+    //  @State var showActionSheet = false
+    //@State var activateSheetPosition: CGPoint = .zero
     
     
     @State var selectedEvent: EventCore?
@@ -121,79 +121,9 @@ struct WeekPlannerView: View {
                     .padding( [.leading] )
                 }
                 
-                // Used to exit blur background and exit popup if tapped outside of buttons
-                if settings.isMenuShown {
-                    VStack(alignment: .leading){
-                        HStack {
-                            Spacer()
-                        }
-                        Spacer()
-                    }
-                    .background(.regularMaterial)
-                    .opacity(0.9)
-                    .blur(radius: 10, opaque: false)
-                    .onTapGesture {
-                        settings.isMenuShown = false
-                    }
-                }
-                
-                
                 
                 // When the plus button in DayEntry->sheetView is pressed, custom action sheet below is activated
-                
-                
-                if buildActionSheet{
-                    
-                    // we want to build initial layout after button is pressed
-                    // then we want to switch instanly
-                    let layout = settings.isMenuShown ? AnyLayout(RadialLayout()) : AnyLayout(InitialLayout())
-                    
-                    layout {
-                        Bubble(colour: Color("Color 1"), text: "Archive", active: settings.isMenuShown)
-                            .onTapGesture{
-                                settings.isMenuShown.toggle() //Hides the buttons once pressed
-                                settings.showSearchMealSheet.toggle()
-                            }
-                            .onAppear(){
-                                print("testB")
-                                print(activateSheetPosition)
-                            }
-                            .layoutValue(key: StartPosition.self, value: activateSheetPosition)
-                        Bubble(colour: Color("Color 2"), text: "Shopping", active: settings.isMenuShown)
-                            .onTapGesture{
-                                settings.isMenuShown.toggle() //Hides the buttons once pressed
-                                settings.showCreateShopSheet.toggle()
-                            }
-                            .onAppear(){
-                                print("testB")
-                                print(activateSheetPosition)
-                            }
-                            .layoutValue(key: StartPosition.self, value: activateSheetPosition)
-                        Bubble(colour: Color("Color 3"), text: "Meal", active: settings.isMenuShown)
-                            .onTapGesture{
-                                settings.isMenuShown.toggle() //Hides the buttons once pressed
-                                settings.showCreateMealSheet.toggle()
-                            }
-                            .onAppear(){
-                                print("testB")
-                                print(activateSheetPosition)
-                            }
-                            .layoutValue(key: StartPosition.self, value: activateSheetPosition)
-                        Bubble(colour: Color("Color 4"), text: "Other", active: settings.isMenuShown)
-                            .onTapGesture{
-                                settings.isMenuShown.toggle() //Hides the buttons once pressed
-                                settings.showCreateOtherSheet.toggle()
-                            }
-                            .onAppear(){
-                                print("testB")
-                                print(activateSheetPosition)
-                            }
-                            .layoutValue(key: StartPosition.self, value: activateSheetPosition)
-                        
-                    }
-                    .animation(.easeInOut(duration: 0.2))
-                    
-                }
+                AnimationOverlay()
                 
                 
             }

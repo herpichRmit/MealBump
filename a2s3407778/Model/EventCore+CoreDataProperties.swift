@@ -32,6 +32,9 @@ extension EventCore : Identifiable {
 
 }
 
+extension UTType {
+    static let event = UTType(exportedAs: "com.charlieblyton.a2s3407778.event")
+}
 
 
 

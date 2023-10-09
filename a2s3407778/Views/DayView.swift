@@ -17,13 +17,13 @@ struct DayView: View {
             
     @Environment(\.managedObjectContext) private var viewContext // For accessing CoreData
     
-
-    @State var isMenuShown = false
-    @State var showActionSheet = false
-    @State var showCreateMealSheet = false
-    @State var showCreateShopSheet = false
-    @State var showCreateOtherSheet = false
-    @State var showSearchMealSheet = false
+//
+//    @State var isMenuShown = false
+//    @State var showActionSheet = false
+//    @State var showCreateMealSheet = false
+//    @State var showCreateShopSheet = false
+//    @State var showCreateOtherSheet = false
+//    @State var showSearchMealSheet = false
     
     //    MARK: - View Body
     
@@ -56,68 +56,13 @@ struct DayView: View {
                 //Must pass the date from here to the DayFilteredList's init(), because we need to know the date first in order to construct the fetch request inside DayFilteredList()
                 DayFilteredList(filter: settings.selectedDate)
                 
-                HStack{
-                    Spacer()
-//                                            SheetView(
-////                                                dayInfo: $allEvents,
-//                                                isMenuShown: $isMenuShown,
-//                                                showActionSheet: $showActionSheet,
-//                                                showCreateMealSheet: $showCreateMealSheet,
-//                                                showCreateShopSheet: $showCreateShopSheet,
-//                                                showCreateOtherSheet: $showCreateOtherSheet,
-//                                                showSearchMealSheet: $showSearchMealSheet
-//                                            )
-                    Spacer()
-                }
+                CustomMenu()
+                
+                
             }
         }
         
-        // Used to exit blur background and exit popup if tapped outside of buttons
-        if isMenuShown {
-            VStack(alignment: .leading){
-                HStack {
-                    Spacer()
-                }
-                Spacer()
-            }
-            .background(.regularMaterial)
-            .opacity(0.9)
-            .blur(radius: 10, opaque: false)
-            .onTapGesture {
-                isMenuShown = false
-            }
-        }
-        
-        // Custom action sheet
-        // when plus button is pressed, custom action sheet is activated
-        if isMenuShown {
-            RadialLayout {
-                Button {
-                    isMenuShown.toggle() //Hides the buttons once pressed
-                    showSearchMealSheet.toggle()
-                } label: {
-                    Bubble(colour: Color("Color 1"), text: "Achive", active: true)
-                }
-                Button {
-                    isMenuShown.toggle()
-                    showCreateShopSheet.toggle()
-                } label: {
-                    Bubble(colour: Color("Color 2"), text: "Shopping", active: true)
-                }
-                Button {
-                    isMenuShown.toggle()
-                    showCreateMealSheet.toggle()
-                } label: {
-                    Bubble(colour: Color("Color 3"), text: "Meal", active: true)
-                }
-                Button {
-                    isMenuShown.toggle()
-                    showCreateOtherSheet.toggle()
-                } label: {
-                    Bubble(colour: Color("Color 4"), text: "Other", active: true)
-                }
-            }
-        }
+        AnimationOverlay()
         
     }
     
