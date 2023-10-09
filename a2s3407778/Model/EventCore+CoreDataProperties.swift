@@ -2,14 +2,12 @@
 //  EventCore+CoreDataProperties.swift
 //  a2-s3407778
 //
-//  Created by Charles Blyton on 2/10/2023.
+//  Created by Charles Blyton on 9/10/2023.
 //
 //
 
 import Foundation
 import CoreData
-import UniformTypeIdentifiers
-import SwiftUI
 
 
 extension EventCore {
@@ -30,22 +28,4 @@ extension EventCore {
 
 extension EventCore : Identifiable {
 
-}
-
-extension UTType {
-    static let event = UTType(exportedAs: "com.charlieblyton.a2s3407778.event")
-}
-
-
-
-extension EventCore : Transferable {
-    
-    static public var transferRepresentation: some TransferRepresentation{
-        CodableRepresentation(contentType: .event)
-    }
-}
-
-
-extension CodingUserInfoKey {
-  static let managedObjectContext = CodingUserInfoKey(rawValue: "managedObjectContext")!
 }
