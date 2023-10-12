@@ -10,6 +10,8 @@ import SwiftUI
 
 struct EditFoodView: View {
     
+    @EnvironmentObject var settings: DateObservableObject
+    
     @Environment(\.dismiss) var dismiss
     
     // Fetch Request for ALL Items in the shopping list
@@ -68,11 +70,14 @@ struct EditFoodView: View {
     
     func updateExisting() {
         
-        /*
-         
-         Functionality to update the
-         
-         */
+        let newItem = ShoppingItemCore()
+        newItem.name = name
+        newItem.category = category
+        newItem.measure = note
+        newItem.checked = false
+        
+        settings.selectedEvent.addToShoppingItemCore(newItem)
+        
         
     }
     

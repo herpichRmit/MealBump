@@ -12,70 +12,62 @@ struct NewMealSheet: View {
     @Environment(\.dismiss) var dismiss //a dismiss variable to be used inside a button later
     
     @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
-    
     //@FetchRequest var events: FetchedResults<EventCore> //New Request to initialize in init()
     
     @EnvironmentObject var settings: DateObservableObject // Object to access custom environment variable
     
     // bindings for values required to create a new meal
-    //let date : Date = // Date for current array
     @State private var name : String = ""
     @State private var mealKind : String = ""
     @State private var note : String = ""
-    //@Binding var servings : Int?
-    
-    // foods that are a part of current meal
-    //@Binding var foodItems : [[String]]
-    
-    // list of all foodItems the user has used
-    //@Binding var allFoodItems : [[String]]
+
+    // when entity is viewed -> create it
+    // when done is pressed update it
+    // if back is pressed, delete
     
     var body: some View {
         NavigationStack(){
+            
             Form {
-                
+                // Text fields
                 Section(){
                     TextField("Name", text: $name)
                     TextField("Time period", text: $mealKind)
                     TextField("Note", text: $note)
                 }
                 
-                // Date and serving pickers ommitted until full functionality is implemented
+                // Date picker
                 Section(){
-                    Text("Date and serving pickers")
-                    //                DatePicker("Date", selection: $date, displayedComponents: [.date])
-                    //                    .datePickerStyle(.compact)
-                    //                Picker("Servings", selection: $servings ?? 1){
-                    //                    Text("1") // TODO: fix picker
-                    //                    Text("2")
-                    //                    Text("3")
-                    //
-                    //                }
+                    DatePicker(
+                        "Date",
+                        selection: $settings.selectedDate, // TODO: might have to change to temp value instead
+                        displayedComponents: [.date]
+                    )
+                    .datePickerStyle(.compact)
                 }
                 
+                // List food in meal
                 Section(){
-                    // list all food items here
                     
-                    // tap food view
+                    // get all items that are under relationship with this EventCore entity
+                    //ForEach(eventObject.selectedEvent.itemArray, id: \.self) { item in
+                    //    Text(item.wrappedName)
+                    //}
     
-                    // allows user to add a food they have used before
+                    // allows user to search for a food
                     NavigationLink(destination: SearchFoodView()) {
-                        Button("Add food from previous meal", action: { print() })
-                    }
-                    
-                    // allows user to add a new food to the meal
-                    NavigationLink(destination: NewFoodView()) {
-                        Button("Add new food", action: { print() })
-                    }
-    
-                    
+                        Text("Add food").foregroundColor(.blue)
+                    }   // -> add food to selectedEvent
                 
                 }
-                
             }
             .navigationTitle("Create meal")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(leading: Button("Back", action: { settings.showCreateMealSheet.toggle() } ))
+            .navigationBarItems(leading: Button("Back", action: {
+                
+                settings.selectedEvent = EventCore()
+                settings.showCreateMealSheet.toggle()
+            } ))
             .navigationBarItems(trailing: Button("Done", action: {
                 // when done is press append event to dayInfo
 
@@ -91,7 +83,12 @@ struct NewMealSheet: View {
                 saveItem()
                 settings.showCreateMealSheet = false
             }))
-            
+            .onAppear(){
+                print("here")
+                let event = EventCore(context: viewContext)
+                settings.selectedEvent = event
+                
+            }
         }
         
     }
@@ -113,6 +110,24 @@ struct NewMealSheet: View {
             let nserror = error as NSError
             fatalError("Saving Error: \(nserror), \(nserror.userInfo)")
         }
+    }
+    
+    func deleteEvent() {
+        viewContext.delete(settings.selectedEvent)
+        
+        saveEvent()
+    }
+    
+    func newEvent() {
+        // Adding data to new EventCore Object
+        settings.selectedEvent.date = settings.selectedDate //Add events to the selected date
+        settings.selectedEvent.name = name
+        settings.selectedEvent.note = note
+        settings.selectedEvent.order = Int16(100)
+        settings.selectedEvent.timePeriod = timePeriod
+        settings.selectedEvent.type = "Meal"
+    
+        saveEvent()
     }
     
 }

@@ -30,8 +30,8 @@ struct NewFoodView: View {
                 }
                 Section(){
                     Picker("Category", selection: $category){
-                        ForEach(types, id: \.self) {
-                            Text($0)
+                        ForEach(categoryEnum.allCases, id: \.self) {
+                            Text(String(describing:$0))
                         }
                     }
                     
