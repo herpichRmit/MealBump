@@ -2,9 +2,30 @@
 # GitIgnore File source adapted from source: https://github.com/github/gitignore/blob/main/Swift.gitignore
 
 # Custom Added Files
-a2-s3407778.xcodeproj/project.xcworkspace/
+#a2-s3407778.xcodeproj/project.xcworkspace/
 
-**/.DS_Store
+# OS X Finder
+.DS_Store
 
-## User settings
-xcuserdata/
+# Xcode per-user config
+*.mode1
+*.mode1v3
+*.mode2v3
+*.perspective
+*.perspectivev3
+*.pbxuser
+*.xcworkspace
+xcuserdata
+
+# Build products
+build/
+*.o
+*.LinkFileList
+*.hmap
+
+# Automatic backup files
+*~.nib/
+*.swp
+*~
+*.dat
+*.dep

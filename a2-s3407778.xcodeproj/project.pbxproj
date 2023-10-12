@@ -37,7 +37,7 @@
 		CD71A2A02ACA99C500E0F09E /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 74140E67286313DAF1079CDF /* Algorithms */; };
 		CD71A2A32ACA9AD800E0F09E /* EventCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD71A2A12ACA9AD800E0F09E /* EventCore+CoreDataClass.swift */; };
 		CD71A2A82ACAD60F00E0F09E /* DateObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD71A2A72ACAD60F00E0F09E /* DateObservableObject.swift */; };
-		CD7B34B82AD3F2180060B4BB /* ShopItemCategoryENUM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7B34B72AD3F2180060B4BB /* ShopItemCategoryENUM.swift */; };
+		CD7B34B82AD3F2180060B4BB /* ENUMs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7B34B72AD3F2180060B4BB /* ENUMs.swift */; };
 		CD7B34C22AD3F9F80060B4BB /* EventCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7B34C12AD3F9F80060B4BB /* EventCore+CoreDataProperties.swift */; };
 		CD8067DA2AC1B0AB00A1ECC5 /* DateFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8067D92AC1B0AB00A1ECC5 /* DateFunctions.swift */; };
 		CD96433A2ABBF26200A1D990 /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD9643382ABBF26200A1D990 /* Main.xcdatamodeld */; };
@@ -80,7 +80,7 @@
 		CD6ED8EE2A8A458A00FD6A25 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		CD71A2A12ACA9AD800E0F09E /* EventCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventCore+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CD71A2A72ACAD60F00E0F09E /* DateObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateObservableObject.swift; sourceTree = "<group>"; };
-		CD7B34B72AD3F2180060B4BB /* ShopItemCategoryENUM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItemCategoryENUM.swift; sourceTree = "<group>"; };
+		CD7B34B72AD3F2180060B4BB /* ENUMs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENUMs.swift; sourceTree = "<group>"; };
 		CD7B34C12AD3F9F80060B4BB /* EventCore+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EventCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CD8067D92AC1B0AB00A1ECC5 /* DateFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFunctions.swift; sourceTree = "<group>"; };
 		CD9643392ABBF26200A1D990 /* Main.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Main.xcdatamodel; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 				CD96433B2ABBF85400A1D990 /* DataControllerCoreData.swift */,
 				CD202ABF2AC2B4F000425AC0 /* Persistence.swift */,
 				CD71A2A72ACAD60F00E0F09E /* DateObservableObject.swift */,
-				CD7B34B72AD3F2180060B4BB /* ShopItemCategoryENUM.swift */,
+				CD7B34B72AD3F2180060B4BB /* ENUMs.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -351,7 +351,7 @@
 				CD96433E2ABC129000A1D990 /* DayEventTile.swift in Sources */,
 				A8A03B032A93054B003EF9B9 /* WeekEventCard.swift in Sources */,
 				A8C6F4712A8EF88300ACC6C4 /* WeekPlannerView.swift in Sources */,
-				CD7B34B82AD3F2180060B4BB /* ShopItemCategoryENUM.swift in Sources */,
+				CD7B34B82AD3F2180060B4BB /* ENUMs.swift in Sources */,
 				A838802E2AD3DC3200C4FB77 /* AnimationOverlay.swift in Sources */,
 				CD96433A2ABBF26200A1D990 /* Main.xcdatamodeld in Sources */,
 				CD7B34C22AD3F9F80060B4BB /* EventCore+CoreDataProperties.swift in Sources */,

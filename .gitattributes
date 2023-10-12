@@ -1,0 +1,6 @@
+# Git Attributes file instructions from:
+# https://thoughtbot.com/blog/xcode-and-git-bridging-the-gap#:~:text=project.&text=pbxproj%20is%20an%20important%20file,pbxproj%20from%20version%20control.
+
+# Trying to resolve git merge conflicts within the project.pbxproj file
+
+*.pbxproj binary merge=union
