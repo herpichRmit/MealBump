@@ -89,6 +89,12 @@ struct DayView: View {
         // Picking random elements
         let chosenName = name.randomElement()! //Force Unwrap ok here because there will always be data
         let chosenNote = note.randomElement()!
+        let chosenEventType = EventType.Meal.rawValue
+        
+        var chosenMealKind = ""
+        if (chosenEventType == "Meal") { //If the event if a MEAL then assign a meal kind
+            chosenMealKind = EventMealKind.allCases.randomElement()!.rawValue // Choosing random from ENUM
+        }
         
         // Adding data to new EventCore Object
         let newEvent = EventCore(context: viewContext) //New object with the CoreData ViewContext
@@ -96,8 +102,8 @@ struct DayView: View {
         newEvent.name = chosenName
         newEvent.note = chosenNote
         newEvent.order = Int16(100)
-        newEvent.mealKind = EventMealKind.allCases.randomElement()?.rawValue
-        newEvent.eventType = EventType.allCases.randomElement()?.rawValue
+        newEvent.mealKind = chosenMealKind
+        newEvent.eventType = chosenEventType
         newEvent.archived = false
         
         // Saving data

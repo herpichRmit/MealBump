@@ -44,8 +44,9 @@ struct DayFilteredList: View {
                 HStack{
                     DayEventTile(
                         title: (item.name ?? "Unknown"),
-                        note: (item.note ?? "Unknown"),
-                        eventType: (item.mealKind ?? "Unknown"))
+                        note: (item.note ?? ""),
+                        eventType: (item.eventType ?? ""),
+                        mealKind: (item.mealKind ?? ""))
                     .padding(.horizontal, 16.0)
                     .padding(.bottom, 4.0)
 //                    VStack{ // Added for testing date and order sorting

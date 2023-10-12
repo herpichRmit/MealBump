@@ -38,7 +38,7 @@ struct NewOtherEventSheet: View {
 
                 }
             }
-            .navigationBarTitle(Text("New Shopping Trip"), displayMode: .inline)
+            .navigationBarTitle(Text("New Other Event"), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
                 saveItem()
                 dismiss()
@@ -56,8 +56,11 @@ struct NewOtherEventSheet: View {
         newEvent.name = name
         newEvent.note = note
         newEvent.order = Int16(100) // Just add at the end, user can re-arrange
+        
+        // No Need to save this for this type of event
 //        newEvent.mealKind = EventMealKind.allCases.randomElement()?.rawValue
-//        newEvent.eventType = EventType.allCases.randomElement()?.rawValue
+        newEvent.eventType = EventType.Other.rawValue //Use the enum to ensure consistant values
+        
         newEvent.archived = false
         
         // Saving data

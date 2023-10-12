@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum ShopItemCategory: String {
     case Dairy, Produce, Meat, Pasta, Fish, Lollies, Drinks, Other, Stationary, Cleaning, Household, Personal, Spices, Bakery
@@ -13,7 +14,10 @@ enum ShopItemCategory: String {
 
 enum EventType: String, CaseIterable {
     // CaseIterable allows access to the randomeElement() function for creating random elements for testing
-    case ShoppingTrip, Meal, SkippedMeal, Other
+    case ShoppingTrip
+    case Meal
+    case SkippedMeal
+    case Other
 }
 
 enum EventMealKind: String, CaseIterable {

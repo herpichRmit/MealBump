@@ -57,7 +57,7 @@ struct NewShoppingTripSheet: View {
         newEvent.note = note
         newEvent.order = Int16(100)
 //        newEvent.mealKind = EventMealKind.allCases.randomElement()?.rawValue
-//        newEvent.eventType = EventType.allCases.randomElement()?.rawValue
+        newEvent.eventType = EventType.ShoppingTrip.rawValue //Use the enum to ensure consistant values
         newEvent.archived = false
         
         // Saving data

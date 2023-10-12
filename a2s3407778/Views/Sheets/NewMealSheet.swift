@@ -104,7 +104,7 @@ struct NewMealSheet: View {
         newEvent.note = note
         newEvent.order = Int16(100)
         newEvent.mealKind = mealKind
-        newEvent.eventType = "Meal"
+        newEvent.eventType = EventType.Meal.rawValue //Use the enum to ensure consistant values
         
         // Saving data
         do {

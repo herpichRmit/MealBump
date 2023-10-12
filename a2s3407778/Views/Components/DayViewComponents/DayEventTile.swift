@@ -13,6 +13,7 @@ struct DayEventTile: View {
     var note: String?
     var eventType: String?
     var icon: String?
+    var mealKind: String?
     
     var body: some View {
         
@@ -37,8 +38,8 @@ struct DayEventTile: View {
                     
                 }
                 
-                if let eventType = eventType {
-                    Text(eventType)
+                if let mealKind = mealKind {
+                    Text(mealKind)
                         .font(.bold(.subheadline)())
                 }
             }
@@ -54,11 +55,22 @@ struct DayEventTile: View {
                 Spacer()
             }
         }
-        .onAppear(){
-            //            DateStringConverter()
-        }
-        .compositingGroup()
-        .background(Color.white.shadow(color: .black.opacity(0.3), radius: 3, x: 2, y: 2))
+        .background(changeBackgrndColour(type: eventType).shadow(color: .black.opacity(0.3), radius: 3, x: 2, y: 2))
         .border(.gray)
+    }
+    
+}
+
+func changeBackgrndColour(type: String?) -> Color{
+    switch (type) {
+    case "Meal":
+        return Color.white
+    case "ShoppingTrip":
+        return Color.yellow
+    case "Other":
+        return Color.white
+    default:
+        return Color.white
+        
     }
 }
