@@ -36,7 +36,7 @@ struct RadialLayout: Layout { // This is the actual layout.... everything else i
         }
         
         // Calculate the radius of the bounds
-        var radius = min(bounds.size.width, bounds.size.height) / 2 - 60
+        let radius = min(bounds.size.width, bounds.size.height) / 2 - 60
         
         // Calculate the direction based on button proximity to edges
         var direction: CircleDirection = .top  // Default direction is top

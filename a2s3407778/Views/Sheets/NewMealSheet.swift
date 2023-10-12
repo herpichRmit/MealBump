@@ -9,11 +9,13 @@ import SwiftUI
 
 struct NewMealSheet: View {
     
+    @Environment(\.dismiss) var dismiss //a dismiss variable to be used inside a button later
+    
     @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
     
     //@FetchRequest var events: FetchedResults<EventCore> //New Request to initialize in init()
     
-    @EnvironmentObject var settings: DateObservableObject
+    @EnvironmentObject var settings: DateObservableObject // Object to access custom environment variable
     
     // bindings for values required to create a new meal
     //let date : Date = // Date for current array

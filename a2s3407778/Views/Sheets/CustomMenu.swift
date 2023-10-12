@@ -22,24 +22,31 @@ struct CustomMenu: View {
                     settings.showActionMenu = true 
                 }
             }
+        
+//    MARK: Create New Meal
             .sheet(isPresented: $settings.showCreateMealSheet) {
                 NewMealSheet()
             }
+        
+//    MARK: Search archive of past meals
             .sheet(isPresented: $settings.showSearchMealSheet) {
                 Form {
                     Button("Dismiss", action: { settings.showSearchMealSheet.toggle() })
                 }
             }
+        
+//    MARK: Create new shopping Trip
             .sheet(isPresented: $settings.showCreateShopSheet) {
-                Form {
-                    Button("Dismiss", action: { settings.showCreateShopSheet.toggle() })
-                }
+                NewShoppingTripSheet()
             }
+        
+//    MARK: Create some other kind of event
             .sheet(isPresented: $settings.showCreateOtherSheet) {
                 Form {
                     Button("Dismiss", action: { settings.showCreateOtherSheet.toggle() })
                 }
             }
+        
     }
 }
 

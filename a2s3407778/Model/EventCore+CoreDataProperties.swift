@@ -25,6 +25,7 @@ extension EventCore {
     @NSManaged public var order: Int16
     @NSManaged public var timePeriod: String?
     @NSManaged public var type: String?
+    @NSManaged public var archived: Bool
 
 }
 

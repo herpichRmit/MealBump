@@ -13,7 +13,7 @@ import CoreData
 public class EventCore: NSManagedObject, Codable {
     
     enum CodingKeys: CodingKey {
-        case eventID, date, name, note, order, timePeriod, type
+        case eventID, date, name, note, order, timePeriod, type, archived
      }
 
     required convenience public init(from decoder: Decoder) throws {
@@ -31,6 +31,7 @@ public class EventCore: NSManagedObject, Codable {
         self.type = try container.decode(String.self, forKey: .type)
         self.order = try container.decode(Int16.self, forKey: .order)
         self.timePeriod = try container.decode(String.self, forKey: .timePeriod)
+        self.archived = try container.decode(Bool.self, forKey: .archived)
         
         
     }
@@ -43,6 +44,7 @@ public class EventCore: NSManagedObject, Codable {
         try container.encode(type, forKey: .type)
         try container.encode(order, forKey: .order)
         try container.encode(timePeriod, forKey: .timePeriod)
+        try container.encode(archived, forKey: .archived)
         
       }
    }
