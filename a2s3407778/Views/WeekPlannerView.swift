@@ -48,8 +48,8 @@ struct WeekPlannerView: View {
                 if selectedEvent != nil {
                     WeekEventCard(
                         title: selectedEvent?.name ?? "Unknown title",
-                        timePeriod: selectedEvent?.timePeriod ?? "Unknown timePeriod",
-                        type: selectedEvent?.type ?? "Unknown type"
+                        timePeriod: selectedEvent?.timePeriod ?? "Unknown mealKind",
+                        type: selectedEvent?.type ?? "Unknown eventType"
                     )
                     .animation(.easeInOut, value: animatedTrigger)
                     .zIndex(1)
@@ -189,7 +189,7 @@ func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
  
  } else {
  // else just provide date info
- weekOfDays.append([Event(id: 98, title: "n/a", desc: "", date: date, order: 99, type: TypeEnum.meal, timeLabel: "", foodItems: [[]])])
+ weekOfDays.append([Event(id: 98, title: "n/a", desc: "", date: date, order: 99, eventType: TypeEnum.meal, timeLabel: "", foodItems: [[]])])
  
  }
  

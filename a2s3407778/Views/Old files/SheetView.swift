@@ -22,7 +22,7 @@
 //    // Creating a new meal
 //    @State var name: String?
 //    @State var note: String?
-//    @State var timePeriod: String?
+//    @State var mealKind: String?
 //    //@State var date = Date()
 //    @State var servings: Int?
 //
@@ -98,7 +98,7 @@
 //
 //                            //var newEvent = EventCore
 //                            /*
-//                            dayInfo.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: dayInfo[0].date, order: 100, type: TypeEnum.meal, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
+//                            dayInfo.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: dayInfo[0].date, order: 100, eventType: TypeEnum.meal, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
 //                            // when done is press append event to dayInfo
 //                            dayInfo.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: dayInfo[0].date, order: 100, type: TypeEnum.meal, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
 //                             */

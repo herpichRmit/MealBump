@@ -13,7 +13,7 @@ struct testData {
     
     var week = [
         [
-            Event(id: 1, title: "Birthday Party", desc: "Celebrate John's birthday", date: Date(), order: 1, type: .meal, timeLabel: "Breakfast", foodItems: [["Cake", "Pizzas", "Soda"]]),
+            Event(id: 1, title: "Birthday Party", desc: "Celebrate John's birthday", date: Date(), order: 1, eventType: .meal, timeLabel: "Breakfast", foodItems: [["Cake", "Pizzas", "Soda"]]),
             Event(id: 2, title: "Grocery Shopping", desc: "Buy groceries for the week", date: Date().addingTimeInterval(86400), order: 2, type: .shoppingTrip, timeLabel: "10:00 AM", foodItems: [["Apples", "Milk", "Bread"]])
         ],
         [
@@ -49,7 +49,7 @@ struct DragDropGrid: View {
             ZStack{
 
                 if !selectedEvent.isEmpty {
-                    WeekEventCard(title: selectedEvent., timePeriod: <#T##String#>, type: <#T##String#>)
+                    WeekEventCard(title: selectedEvent., mealKind: <#T##String#>, type: <#T##String#>)
                         .animation(.easeInOut, value: animatedTrigger)
                         .zIndex(1)
                         .position(cardPosition) // where the card is double tapped

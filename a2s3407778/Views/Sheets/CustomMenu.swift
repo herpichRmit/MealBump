@@ -44,9 +44,9 @@ struct CustomMenu: View {
         
 //    MARK: Create some other kind of event
             .sheet(isPresented: $settings.showCreateOtherSheet) {
-                Form {
-                    Button("Dismiss", action: { settings.showCreateOtherSheet.toggle() })
-                }
+                NewOtherEventSheet()
+                    .presentationDetents([.medium]) //Makes the sheet half height
+                    .presentationDragIndicator(.visible)
             }
         
     }

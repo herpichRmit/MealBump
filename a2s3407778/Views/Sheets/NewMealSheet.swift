@@ -81,12 +81,12 @@ struct NewMealSheet: View {
 
                 //var newEvent = EventCore
                 /*
-                dayInfo.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: dayInfo[0].date, order: 100, type: TypeEnum.meal, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
+                dayInfo.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: dayInfo[0].date, order: 100, eventType: TypeEnum.meal, timeLabel: mealKind ?? "", foodItems: newFoodItems))
                 // when done is press append event to dayInfo
-                dayInfo.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: dayInfo[0].date, order: 100, type: TypeEnum.meal, timeLabel: timePeriod ?? "", foodItems: newFoodItems))
+                dayInfo.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: dayInfo[0].date, order: 100, eventType: TypeEnum.meal, timeLabel: mealKind ?? "", foodItems: newFoodItems))
                  */
                 // when done is press append event to events
-    //                            addNewEvent(date: currDate, name: name ?? "", note: note ?? "", order: 100, timePeriod: timePeriod ?? "", type: "Meal")
+    //                            addNewEvent(date: currDate, name: name ?? "", note: note ?? "", order: 100, mealKind: mealKind ?? "", eventType: "Meal")
 
                 saveItem()
                 settings.showCreateMealSheet = false
