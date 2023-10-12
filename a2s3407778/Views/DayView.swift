@@ -85,25 +85,20 @@ struct DayView: View {
                     "Have for lunch to stay energized.",
                     "Dinner option for a satisfying evening meal.",
                     "Enjoy as a mid-morning snack."]
-        let order = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        let timePeriod = ["Snack","Breakfast", "Lunch", "Dinner", "", ""]
-        let type = ["meal", "meal", "Shopping Trip", "Meal", "Meal"]
         
         // Picking random elements
         let chosenName = name.randomElement()! //Force Unwrap ok here because there will always be data
         let chosenNote = note.randomElement()!
-        let chosenOrder = order.randomElement()!
-        let chosenTimePeriod = timePeriod.randomElement()!
-        let chosenType = type.randomElement()!
         
         // Adding data to new EventCore Object
         let newEvent = EventCore(context: viewContext) //New object with the CoreData ViewContext
         newEvent.date = settings.selectedDate //Add events to the selected date
         newEvent.name = chosenName
         newEvent.note = chosenNote
-        newEvent.order = Int16(chosenOrder)
-        newEvent.timePeriod = chosenTimePeriod
-        newEvent.type = chosenType
+        newEvent.order = Int16(100)
+        newEvent.timePeriod = EventTimePeriod.allCases.randomElement()?.rawValue
+        newEvent.type = EventType.allCases.randomElement()?.rawValue
+        newEvent.archived = false
         
         // Saving data
         do {
