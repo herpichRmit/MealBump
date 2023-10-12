@@ -20,5 +20,4 @@ final class DateObservableObject: ObservableObject {
     @Published var showSearchMealSheet = false
     @Published var animateActionMenu = false
     @Published var activateSheetPosition: CGPoint = .zero
-    @Published var selectedEvent: EventCore = EventCore()
 }

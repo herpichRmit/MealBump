@@ -44,7 +44,7 @@ struct DayView: View {
                     .padding()
                 }
                 
-                CustomDatePicker()
+                DatePicker()
 //                    .environmentObject(settings)
                     .padding(.horizontal)
                     .padding(.bottom, 30)

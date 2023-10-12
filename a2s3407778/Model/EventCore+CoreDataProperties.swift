@@ -2,12 +2,13 @@
 //  EventCore+CoreDataProperties.swift
 //  a2-s3407778
 //
-//  Created by Ethan Herpich on 10/10/2023.
+//  Created by Charles Blyton on 9/10/2023.
 //
 //
 
 import Foundation
 import CoreData
+import UniformTypeIdentifiers
 import SwiftUI
 import UniformTypeIdentifiers
 
@@ -25,38 +26,6 @@ extension EventCore {
     @NSManaged public var mealKind: String?
     @NSManaged public var eventType: String?
     @NSManaged public var archived: Bool
-    @NSManaged public var timePeriod: String?
-    @NSManaged public var type: String?
-    @NSManaged public var shoppingItemCore: NSSet?
-    
-    
-    // Trying to convert from NSSet to Set
-    public var itemArray: [ShoppingItemCore] {
-        let set = shoppingItemCore as? Set<ShoppingItemCore> ?? []
-        
-        // Returning all items that make up this meal
-        return set.sorted {
-            $0.wrappedName < $1.wrappedName
-        }
-    }
-    
-
-}
-
-// MARK: Generated accessors for shoppingItemCore
-extension EventCore {
-
-    @objc(addShoppingItemCoreObject:)
-    @NSManaged public func addToShoppingItemCore(_ value: ShoppingItemCore)
-
-    @objc(removeShoppingItemCoreObject:)
-    @NSManaged public func removeFromShoppingItemCore(_ value: ShoppingItemCore)
-
-    @objc(addShoppingItemCore:)
-    @NSManaged public func addToShoppingItemCore(_ values: NSSet)
-
-    @objc(removeShoppingItemCore:)
-    @NSManaged public func removeFromShoppingItemCore(_ values: NSSet)
 
 }
 

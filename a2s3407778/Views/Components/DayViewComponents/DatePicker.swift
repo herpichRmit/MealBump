@@ -1,5 +1,5 @@
 //
-//  CustomDatePicker.swift
+//  DatePicker.swift
 //  a1s3407778
 //
 //  Created by Charles Blyton on 18/8/2023.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct CustomDatePicker: View {
+struct DatePicker: View {
     
     @EnvironmentObject var settings: DateObservableObject
 
@@ -94,7 +94,7 @@ struct DateTile: View  {
     }
 }
 
-struct CustomDatePicker_Previews: PreviewProvider {
+struct DatePicker_Previews: PreviewProvider {
     static var previews: some View {
         DayView()
     }

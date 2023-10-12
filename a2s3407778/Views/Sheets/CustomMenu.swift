@@ -25,7 +25,7 @@ struct CustomMenu: View {
         
 //    MARK: Create New Meal
             .sheet(isPresented: $settings.showCreateMealSheet) {
-                NewMealSheet()//.environmentObject(yourEnvironmentObject)
+                NewMealSheet()
             }
         
 //    MARK: Search archive of past meals
