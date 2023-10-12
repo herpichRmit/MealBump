@@ -23,8 +23,8 @@ extension EventCore {
     @NSManaged public var name: String?
     @NSManaged public var note: String?
     @NSManaged public var order: Int16
-    @NSManaged public var timePeriod: String?
-    @NSManaged public var type: String?
+    @NSManaged public var mealKind: String?
+    @NSManaged public var eventType: String?
     @NSManaged public var archived: Bool
 
 }

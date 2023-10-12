@@ -48,8 +48,8 @@ struct WeekPlannerView: View {
                 if selectedEvent != nil {
                     WeekEventCard(
                         title: selectedEvent?.name ?? "Unknown title",
-                        timePeriod: selectedEvent?.timePeriod ?? "Unknown mealKind",
-                        type: selectedEvent?.type ?? "Unknown eventType"
+                        mealKind: selectedEvent?.mealKind ?? "Unknown mealKind",
+                        type: selectedEvent?.eventType ?? "Unknown eventType"
                     )
                     .animation(.easeInOut, value: animatedTrigger)
                     .zIndex(1)

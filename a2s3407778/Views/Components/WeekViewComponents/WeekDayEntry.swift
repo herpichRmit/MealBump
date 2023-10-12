@@ -60,8 +60,8 @@ struct WeekDayEntry: View {
                     ForEach (events) { item in
                         HStack{
                             WeekEventCard(title: item.name ?? "Unknown Name",
-                                          timePeriod: item.timePeriod ?? "Unknown Time Period",
-                                          type: item.type ?? "Unknown Type")
+                                          mealKind: item.mealKind ?? "Unknown Time Period",
+                                          type: item.eventType ?? "Unknown Type")
                             .onTapGesture(count: 2, coordinateSpace: .global) { location in
 //                                cardPosition = location
 //                                selectedEvent = item

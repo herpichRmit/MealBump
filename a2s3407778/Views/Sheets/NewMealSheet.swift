@@ -20,7 +20,7 @@ struct NewMealSheet: View {
     // bindings for values required to create a new meal
     //let date : Date = // Date for current array
     @State private var name : String = ""
-    @State private var timePeriod : String = ""
+    @State private var mealKind : String = ""
     @State private var note : String = ""
     //@Binding var servings : Int?
     
@@ -36,7 +36,7 @@ struct NewMealSheet: View {
                 
                 Section(){
                     TextField("Name", text: $name)
-                    TextField("Time period", text: $timePeriod)
+                    TextField("Time period", text: $mealKind)
                     TextField("Note", text: $note)
                 }
                 
@@ -103,8 +103,8 @@ struct NewMealSheet: View {
         newEvent.name = name
         newEvent.note = note
         newEvent.order = Int16(100)
-        newEvent.timePeriod = timePeriod
-        newEvent.type = "Meal"
+        newEvent.mealKind = mealKind
+        newEvent.eventType = "Meal"
         
         // Saving data
         do {

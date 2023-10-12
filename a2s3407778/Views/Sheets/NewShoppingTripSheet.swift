@@ -56,7 +56,7 @@ struct NewShoppingTripSheet: View {
         newEvent.name = name
         newEvent.note = note
         newEvent.order = Int16(100)
-//        newEvent.mealKind = EventTimePeriod.allCases.randomElement()?.rawValue
+//        newEvent.mealKind = EventMealKind.allCases.randomElement()?.rawValue
 //        newEvent.eventType = EventType.allCases.randomElement()?.rawValue
         newEvent.archived = false
         

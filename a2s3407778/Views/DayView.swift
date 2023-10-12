@@ -96,8 +96,8 @@ struct DayView: View {
         newEvent.name = chosenName
         newEvent.note = chosenNote
         newEvent.order = Int16(100)
-        newEvent.timePeriod = EventTimePeriod.allCases.randomElement()?.rawValue
-        newEvent.type = EventType.allCases.randomElement()?.rawValue
+        newEvent.mealKind = EventMealKind.allCases.randomElement()?.rawValue
+        newEvent.eventType = EventType.allCases.randomElement()?.rawValue
         newEvent.archived = false
         
         // Saving data

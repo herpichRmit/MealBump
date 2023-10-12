@@ -28,9 +28,9 @@ public class EventCore: NSManagedObject, Codable {
         self.date = try container.decode(Date.self, forKey: .date)
         self.name = try container.decode(String.self, forKey: .name)
         self.note = try container.decode(String.self, forKey: .note)
-        self.type = try container.decode(String.self, forKey: .eventType)
+        self.eventType = try container.decode(String.self, forKey: .eventType)
         self.order = try container.decode(Int16.self, forKey: .order)
-        self.timePeriod = try container.decode(String.self, forKey: .mealKind)
+        self.mealKind = try container.decode(String.self, forKey: .mealKind)
         self.archived = try container.decode(Bool.self, forKey: .archived)
         
         
@@ -41,9 +41,9 @@ public class EventCore: NSManagedObject, Codable {
         try container.encode(date, forKey: .date)
         try container.encode(name, forKey: .name)
         try container.encode(note, forKey: .note)
-        try container.encode(type, forKey: .eventType)
+        try container.encode(eventType, forKey: .eventType)
         try container.encode(order, forKey: .order)
-        try container.encode(timePeriod, forKey: .mealKind)
+        try container.encode(mealKind, forKey: .mealKind)
         try container.encode(archived, forKey: .archived)
         
       }

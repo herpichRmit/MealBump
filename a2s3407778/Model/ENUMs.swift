@@ -16,6 +16,6 @@ enum EventType: String, CaseIterable {
     case ShoppingTrip, Meal, SkippedMeal, Other
 }
 
-enum EventTimePeriod: String, CaseIterable {
+enum EventMealKind: String, CaseIterable {
     case Breakfast, Lunch, Dinner, Snack
 }

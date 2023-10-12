@@ -10,7 +10,7 @@ import SwiftUI
 struct WeekEventCard: View {
     
     let title: String
-    let timePeriod: String
+    let mealKind: String
     let type: String
     
     var body: some View {
@@ -18,7 +18,7 @@ struct WeekEventCard: View {
             
             Text(title)
                 .font(.system(size: 13).weight(.semibold))
-            Text(timePeriod)
+            Text(mealKind)
                 .font(.system(size: 11))
             if type == "shoppingTrip" {
                 Image(systemName: "cart")
