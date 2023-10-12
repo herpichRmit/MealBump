@@ -69,17 +69,6 @@ struct NewMealSheet: View {
                 settings.showCreateMealSheet.toggle()
             } ))
             .navigationBarItems(trailing: Button("Done", action: {
-                // when done is press append event to dayInfo
-
-                //var newEvent = EventCore
-                /*
-                dayInfo.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: dayInfo[0].date, order: 100, eventType: TypeEnum.meal, timeLabel: mealKind ?? "", foodItems: newFoodItems))
-                // when done is press append event to dayInfo
-                dayInfo.append(Event(id: Int.random(in:50..<4000), title: name ?? "", desc: note ?? "", date: dayInfo[0].date, order: 100, eventType: TypeEnum.meal, timeLabel: mealKind ?? "", foodItems: newFoodItems))
-                 */
-                // when done is press append event to events
-    //                            addNewEvent(date: currDate, name: name ?? "", note: note ?? "", order: 100, mealKind: mealKind ?? "", eventType: "Meal")
-
                 saveItem()
                 settings.showCreateMealSheet = false
             }))
@@ -115,7 +104,13 @@ struct NewMealSheet: View {
     func deleteEvent() {
         viewContext.delete(settings.selectedEvent)
         
-        saveEvent()
+        // Saving data
+        do {
+            try viewContext.save() //Saving data to the persistent store
+        } catch {
+            let nserror = error as NSError
+            fatalError("Saving Error: \(nserror), \(nserror.userInfo)")
+        }
     }
     
     func newEvent() {
@@ -124,10 +119,16 @@ struct NewMealSheet: View {
         settings.selectedEvent.name = name
         settings.selectedEvent.note = note
         settings.selectedEvent.order = Int16(100)
-        settings.selectedEvent.timePeriod = timePeriod
+        settings.selectedEvent.mealKind = mealKind
         settings.selectedEvent.type = "Meal"
     
-        saveEvent()
+        // Saving data
+        do {
+            try viewContext.save() //Saving data to the persistent store
+        } catch {
+            let nserror = error as NSError
+            fatalError("Saving Error: \(nserror), \(nserror.userInfo)")
+        }
     }
     
 }
