@@ -38,7 +38,7 @@ struct NewShoppingTripSheet: View {
 
                 }
             }
-            .navigationBarTitle(Text("Farts"), displayMode: .inline)
+            .navigationBarTitle(Text("New Shopping Trip"), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
                 saveItem()
                 dismiss()

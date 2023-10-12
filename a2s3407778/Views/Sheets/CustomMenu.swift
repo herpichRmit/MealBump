@@ -39,6 +39,7 @@ struct CustomMenu: View {
             .sheet(isPresented: $settings.showCreateShopSheet) {
                 NewShoppingTripSheet()
                     .presentationDetents([.medium]) //Makes the sheet half height
+                    .presentationDragIndicator(.visible)
             }
         
 //    MARK: Create some other kind of event
