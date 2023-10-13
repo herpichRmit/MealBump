@@ -23,45 +23,38 @@ struct DayView: View {
     let dateFormatter = DateFormatter()
     
     var body: some View {
-        ZStack {
-            VStack{
-                HStack{
-                    Text("**Daily Planner** \(dateFormatter.string(from: settings.selectedDate) )") //The Double Star makes "Planner" Bold
-                        .font(.title2)
-                        .padding()
-                        .onAppear(){
-                            dateFormatter.dateFormat = "MMMM"
-                        }
-                    Spacer()
-                    EditButton()
-                    Button { //Plus Button adding new random item (for testing)
-                        addRandomEventToToday()
-                    } label: {
-                        Image(systemName: "plus")
-                    }
+        VStack{
+            HStack{
+                Text("**Daily Planner** \(dateFormatter.string(from: settings.selectedDate) )") //The Double Star makes "Planner" Bold
+                    .font(.title2)
                     .padding()
-                }
-                
-                CustomDatePicker()
-//                    .environmentObject(settings)
-                    .padding(.horizontal)
-                    .padding(.bottom, 30)
-                
+                    .onAppear(){
+                        dateFormatter.dateFormat = "MMMM"
+                    }
                 Spacer()
-                
-                Text("\(settings.selectedDate.formatted(.dateTime.weekday(.wide).day().month().year()))").font(.callout)
-                
-                //Must pass the date from here to the DayFilteredList's init(), because we need to know the date first in order to construct the fetch request inside DayFilteredList()
-                DayFilteredList(filter: settings.selectedDate)
-                
-                CustomMenu()
-                
-                
+                EditButton()
+                Button { //Plus Button adding new random item (for testing)
+                    addRandomEventToToday()
+                } label: {
+                    Image(systemName: "plus")
+                }
+                .padding()
             }
+            
+            CustomDatePicker()
+                .padding(.horizontal)
+                .padding(.bottom, 30)
+            
+            Spacer()
+            
+            Text("\(settings.selectedDate.formatted(.dateTime.weekday(.wide).day().month().year()))").font(.callout)
+            
+            //Must pass the date from here to the DayFilteredList's init(), because we need to know the date first in order to construct the fetch request inside DayFilteredList()
+            DayFilteredList(filter: settings.selectedDate)
+            
+            CustomMenu()
+            
         }
-        
-        AnimationOverlay()
-        
     }
     
     

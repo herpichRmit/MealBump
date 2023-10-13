@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct Bubble: View {
-    
     let colour: Color
     let borderColor = Color.gray
     let text: String
@@ -20,7 +19,6 @@ struct Bubble: View {
                 .strokeBorder(.gray, lineWidth: 3)
                 .background(Circle().fill(colour))
                 .frame(width: active ? 70 : 0, height: active ? 70 : 0)
-                .opacity(active ? 1 : 0)
             Text(text)
                 .multilineTextAlignment(.center)
                 .frame(width: 70, height: 70)

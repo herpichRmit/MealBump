@@ -16,8 +16,13 @@ struct WeekPlannerView: View {
     @State private var animatedTrigger: Bool = false
     let cardStartPoint: CGPoint = CGPoint(x: 300, y: 600)
     
-    // for month date
+    // For Month title formatting
     let dateFormatter = DateFormatter()
+    
+    // For changing week function
+    var calendar = Calendar.current
+    @State private var slideLeft = false
+    @State private var slideRight = false
     
     var body: some View {
         NavigationView {
@@ -33,7 +38,7 @@ struct WeekPlannerView: View {
                     .zIndex(1)
                     .position(settings.cardPosition) // where the card is double tapped
                     .shadow(color: Color.white.opacity(0.07), radius: 15, x: 4, y: 10)
-                    .onAppear{
+                    .onAppear {
                         animateCardSelect(location: settings.cardPosition) // move card to spot
                     }
                 }
@@ -47,6 +52,20 @@ struct WeekPlannerView: View {
                             .onAppear(){
                                 dateFormatter.dateFormat = "MMMM"
                             }
+                        Spacer()
+                        Button {
+                            // change week, swipe animation
+                            dateChangeBack()
+                        } label: {
+                            Image(systemName: "chevron.left")
+                        }
+                        Spacer()
+                        Button {
+                            // change week, swipe animation
+                            dateChangeForward()
+                        } label: {
+                            Image(systemName: "chevron.right")
+                        }
                         Spacer()
                     }
                     
@@ -77,10 +96,14 @@ struct WeekPlannerView: View {
                     .frame(minHeight: 300, alignment: .topLeading)
                     .padding( [.leading] )
                 }
-                // When the plus button in WeekDayEntry is pressed, the animation and menu is shown as an overlay to the screen.
-                AnimationOverlay()
             }
+            //.frame(maxWidth: .infinity, maxHeight: .infinity)
+            //.background(Color.green)
+            //.animation(.easeOut(duration: 0.4))
+            //.offset(x: slideLeft ? -UIScreen.main.bounds.width : 0)
+            //.offset(x: slideRight ? UIScreen.main.bounds.width : 0)
         }
+        
     }
     
     // Used to animate the pick up and drop feature.
@@ -97,6 +120,22 @@ struct WeekPlannerView: View {
         animatedTrigger.toggle()
         withAnimation {
             settings.cardPosition = location
+        }
+    }
+    
+    func dateChangeForward() {
+        // Add 7 days from the original date
+        self.slideRight.toggle()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            settings.selectedDate = calendar.date(byAdding: .day, value: 7, to: settings.selectedDate) ?? Date()
+        }
+    }
+    
+    func dateChangeBack() {
+        // Subtract 7 days from the original date
+        self.slideLeft.toggle()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            settings.selectedDate = calendar.date(byAdding: .day, value: -7, to: settings.selectedDate) ?? Date()
         }
     }
 }
