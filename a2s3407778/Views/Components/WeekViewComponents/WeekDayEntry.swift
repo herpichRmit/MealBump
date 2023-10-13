@@ -6,46 +6,97 @@
 //
 
 import SwiftUI
+<<<<<<< Updated upstream
+=======
+//import SwiftUIReorderableForEach // package as seen in https://iosexample.com/drag-drop-to-reorder-items-in-swiftui/
+import Algorithms
+>>>>>>> Stashed changes
 
 // WeekDayEntry shows the weekday, weeknumber and holds all of the meal cards
 
 struct WeekDayEntry: View {
-    @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
-    @FetchRequest var events: FetchedResults<EventCore> //New Request to initialize in init()
-    @EnvironmentObject var settings: DateObservableObject
-
-    let dateToDisplay: Date
     
-    init(filter: Date){
+    @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
+    
+    @FetchRequest var fetchRequest: FetchedResults<EventCore> //New Request to initialize in init()
+    
+    @EnvironmentObject var settings: DateObservableObject
+    
+    let headingDate: Date
+    
+    init(startDate: Date, endDate: Date){
         // Sort order by order
-        self.dateToDisplay = filter
+        self.headingDate = startDate
         
         let orderSort = NSSortDescriptor(key: "order", ascending: true)
         
         // Constructing filter predicate
         let calendar = Calendar.current
-        let start = calendar.startOfDay(for: filter)
-        let end = calendar.date(byAdding: .day, value: 1, to: start)
+        let start = calendar.startOfDay(for: startDate)
+        let end = calendar.date(byAdding: .day, value: 1, to: endDate) // Date will be received at 12am, so need to add another day to get range
         
         let predicate = NSPredicate(format: "date >= %@ AND date < %@", start as NSDate, end! as NSDate)
         
-        // Underscore means we are changing the wrapper itsself rather than the value stored
-        _events = FetchRequest<EventCore>(
+        // Underscore means we are changing the wrapper itself rather than the value stored
+        _fetchRequest = FetchRequest<EventCore>(
             sortDescriptors: [orderSort],
             predicate: predicate)
     }
     
+<<<<<<< Updated upstream
+=======
+    @State private var monday: [WeekEventCard] = [WeekEventCard(title: "Spagetti Bolognese", mealKind: "Dinner", type: "Meal"),
+                                                  WeekEventCard(title: "Savoys and Hummus", mealKind: "Snack", type: "Meal"),
+                                                  WeekEventCard(title: "Thai Green Curry", mealKind: "Dinner", type: "Meal"),]
+    @State private var tuesday: [WeekEventCard] = [WeekEventCard(title: "Shopping Trip", mealKind: "", type: "ShoppingTrip")]
+    @State private var wednesday: [WeekEventCard] = [WeekEventCard(title: "Banana", mealKind: "Snack", type: "Meal")]
+    @State private var thursday: [WeekEventCard] = [WeekEventCard(title: "Other Event", mealKind: "", type: "Other")]
+    @State private var friday: [WeekEventCard] = [WeekEventCard(title: "Rueben Sandwich", mealKind: "Lunch", type: "Meal")]
+    @State private var saturday: [WeekEventCard] = [WeekEventCard(title: "Eggs on Toast", mealKind: "Breakfast", type: "Meal")]
+    @State private var sunday: [WeekEventCard] = [WeekEventCard(title: "Chili Con Carne", mealKind: "Dinner", type: "Meal")]
+    
+    @State private var draggedEventItem: WeekEventCard?
+    
+>>>>>>> Stashed changes
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
+        
+        
+        ScrollView(.vertical, showsIndicators: false){ //Vertical Scrolling of the week
             
-            // Weekday Headings
-            VStack(alignment: .leading) {
-                Text(weekdayFromDate(date: dateToDisplay))
+            VStack(alignment: .leading, spacing: 5) {
+                // Weekday Headings
+                Text(weekdayFromDate(date: headingDate))
                     .font(.system(size: 16))
-                Text(dayNumberFromDate(date: dateToDisplay))
+                Text(dayNumberFromDate(date: headingDate))
                     .font(.system(size: 19))
+                
+                // row of cards
+                ScrollView(.horizontal, showsIndicators: false){
+                    HStack {
+                        ForEach (monday, id:\.id) { item in //Printing out items in a day, horizontally
+                            item //This is the WeekEventCard, but called from a foreach loop
+                            // Dragging logic
+                                .draggable(item)
+                            
+                            // Dropping logic
+                                .dropDestination(for: WeekEventCard.self) { items, location in //Making the horizontal list a drag destination
+                                    draggedEventItem = items.first
+                                    print(location)
+                                    return true
+                                }  isTargeted: { inDropArea in
+                                }
+                        }
+                        .listRowSeparator(.hidden)
+                        
+                        CustomMenu()
+                    }
+                }
+                //                    .frame(height: 120, alignment: .top)
+                .padding([.top, .leading], 2)
+                .padding([.trailing], 10)
             }
             
+<<<<<<< Updated upstream
             // Row of cards
             ScrollView(.horizontal, showsIndicators: false){
                 HStack {
@@ -74,18 +125,49 @@ struct WeekDayEntry: View {
                     .onMove(perform: moveActiveTodos)
                     
                     CustomMenu()
+=======
+            
+            VStack(alignment: .leading, spacing: 5) {
+                // Weekday Headings
+                Text("Tuesday")
+                    .font(.system(size: 16))
+                Text(dayNumberFromDate(date: headingDate))
+                    .font(.system(size: 19))
+                
+                // row of cards
+                ScrollView(.horizontal, showsIndicators: false){
+                    HStack {
+                        ForEach (tuesday, id:\.id) { item in //Printing out items in a day, horizontally
+                            item //This is the WeekEventCard, but called from a foreach loop
+                            // Dragging logic
+                                .draggable(item)
+                            
+                            // Dropping logic
+                                .dropDestination(for: WeekEventCard.self) { items, location in //Making the horizontal list a drag destination
+                                    draggedEventItem = items.first
+                                    print(location)
+                                    return true
+                                }  isTargeted: { inDropArea in
+                                }
+                        }
+                        .listRowSeparator(.hidden)
+                        
+                        CustomMenu()
+                    }
+>>>>>>> Stashed changes
                 }
-                .frame(height: 140, alignment: .top)
+                //                    .frame(height: 120, alignment: .top)
                 .padding([.top, .leading], 2)
                 .padding([.trailing], 10)
+                
+
             }
         }
-        .frame(height: 150, alignment: .topLeading)
     }
     
-    func moveActiveTodos( from source: IndexSet, to destination: Int) {
+    private func moveActiveTodos( from source: IndexSet, to destination: Int) {
         // Make an array of items from fetched results
-        var revisedItems: [ EventCore ] = events.map{ $0 }
+        var revisedItems: [ EventCore ] = fetchRequest.map{ $0 }
         
         // change the order of the items in the array
         revisedItems.move(fromOffsets: source, toOffset: destination )
@@ -99,27 +181,5 @@ struct WeekDayEntry: View {
         {
             revisedItems[ reverseIndex ].order = Int16( reverseIndex )
         }
-        saveData()
-    }
-    
-    func deleteEvent(at offset: IndexSet) {
-        //       Identifying the item to delete
-        offset.map{events[$0]}
-            .forEach(viewContext.delete)
-        
-        saveData()
-    }
-    
-    func saveData() {
-        do {
-            try viewContext.save() //Saving data to the persistent store
-        } catch {
-            let nserror = error as NSError
-            fatalError("Saving Error: \(nserror), \(nserror.userInfo)")
-        }
     }
 }
-
-
-
-

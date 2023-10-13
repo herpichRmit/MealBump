@@ -30,6 +30,8 @@
 		A8C6F4792A8F143E00ACC6C4 /* SearchFoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C6F4782A8F143E00ACC6C4 /* SearchFoodView.swift */; };
 		A8D446E22A9B13DF00F77403 /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D446E12A9B13DF00F77403 /* Bubble.swift */; };
 		CD1740372AD7B0C300653B25 /* NewShoppingItemSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1740362AD7B0C300653B25 /* NewShoppingItemSheet.swift */; };
+		CD1740392AD7E22400653B25 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1740382AD7E22400653B25 /* CoreDataHelper.swift */; };
+		CD17403B2AD901DD00653B25 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = CD17403A2AD901DD00653B25 /* Algorithms */; };
 		CD17457F2A80D0DA00294186 /* a1s3407778App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD17457E2A80D0DA00294186 /* a1s3407778App.swift */; };
 		CD1745812A80D0DA00294186 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1745802A80D0DA00294186 /* ContentView.swift */; };
 		CD1745832A80D0DB00294186 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD1745822A80D0DB00294186 /* Assets.xcassets */; };
@@ -73,6 +75,7 @@
 		B047ACD973E8B3D48DBBF5D3 /* ReorderableStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReorderableStack.swift; sourceTree = "<group>"; };
 		C4F8CD21AC6ADFD6C9153CEB /* InitialLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialLayout.swift; sourceTree = "<group>"; };
 		CD1740362AD7B0C300653B25 /* NewShoppingItemSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShoppingItemSheet.swift; sourceTree = "<group>"; };
+		CD1740382AD7E22400653B25 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		CD17457B2A80D0DA00294186 /* a2-s3407778.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "a2-s3407778.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD17457E2A80D0DA00294186 /* a1s3407778App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = a1s3407778App.swift; sourceTree = "<group>"; };
 		CD1745802A80D0DA00294186 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD17403B2AD901DD00653B25 /* Algorithms in Frameworks */,
 				CD71A2A02ACA99C500E0F09E /* Algorithms in Frameworks */,
 				A8A03B002A930336003EF9B9 /* SwiftUIReorderableForEach in Frameworks */,
 			);
@@ -208,6 +212,7 @@
 				CD202ABF2AC2B4F000425AC0 /* Persistence.swift */,
 				CD71A2A72ACAD60F00E0F09E /* DateObservableObject.swift */,
 				CD7B34B72AD3F2180060B4BB /* ENUMs.swift */,
+				CD1740382AD7E22400653B25 /* CoreDataHelper.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -273,6 +278,7 @@
 			packageProductDependencies = (
 				A8A03AFF2A930336003EF9B9 /* SwiftUIReorderableForEach */,
 				74140E67286313DAF1079CDF /* Algorithms */,
+				CD17403A2AD901DD00653B25 /* Algorithms */,
 			);
 			productName = a1s3407778;
 			productReference = CD17457B2A80D0DA00294186 /* a2-s3407778.app */;
@@ -366,6 +372,8 @@
 				CD96433A2ABBF26200A1D990 /* Main.xcdatamodeld in Sources */,
 				A8A03AFD2A91E5A2003EF9B9 /* NewFoodView.swift in Sources */,
 				CDB6BC7F2A8F3654009A05F7 /* CustomDatePicker.swift in Sources */,
+				CD1740392AD7E22400653B25 /* CoreDataHelper.swift in Sources */,
+				CDB6BC7F2A8F3654009A05F7 /* DatePicker.swift in Sources */,
 				CD202AC02AC2B4F000425AC0 /* Persistence.swift in Sources */,
 				6C270EE131D53489DA12FB3A /* InitialLayout.swift in Sources */,
 				7DAF2D198F67236D5224E040 /* ReorderableStack.swift in Sources */,
@@ -497,7 +505,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"a2s3407778/Preview Content\"";
-				DEVELOPMENT_TEAM = Q22YDM2KVH;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = a2s3407778/Info.plist;
@@ -527,7 +535,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"a2s3407778/Preview Content\"";
-				DEVELOPMENT_TEAM = Q22YDM2KVH;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = a2s3407778/Info.plist;
@@ -609,6 +617,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A8A03AFE2A930336003EF9B9 /* XCRemoteSwiftPackageReference "swiftui-reorderable-foreach" */;
 			productName = SwiftUIReorderableForEach;
+		};
+		CD17403A2AD901DD00653B25 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18BE89679E2A64710E58EBB8 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
 		};
 /* End XCSwiftPackageProductDependency section */
 
