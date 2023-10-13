@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// WeekPlannerView organises events by rows within a scroll view
+/// It includes the functionality to navigate weeks via move buttons, and to reorder events between different days
 struct WeekPlannerView: View {
     
     @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
@@ -106,7 +108,7 @@ struct WeekPlannerView: View {
         
     }
     
-    // Used to animate the pick up and drop feature.
+    /// Changes the value of published  var `cardPosition` to a specific `CGPoint`
     func animateCardSelect(location: CGPoint) {
         animatedTrigger.toggle()
         settings.cardPosition = location
@@ -115,7 +117,7 @@ struct WeekPlannerView: View {
         }
     }
     
-    // Used to animate the pick up and drop feature.
+    /// Changes the value of published  var `cardPosition` to a parameter `location`
     func animateCardPlace(location: CGPoint) {
         animatedTrigger.toggle()
         withAnimation {
@@ -123,6 +125,7 @@ struct WeekPlannerView: View {
         }
     }
     
+    /// Changes the value of published  var `selectedDate` forward by 7 days
     func dateChangeForward() {
         // Add 7 days from the original date
         self.slideRight.toggle()
@@ -131,6 +134,7 @@ struct WeekPlannerView: View {
         }
     }
     
+    /// Changes the value of published  var `selectedDate` back by 7 days
     func dateChangeBack() {
         // Subtract 7 days from the original date
         self.slideLeft.toggle()

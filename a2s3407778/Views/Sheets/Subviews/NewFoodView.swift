@@ -5,20 +5,18 @@
 //  Created by Ethan Herpich on 20/8/2023.
 //
 
-
 import SwiftUI
 
+/// NewFoodView is a form for the user to create a new `ShoppingItemCore`. Default values can be used, or values passed into view as inputs.
 struct NewFoodView: View {
-    
     // Managed Object Context to read the coredata objects
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var settings: DateObservableObject
     
     @State var name : String = ""
     @State var note : String = ""
     @State var category : ShopItemCategory = .None
-    
-    @EnvironmentObject var settings: DateObservableObject
     
     var body: some View {
         NavigationStack{
@@ -46,6 +44,7 @@ struct NewFoodView: View {
         }
     }
     
+    /// Add a new entry to the ``ShoppingItemCore`` CoreData storage
     func addFood() {
         let newShoppingItem = ShoppingItemCore(context: viewContext)
         newShoppingItem.name = name
@@ -53,10 +52,7 @@ struct NewFoodView: View {
         newShoppingItem.category = category.rawValue
         
         settings.selectedEvent.addToShoppingItemCore(newShoppingItem)
-        saveData()
-    }
-    
-    func saveData(){
+        
         do {
             try viewContext.save() //Saving data to the persistent store
         } catch {

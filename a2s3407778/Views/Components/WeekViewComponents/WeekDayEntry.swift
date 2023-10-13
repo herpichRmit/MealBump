@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// WeekDayEntry shows the weekday, weeknumber and holds all of the meal cards
 
+/// WeekDayEntry contains rows of card views with different events, for a specific day each
 struct WeekDayEntry: View {
     @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
     @FetchRequest var events: FetchedResults<EventCore> //New Request to initialize in init()
@@ -16,6 +16,7 @@ struct WeekDayEntry: View {
 
     let dateToDisplay: Date
     
+    // Initalise fetch request to recieve data from a given variable date
     init(filter: Date){
         // Sort order by order
         self.dateToDisplay = filter
@@ -71,8 +72,8 @@ struct WeekDayEntry: View {
                         .listRowSeparator(.hidden)
                     }
                     .onDelete(perform: deleteEvent)
-                    .onMove(perform: moveActiveTodos)
                     
+                    // Contains links to all sheets though the pop-up menu
                     CustomMenu()
                 }
                 .frame(height: 140, alignment: .top)
@@ -83,25 +84,7 @@ struct WeekDayEntry: View {
         .frame(height: 150, alignment: .topLeading)
     }
     
-    func moveActiveTodos( from source: IndexSet, to destination: Int) {
-        // Make an array of items from fetched results
-        var revisedItems: [ EventCore ] = events.map{ $0 }
-        
-        // change the order of the items in the array
-        revisedItems.move(fromOffsets: source, toOffset: destination )
-        
-        // update the userOrder attribute in revisedItems to
-        // persist the new order. This is done in reverse order
-        // to minimize changes to the indices.
-        for reverseIndex in stride( from: revisedItems.count - 1,
-                                    through: 0,
-                                    by: -1 )
-        {
-            revisedItems[ reverseIndex ].order = Int16( reverseIndex )
-        }
-        saveData()
-    }
-    
+    /// Removes event from ``EventCore`` using `indexSet` provided by forEach
     func deleteEvent(at offset: IndexSet) {
         //       Identifying the item to delete
         offset.map{events[$0]}
@@ -110,6 +93,7 @@ struct WeekDayEntry: View {
         saveData()
     }
     
+    /// Helper function to save data to ``EventCore``
     func saveData() {
         do {
             try viewContext.save() //Saving data to the persistent store

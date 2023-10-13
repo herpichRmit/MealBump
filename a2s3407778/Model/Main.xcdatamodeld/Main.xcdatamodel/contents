@@ -13,13 +13,6 @@
         <attribute name="type" optional="YES" attributeType="String"/>
         <relationship name="shoppingItemCore" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ShoppingItemCore" inverseName="eventCore" inverseEntity="ShoppingItemCore"/>
     </entity>
-    <entity name="MealCore" representedClassName="MealCore" syncable="YES" codeGenerationType="class">
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="note" optional="YES" attributeType="String"/>
-        <attribute name="servings" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="timePeriod" optional="YES" attributeType="String"/>
-    </entity>
     <entity name="ShoppingItemCore" representedClassName=".ShoppingItemCore" syncable="YES">
         <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="checked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>

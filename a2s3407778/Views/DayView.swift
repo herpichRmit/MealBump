@@ -10,9 +10,6 @@ import SwiftUI
 
 struct DayView: View {
     //    MARK: - Variables and FetchRequests
-
-    // You don't initialise an environment object as it has already been initialized in ContentView()
-    // I just named it settings to have a unique name so we don't get confused, but the name is local to this view. It can be anything...
     @EnvironmentObject var settings: DateObservableObject
             
     @Environment(\.managedObjectContext) private var viewContext // For accessing CoreData

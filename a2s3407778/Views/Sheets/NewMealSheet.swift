@@ -7,16 +7,13 @@
 
 import SwiftUI
 
+/// NewMealSheet is a form for users to create a new meal. They will be able to set ``EventCore`` properties including `name`, `mealKind`, `note`, `date` and related `ShoppingItemCore`.
 struct NewMealSheet: View {
+    @Environment(\.managedObjectContext) private var viewContext // For accessing CoreData
+    @EnvironmentObject var settings: DateObservableObject // For accessing global variables
+    @Environment(\.dismiss) var dismiss // to close the view
     
-    @Environment(\.dismiss) var dismiss //a dismiss variable to be used inside a button later
-    
-    @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
-    //@FetchRequest var events: FetchedResults<EventCore> //New Request to initialize in init()
-    
-    @EnvironmentObject var settings: DateObservableObject // Object to access custom environment variable
-    
-    // bindings for values required to create a new meal
+    // Default values for form.
     @State private var name : String = ""
     @State private var mealKind : String = ""
     @State private var note : String = ""
@@ -30,14 +27,14 @@ struct NewMealSheet: View {
         NavigationStack(){
             
             Form {
-                // Text fields
+                // Text fields.
                 Section(){
                     TextField("Name", text: $name)
                     TextField("Time period", text: $mealKind)
                     TextField("Note", text: $note)
                 }
                 
-                // Date picker
+                // Date picker.
                 Section(){
                     DatePicker(
                         "Date",
@@ -47,7 +44,7 @@ struct NewMealSheet: View {
                     .datePickerStyle(.compact)
                 }
                 
-                // List food in meal
+                // List all food items that have been added to a meal
                 List {
                     if items != [] {
                         ForEach(settings.selectedEvent.itemArray, id: \.self) { item in
@@ -88,6 +85,8 @@ struct NewMealSheet: View {
     }
     
     
+    /// Takes an IndexSet and removes respective ``ShoppingItemCore`` as a child of the ``EventCore`` object within CoreData storage.
+    /// - Parameter offsets: An IndexSet from a forEach loop
     func deleteItem(at offsets: IndexSet) {
         // get item that is being removed
         offsets.forEach { (i) in
@@ -104,47 +103,31 @@ struct NewMealSheet: View {
 
     }
     
+    /// Instatiates a new EventCore object and assigns user input to properties.
     func saveItem() {
         // Adding data to new EventCore Object
-        let newEvent = EventCore(context: viewContext) //New object with the CoreData ViewContext
-        newEvent.date = settings.selectedDate //Add events to the selected date
+        let newEvent = EventCore(context: viewContext)
+        newEvent.date = settings.selectedDate
         newEvent.name = name
         newEvent.note = note
         newEvent.order = Int16(100)
         newEvent.mealKind = mealKind
-        newEvent.eventType = EventType.Meal.rawValue //Use the enum to ensure consistant values
+        newEvent.eventType = EventType.Meal.rawValue // Use the enum to ensure consistent values.
         
         // Saving data
-        do {
-            try viewContext.save() //Saving data to the persistent store
-        } catch {
-            let nserror = error as NSError
-            fatalError("Saving Error: \(nserror), \(nserror.userInfo)")
-        }
+        saveData()
     }
     
+    /// Removes EventCore stored in global variable `selectedEvent` from ``EventCore`` CoreData storage.
     func deleteEvent() {
         viewContext.delete(settings.selectedEvent)
         
         // Saving data
-        do {
-            try viewContext.save() //Saving data to the persistent store
-        } catch {
-            let nserror = error as NSError
-            fatalError("Saving Error: \(nserror), \(nserror.userInfo)")
-        }
+        saveData()
     }
     
-    func newEvent() {
-        // Adding data to new EventCore Object
-        settings.selectedEvent.date = settings.selectedDate //Add events to the selected date
-        settings.selectedEvent.name = name
-        settings.selectedEvent.note = note
-        settings.selectedEvent.order = Int16(100)
-        settings.selectedEvent.mealKind = mealKind
-        settings.selectedEvent.type = "Meal"
-    
-        // Saving data
+    /// Helper function to save data to ``EventCore``
+    func saveData() {
         do {
             try viewContext.save() //Saving data to the persistent store
         } catch {

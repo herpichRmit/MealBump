@@ -7,15 +7,14 @@
 
 import SwiftUI
 
+/// WeekDayCard shows information about each event
 struct WeekEventCard: View {
-    
     let title: String
     let mealKind: String
     let type: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10){
-            
             Text(title)
                 .font(.system(size: 13).weight(.semibold))
             Text(mealKind)
@@ -24,7 +23,6 @@ struct WeekEventCard: View {
                 Image(systemName: "cart")
                     .font(.system(size: 11))
             }
-            
         }
         .frame(width: 100, height: 80, alignment: .topLeading)
         .padding(10)
@@ -37,9 +35,6 @@ struct WeekEventCard: View {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(Color.gray, lineWidth: 2)
         )
-        
-        
-        
     }
 }
 
