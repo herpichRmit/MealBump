@@ -25,14 +25,12 @@ struct CustomMenu: View {
         
 //    MARK: Create New Meal
             .sheet(isPresented: $settings.showCreateMealSheet) {
-                NewMealSheet()//.environmentObject(yourEnvironmentObject)
+                NewMealSheet()
             }
         
 //    MARK: Search archive of past meals
             .sheet(isPresented: $settings.showSearchMealSheet) {
-                Form {
-                    Button("Dismiss", action: { settings.showSearchMealSheet.toggle() })
-                }
+                MealFromArchiveSheet()
             }
         
 //    MARK: Create new shopping Trip

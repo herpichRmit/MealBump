@@ -20,6 +20,7 @@ struct NewMealSheet: View {
     @State private var name : String = ""
     @State private var mealKind : String = ""
     @State private var note : String = ""
+    @State private var date : Date = Date()
 
     @State private var items : [ShoppingItemCore] = []
     @State private var itemToRemove : ShoppingItemCore?
@@ -40,7 +41,7 @@ struct NewMealSheet: View {
                 Section(){
                     DatePicker(
                         "Date",
-                        selection: $settings.selectedDate, // TODO: might have to change to temp value instead
+                        selection: $date,
                         displayedComponents: [.date]
                     )
                     .datePickerStyle(.compact)
@@ -79,6 +80,12 @@ struct NewMealSheet: View {
                 print(settings.selectedEvent.itemArray)
                 
                 items = settings.selectedEvent.itemArray
+                
+                // Use current selected meal, else use default values
+                name = settings.selectedEvent.name ?? ""
+                mealKind = settings.selectedEvent.mealKind ?? ""
+                note = settings.selectedEvent.note ?? ""
+                date = settings.selectedEvent.date ?? settings.selectedDate
             }
         }
     }
