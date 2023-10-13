@@ -10,6 +10,8 @@ import CoreData
 
 struct ShoppingView: View {
     
+    @EnvironmentObject var settings: DateObservableObject // Object to access custom environment variable\
+    
     // Managed Object Context to read the coredata objects
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -23,7 +25,7 @@ struct ShoppingView: View {
     ) var checkedShoppingItems: FetchedResults<ShoppingItemCore>
     
     // State variable to show or hide the checked items in the list
-    @State  var showCheckedInList = false
+    @State var showCheckedInList = false
     
     var body: some View {
         
@@ -49,7 +51,20 @@ struct ShoppingView: View {
                 Button { //Plus Button adding new random item (for testing)
                     addRandomItem()
                 } label: {
+                    Image(systemName: "goforward.plus")
+                }
+                .padding()
+                
+                Button {
+                    settings.showAddShoppingItemSheet.toggle()
+                } label: {
                     Image(systemName: "plus")
+                }
+                .sheet(isPresented: $settings.showAddShoppingItemSheet) {} content: {
+                    NewShoppingItemSheet()
+                        .presentationDetents([.medium]) //Makes the sheet half height
+                        .presentationDragIndicator(.visible)
+                
                 }
                 .padding()
             }
@@ -152,12 +167,15 @@ struct ShoppingView: View {
     }
     
     func saveData(){
-        do {
-            try viewContext.save() //Saving data to the persistent store
-        } catch {
-            let nserror = error as NSError
-            fatalError("Saving Error: \(nserror), \(nserror.userInfo)")
-        }    }
+        if viewContext.hasChanges {
+            do {
+                try viewContext.save() //Saving data to the persistent store
+            } catch {
+                let nserror = error as NSError
+                fatalError("Saving Error: \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
     
 }
 

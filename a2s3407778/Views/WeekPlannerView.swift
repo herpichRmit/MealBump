@@ -10,6 +10,7 @@ import SwiftUI
 struct WeekPlannerView: View {
     
     @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
+<<<<<<< Updated upstream
     @EnvironmentObject var settings: DateObservableObject
     
     // needed for animating pickup card feature
@@ -120,6 +121,27 @@ struct WeekPlannerView: View {
         animatedTrigger.toggle()
         withAnimation {
             settings.cardPosition = location
+=======
+    
+    @EnvironmentObject var settings: DateObservableObject
+    
+    
+    var body: some View {
+        // list of days
+        VStack{
+            HStack{
+                Text("**Weekly Planner** August")
+                    .font(.title2)
+                    .padding()
+                Spacer()
+            }
+            
+            // Date Calculation must be done here so the CoreData fetchRequest has a date to construct the fetch request in WeekDayEntry()
+            WeekDayEntry(
+                startDate: startOfWeek(selectedDate: settings.selectedDate),
+                endDate: endOfWeek(selectedDate: settings.selectedDate))
+
+>>>>>>> Stashed changes
         }
     }
     
@@ -140,6 +162,7 @@ struct WeekPlannerView: View {
     }
 }
 
+<<<<<<< Updated upstream
 // Unwrapping tool used from stack overflow.
 // TODO: from https://stackoverflow.com/questions/57021722/swiftui-optional-textfield
 
@@ -148,4 +171,11 @@ func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
         get: { lhs.wrappedValue ?? rhs },
         set: { lhs.wrappedValue = $0 }
     )
+=======
+
+struct WeekPlannerView_Previews: PreviewProvider {
+    static var previews: some View {
+        WeekPlannerView()
+    }
+>>>>>>> Stashed changes
 }

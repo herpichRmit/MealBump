@@ -5,6 +5,18 @@
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
+			<key>UTTypeDescription</key>
+			<string>WeekEventCard</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.public.data</string>
+			</array>
+			<key>UTTypeIdentifier</key>
+			<string>com.charlieblyton.a2s3407778.weekEventCard</string>
+			<key>UTTypeTagSpecification</key>
+			<dict/>
+		</dict>
+		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>com.public.data</string>
