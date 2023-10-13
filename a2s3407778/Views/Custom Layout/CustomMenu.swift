@@ -9,31 +9,18 @@ import SwiftUI
 
 struct CustomMenu: View {
     @EnvironmentObject var settings: DateObservableObject
-    @State private var isPressed = false
     
     var body: some View {
         PlusButton()
-            .opacity(isPressed ? 0.4 : 1.0)
-            .scaleEffect(isPressed ? 0.9 : 1.0)
             .onTapGesture(coordinateSpace: .global) { location in
                 settings.animateActionMenu = true
                 settings.activateSheetPosition = location
-                
+
                 // delay so animtion is applied
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    settings.showActionMenu = true
+                    settings.showActionMenu = true 
                 }
             }
-            .pressEvents {
-                withAnimation(.easeIn(duration: 0.1)) {
-                    isPressed = true
-                }
-            } onRelease: {
-                withAnimation {
-                    isPressed = false
-                }
-            }
-            
         
 //    MARK: Create New Meal
             .sheet(isPresented: $settings.showCreateMealSheet) {

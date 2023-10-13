@@ -23,38 +23,45 @@ struct DayView: View {
     let dateFormatter = DateFormatter()
     
     var body: some View {
-        VStack{
-            HStack{
-                Text("**Daily Planner** \(dateFormatter.string(from: settings.selectedDate) )") //The Double Star makes "Planner" Bold
-                    .font(.title2)
-                    .padding()
-                    .onAppear(){
-                        dateFormatter.dateFormat = "MMMM"
+        ZStack {
+            VStack{
+                HStack{
+                    Text("**Daily Planner** \(dateFormatter.string(from: settings.selectedDate) )") //The Double Star makes "Planner" Bold
+                        .font(.title2)
+                        .padding()
+                        .onAppear(){
+                            dateFormatter.dateFormat = "MMMM"
+                        }
+                    Spacer()
+                    EditButton()
+                    Button { //Plus Button adding new random item (for testing)
+                        addRandomEventToToday()
+                    } label: {
+                        Image(systemName: "plus")
                     }
-                Spacer()
-                EditButton()
-                Button { //Plus Button adding new random item (for testing)
-                    addRandomEventToToday()
-                } label: {
-                    Image(systemName: "plus")
+                    .padding()
                 }
-                .padding()
+                
+                CustomDatePicker()
+//                    .environmentObject(settings)
+                    .padding(.horizontal)
+                    .padding(.bottom, 30)
+                
+                Spacer()
+                
+                Text("\(settings.selectedDate.formatted(.dateTime.weekday(.wide).day().month().year()))").font(.callout)
+                
+                //Must pass the date from here to the DayFilteredList's init(), because we need to know the date first in order to construct the fetch request inside DayFilteredList()
+                DayFilteredList(filter: settings.selectedDate)
+                
+                CustomMenu()
+                
+                
             }
-            
-            CustomDatePicker()
-                .padding(.horizontal)
-                .padding(.bottom, 30)
-            
-            Spacer()
-            
-            Text("\(settings.selectedDate.formatted(.dateTime.weekday(.wide).day().month().year()))").font(.callout)
-            
-            //Must pass the date from here to the DayFilteredList's init(), because we need to know the date first in order to construct the fetch request inside DayFilteredList()
-            DayFilteredList(filter: settings.selectedDate)
-            
-            CustomMenu()
-            
         }
+        
+        AnimationOverlay()
+        
     }
     
     

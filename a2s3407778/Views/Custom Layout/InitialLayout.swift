@@ -17,6 +17,8 @@ struct InitialLayout: Layout {
         return proposal.replacingUnspecifiedDimensions()
     }
     
+    
+    
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout Void) {
         
         // Map the flexibility property of each subview into an array.
@@ -51,3 +53,11 @@ extension View {
 
     }
 }
+
+/*
+extension LayoutSubview {
+    var anchor: CGPoint {
+        self[StartPosition.self]
+    }
+}
+*/

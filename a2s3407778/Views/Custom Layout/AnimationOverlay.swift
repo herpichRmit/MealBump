@@ -13,34 +13,20 @@ struct AnimationOverlay: View {
     // Managed Object Context to read the coredata objects
     @Environment(\.managedObjectContext) private var viewContext
     
-    @State private var isPressed = false
-    @State private var backgroundAnimation = false
-    
     var body: some View {
-        
         // Used to exit blur background and exit popup if tapped outside of buttons
-        if settings.animateActionMenu {
-            VStack(alignment: .leading) {
+        if settings.showActionMenu {
+            VStack(alignment: .leading){
                 HStack {
                     Spacer()
                 }
                 Spacer()
             }
-            .onAppear(){
-                withAnimation(.easeIn(duration: 0.2)) {
-                    backgroundAnimation = true
-                }
-            }
             .background(.regularMaterial)
-            .opacity(backgroundAnimation ? 0.2 : 0 )
-            .blur(radius: backgroundAnimation ? 10 : 0, opaque: false)
+            .opacity(0.9)
+            .blur(radius: 10, opaque: false)
             .onTapGesture {
                 settings.showActionMenu = false
-                
-                // delay so animtion is applied
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    settings.animateActionMenu = false
-                }
             }
         }
         
@@ -54,82 +40,35 @@ struct AnimationOverlay: View {
             layout {
                 Bubble(colour: Color("Color 1"), text: "Archive", active: settings.showActionMenu)
                     .onTapGesture{
-                        settings.showActionMenu = false
-                        settings.animateActionMenu = false
-                        settings.showSearchMealSheet = true
-                    }
-                    .opacity(isPressed ? 0.8 : 1.0)
-                    .scaleEffect(isPressed ? 0.9 : 1.0)
-                    .pressEvents {
-                        withAnimation(.easeIn(duration: 0.05)) {
-                            isPressed = true
-                        }
-                    } onRelease: {
-                        withAnimation {
-                            isPressed = false
-                        }
+                        settings.showActionMenu.toggle() //Hides the buttons once pressed
+                        settings.showSearchMealSheet.toggle()
                     }
                     .layoutValue(key: StartPosition.self, value: settings.activateSheetPosition)
                 Bubble(colour: Color("Color 2"), text: "Shopping", active: settings.showActionMenu)
                     .onTapGesture{
-                        settings.showActionMenu = false
-                        settings.animateActionMenu = false
-                        settings.showCreateShopSheet = true
-                    }
-                    .opacity(isPressed ? 0.8 : 1.0)
-                    .scaleEffect(isPressed ? 0.9 : 1.0)
-                    .pressEvents {
-                        withAnimation(.easeIn(duration: 0.05)) {
-                            isPressed = true
-                        }
-                    } onRelease: {
-                        withAnimation {
-                            isPressed = false
-                        }
+                        settings.showActionMenu.toggle() //Hides the buttons once pressed
+                        settings.showCreateShopSheet.toggle()
                     }
                     .layoutValue(key: StartPosition.self, value: settings.activateSheetPosition)
                 Bubble(colour: Color("Color 3"), text: "Meal", active: settings.showActionMenu)
                     .onTapGesture{
-                        settings.showActionMenu = false
-                        settings.animateActionMenu = false
-                        settings.showCreateMealSheet = true
+                        settings.showActionMenu.toggle() //Hides the buttons once pressed
+                        settings.showCreateMealSheet.toggle()
                         
                         // need to initalise a new eventCore
                         let event = EventCore(context: viewContext)
                         settings.selectedEvent = event
                     }
-                    .opacity(isPressed ? 0.8 : 1.0)
-                    .scaleEffect(isPressed ? 0.9 : 1.0)
-                    .pressEvents {
-                        withAnimation(.easeIn(duration: 0.05)) {
-                            isPressed = true
-                        }
-                    } onRelease: {
-                        withAnimation {
-                            isPressed = false
-                        }
-                    }
                     .layoutValue(key: StartPosition.self, value: settings.activateSheetPosition)
                 Bubble(colour: Color("Color 4"), text: "Other", active: settings.showActionMenu)
                     .onTapGesture{
-                        settings.showActionMenu = false
-                        settings.animateActionMenu = false
-                        settings.showCreateOtherSheet = true
-                    }
-                    .opacity(isPressed ? 0.8 : 1.0)
-                    .scaleEffect(isPressed ? 0.9 : 1.0)
-                    .pressEvents {
-                        withAnimation(.easeIn(duration: 0.05)) {
-                            isPressed = true
-                        }
-                    } onRelease: {
-                        withAnimation {
-                            isPressed = false
-                        }
+                        settings.showActionMenu.toggle() //Hides the buttons once pressed
+                        settings.showCreateOtherSheet.toggle()
                     }
                     .layoutValue(key: StartPosition.self, value: settings.activateSheetPosition)
             }
-            .animation(.easeInOut(duration: 0.15))
+            .animation(.easeInOut(duration: 0.2))
+            
         }
     }
 }
