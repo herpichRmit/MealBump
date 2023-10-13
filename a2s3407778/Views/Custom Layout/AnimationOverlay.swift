@@ -14,7 +14,6 @@ struct AnimationOverlay: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
-        
         // Used to exit blur background and exit popup if tapped outside of buttons
         if settings.showActionMenu {
             VStack(alignment: .leading){
@@ -31,12 +30,9 @@ struct AnimationOverlay: View {
             }
         }
         
+        // When the plus button in WeekDayEntry or DayView is pressed, custom action sheet below is activated
         
-        // When the plus button in DayEntry->sheetView is pressed, custom action sheet below is activated
-        
-        
-        if settings.showActionMenu {
-            
+        if settings.animateActionMenu {
             // we want to build initial layout after button is pressed
             // then we want to switch instanly
             let layout = settings.showActionMenu ? AnyLayout(RadialLayout()) : AnyLayout(InitialLayout())
@@ -47,17 +43,11 @@ struct AnimationOverlay: View {
                         settings.showActionMenu.toggle() //Hides the buttons once pressed
                         settings.showSearchMealSheet.toggle()
                     }
-                    .onAppear(){
-                        print(settings.activateSheetPosition)
-                    }
                     .layoutValue(key: StartPosition.self, value: settings.activateSheetPosition)
                 Bubble(colour: Color("Color 2"), text: "Shopping", active: settings.showActionMenu)
                     .onTapGesture{
                         settings.showActionMenu.toggle() //Hides the buttons once pressed
                         settings.showCreateShopSheet.toggle()
-                    }
-                    .onAppear(){
-                        print(settings.activateSheetPosition)
                     }
                     .layoutValue(key: StartPosition.self, value: settings.activateSheetPosition)
                 Bubble(colour: Color("Color 3"), text: "Meal", active: settings.showActionMenu)
@@ -68,12 +58,6 @@ struct AnimationOverlay: View {
                         // need to initalise a new eventCore
                         let event = EventCore(context: viewContext)
                         settings.selectedEvent = event
-                        
-                        
-                    }
-                    .onAppear(){
-                        print("testB")
-                        print(settings.activateSheetPosition)
                     }
                     .layoutValue(key: StartPosition.self, value: settings.activateSheetPosition)
                 Bubble(colour: Color("Color 4"), text: "Other", active: settings.showActionMenu)
@@ -81,12 +65,7 @@ struct AnimationOverlay: View {
                         settings.showActionMenu.toggle() //Hides the buttons once pressed
                         settings.showCreateOtherSheet.toggle()
                     }
-                    .onAppear(){
-                        print("testB")
-                        print(settings.activateSheetPosition)
-                    }
                     .layoutValue(key: StartPosition.self, value: settings.activateSheetPosition)
-                
             }
             .animation(.easeInOut(duration: 0.2))
             

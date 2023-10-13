@@ -1,14 +1,13 @@
 //
-//  DayEntry.swift
+//  WeekDayEntry.swift
 //  a1s3407778
 //
 //  Created by Ethan Herpich on 21/8/2023.
 //
 
 import SwiftUI
-import SwiftUIReorderableForEach // package as seen in https://iosexample.com/drag-drop-to-reorder-items-in-swiftui/
 
-// DayEntry shows the weekday, weeknumber and holds all of the meal cards
+// WeekDayEntry shows the weekday, weeknumber and holds all of the meal cards
 
 struct WeekDayEntry: View {
     @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
@@ -29,19 +28,12 @@ struct WeekDayEntry: View {
         let end = calendar.date(byAdding: .day, value: 1, to: start)
         
         let predicate = NSPredicate(format: "date >= %@ AND date < %@", start as NSDate, end! as NSDate)
-        // Need to get range because dates have times associated with them
-        
-        //        // %K and %@ are format specifiers
-        //        // %K var arg substitution for a keypath (coredata attribute)
-        //        // %@ var arg substitution for an object
         
         // Underscore means we are changing the wrapper itsself rather than the value stored
         _events = FetchRequest<EventCore>(
             sortDescriptors: [orderSort],
             predicate: predicate)
     }
-    
-    
     
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
@@ -54,39 +46,34 @@ struct WeekDayEntry: View {
                     .font(.system(size: 19))
             }
             
-            // row of cards
+            // Row of cards
             ScrollView(.horizontal, showsIndicators: false){
                 HStack {
-                    ForEach (events) { item in
+                    ForEach(events) { item in
                         HStack{
-                            WeekEventCard(title: item.name ?? "Unknown Name",
-                                          mealKind: item.mealKind ?? "Unknown Time Period",
-                                          type: item.eventType ?? "Unknown Type")
-                            .onTapGesture(count: 2, coordinateSpace: .global) { location in
-//                                cardPosition = location
-//                                selectedEvent = item
+                            WeekEventCard(
+                                    title: item.name ?? "Unknown Name",
+                                    mealKind: item.mealKind ?? "Unknown Time Period",
+                                    type: item.eventType ?? "Unknown Type"
+                                )
+                                .onTapGesture(count: 2, coordinateSpace: .global) { location in
+                                    settings.cardPosition = location
+                                    settings.selectedPickupCard = item
                                 
-                                /*
-                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                 events.removeAll { $0.id == selectedEvent[0]!.id }
-                                 }
-                                 */
-                            }
-                            Spacer()
-                            //                            }
-                            //                    VStack{ // Added for testing date and order sorting
-                            //                        Text("\(item.order)") // To Test the order sorting is working
-                            //                        Text(dateToString(date: item.date!)) // TO Test date seperation is working
-                            //                    }
+                                    // call function to remove event date temporarily
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                        settings.selectedPickupCard?.date = Date()
+                                        saveData()
+                                    }
+                                }
+                                Spacer()
                         }
                         .listRowSeparator(.hidden)
-                        
                     }
                     .onDelete(perform: deleteEvent)
                     .onMove(perform: moveActiveTodos)
                     
                     CustomMenu()
-                    
                 }
                 .frame(height: 140, alignment: .top)
                 .padding([.top, .leading], 2)

@@ -12,144 +12,96 @@ struct WeekPlannerView: View {
     @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
     @EnvironmentObject var settings: DateObservableObject
     
-    // All of the events read from the json file
-    //var events: [Event] = Event.allEvents
-    //    var datesInWeek
-    
-    // Controls if a modal is being shown and which one
-    //    @State var isMenuShown = false
-    //    @State var showActionSheet = false
-    //    @State var showCreateMealSheet = false
-    //    @State var showCreateShopSheet = false
-    //    @State var showCreateOtherSheet = false
-    //    @State var showSearchMealSheet = false
-    //  @State var showActionSheet = false
-    //@State var activateSheetPosition: CGPoint = .zero
-    
-    
-    @State var selectedEvent: EventCore?
+    // needed for animating pickup card feature
     @State private var animatedTrigger: Bool = false
-    @State var cardPosition: CGPoint = CGPoint(x: 0, y: 0)
     let cardStartPoint: CGPoint = CGPoint(x: 300, y: 600)
     
-    // Partition events into several arrays of events by day
-    
-    init() {
-    }
-    
-    
-    
+    // for month date
+    let dateFormatter = DateFormatter()
     
     var body: some View {
-        
         NavigationView {
             ZStack(){
-                
-                if selectedEvent != nil {
+                // Formatting for pickup and drop card feature.
+                if settings.selectedPickupCard != nil {
                     WeekEventCard(
-                        title: selectedEvent?.name ?? "Unknown title",
-                        mealKind: selectedEvent?.mealKind ?? "Unknown mealKind",
-                        type: selectedEvent?.eventType ?? "Unknown eventType"
+                        title: settings.selectedPickupCard?.name ?? "Unknown title",
+                        mealKind: settings.selectedPickupCard?.mealKind ?? "Unknown mealKind",
+                        type: settings.selectedPickupCard?.eventType ?? "Unknown eventType"
                     )
                     .animation(.easeInOut, value: animatedTrigger)
                     .zIndex(1)
-                    .position(cardPosition) // where the card is double tapped
-                    .position(cardPosition) // where the card is double tapped
+                    .position(settings.cardPosition) // where the card is double tapped
                     .shadow(color: Color.white.opacity(0.07), radius: 15, x: 4, y: 10)
                     .onAppear{
-                        animateCardSelect(location: cardPosition) // move card to spot
+                        animateCardSelect(location: settings.cardPosition) // move card to spot
                     }
                 }
                 
-                // list of days
-                VStack{
-                    HStack{
-                        Text("**Weekly Planner** August")
+                VStack {
+                    // Header.
+                    HStack {
+                        Text("**Weekly Planner** \(dateFormatter.string(from: settings.selectedDate) )")
                             .font(.title2)
                             .padding()
+                            .onAppear(){
+                                dateFormatter.dateFormat = "MMMM"
+                            }
                         Spacer()
                     }
                     
-                    
-                    ScrollView(.vertical, showsIndicators: false){
+                    // Content.
+                    ScrollView(.vertical, showsIndicators: false) {
                         VStack(alignment: .leading, spacing: 20) {
                             
-                            // pass in 0..7 dates
-                            // within WeekDayEntry -> fetch request
-                            
-                            // create a row for each day
+                            // Create rows for each day.
                             ForEach(generateDateArray(selectedDate: settings.selectedDate), id: \.self) { day in
-                                WeekDayEntry(
-                                    filter: day//,
-                                    //                                            selectedEvent: $selectedEvent,
-                                    //                                            cardPosition: $cardPosition,
-                                    //                                            buildActionSheet: $buildActionSheet,
-                                    //                                            activateSheetPosition: $activateSheetPosition
-                                )
-                                .onTapGesture { location in
-                                    // dropping card
-                                    if selectedEvent != nil {
-                                        animateCardPlace(location: location)
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                            
-                                            // changing selectedEvent to have new date
-                                            
-                                            // call update event with new date
-                                            
-                                            selectedEvent?.date = day
-                                            
-                                            /*
-                                             var updatedDay = eventsByDay[index] // Create a mutable copy
-                                             updatedDay.removeAll {
-                                             $0.id == selectedEvent[0]!.id // delete date from original day
-                                             }
-                                             updatedDay.append(selectedEvent[0]!) // save event to new day
-                                             eventsByDay[index] = updatedDay
-                                             selectedEvent.removeAll() // clear selected event
-                                             */
+                                WeekDayEntry(filter: day)
+                                    .onTapGesture { location in
+                                        // dropping card
+                                        if settings.selectedPickupCard != nil {
+                                            animateCardPlace(location: location)
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                                
+                                                // changing selectedEvent to have new date
+                                                settings.selectedPickupCard?.date = day
+                                                // clear placeholder value
+                                                settings.selectedPickupCard = nil
+                                            }
                                         }
                                     }
-                                }
-                                
                             }
-                            
-                            
                             
                         }
                     }
                     .frame(minHeight: 300, alignment: .topLeading)
                     .padding( [.leading] )
                 }
-                
-                
-                // When the plus button in DayEntry->sheetView is pressed, custom action sheet below is activated
+                // When the plus button in WeekDayEntry is pressed, the animation and menu is shown as an overlay to the screen.
                 AnimationOverlay()
-                
-                
             }
-            
-            
         }
     }
     
-    
+    // Used to animate the pick up and drop feature.
     func animateCardSelect(location: CGPoint) {
         animatedTrigger.toggle()
-        cardPosition = location
+        settings.cardPosition = location
         withAnimation {
-            cardPosition = CGPoint(x:300, y:600)
+            settings.cardPosition = CGPoint(x:300, y:600)
         }
     }
     
+    // Used to animate the pick up and drop feature.
     func animateCardPlace(location: CGPoint) {
         animatedTrigger.toggle()
         withAnimation {
-            cardPosition = location
+            settings.cardPosition = location
         }
     }
 }
 
-// Unwrapping tool used from stack overflow
+// Unwrapping tool used from stack overflow.
 // TODO: from https://stackoverflow.com/questions/57021722/swiftui-optional-textfield
 
 func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
@@ -157,55 +109,4 @@ func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
         get: { lhs.wrappedValue ?? rhs },
         set: { lhs.wrappedValue = $0 }
     )
-}
-
-/*
- func partitionByDate(currentDate: Date) -> [[Event]] {
- 
- var dayArrEvents : [Event] = []
- var weekOfDays : [[Event]] = []
- let formatter = DateFormatter()
- 
- // collect all meals under same date create and array of days
- formatter.dateFormat = "YYYY-MM-dd"
- let anchor = formatter.date(from: "2023-08-7") ?? Date()
- let calendar = Calendar.current
- 
- for dayOffset in 0...6 {
- if let date = calendar.date(byAdding: .day, value: dayOffset, to: anchor) {
- 
- dayArrEvents = []
- for targetEvent in events {
- if targetEvent.date == date {
- //print("succesful")
- //print(targetEvent)
- dayArrEvents.append(targetEvent)
- }
- }
- 
- if dayArrEvents != [] {
- // if dayArrEvents has items append
- weekOfDays.append(dayArrEvents)
- 
- } else {
- // else just provide date info
- weekOfDays.append([Event(id: 98, title: "n/a", desc: "", date: date, order: 99, eventType: TypeEnum.meal, timeLabel: "", foodItems: [[]])])
- 
- }
- 
- }
- 
- }
- 
- return weekOfDays
- 
- }
- */
-
-
-
-struct WeekPlannerView_Previews: PreviewProvider {
-    static var previews: some View {
-        WeekPlannerView()
-    }
 }

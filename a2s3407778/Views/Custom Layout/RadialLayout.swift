@@ -62,22 +62,16 @@ struct RadialLayout: Layout { // This is the actual layout.... everything else i
             
             // Calculate the direction based on proximity to edges
             if distanceToRightEdge <= minDistanceLeftRightEdge && distanceToBottomEdge <= minDistanceBottomEdge {
-                print("1")
                 direction = .topLeft
             } else if distanceToLeftEdge <= minDistanceLeftRightEdge && distanceToBottomEdge <= minDistanceBottomEdge {
-                print("2")
                 direction = .topRight
             } else if distanceToRightEdge <= minDistanceLeftRightEdge && distanceToTopEdge <= minDistanceTopEdge {
-                print("3")
                 direction = .bottomRight
             } else if distanceToLeftEdge <= minDistanceLeftRightEdge && distanceToTopEdge <= minDistanceTopEdge {
-                print("4")
                 direction = .bottomLeft
             } else if distanceToRightEdge <= minDistanceLeftRightEdge {
-                print("5")
                 direction = .left
             } else if distanceToLeftEdge <= minDistanceLeftRightEdge {
-                print("6")
                 direction = .right
             } else {
                 direction = .top

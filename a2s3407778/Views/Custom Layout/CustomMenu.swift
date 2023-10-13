@@ -18,7 +18,6 @@ struct CustomMenu: View {
 
                 // delay so animtion is applied
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    print("delay end")
                     settings.showActionMenu = true 
                 }
             }
@@ -47,11 +46,5 @@ struct CustomMenu: View {
                     .presentationDragIndicator(.visible)
             }
         
-    }
-}
-
-struct CustomView_Previews: PreviewProvider {
-    static var previews: some View {
-        CustomMenu()
     }
 }

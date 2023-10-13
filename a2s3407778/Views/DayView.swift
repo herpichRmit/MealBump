@@ -17,23 +17,21 @@ struct DayView: View {
             
     @Environment(\.managedObjectContext) private var viewContext // For accessing CoreData
     
-//
-//    @State var isMenuShown = false
-//    @State var showActionSheet = false
-//    @State var showCreateMealSheet = false
-//    @State var showCreateShopSheet = false
-//    @State var showCreateOtherSheet = false
-//    @State var showSearchMealSheet = false
-    
     //    MARK: - View Body
+    
+    // for month date
+    let dateFormatter = DateFormatter()
     
     var body: some View {
         ZStack {
             VStack{
                 HStack{
-                    Text("**Daily Planner** August") //The Double Star makes "Planner" Bold
+                    Text("**Daily Planner** \(dateFormatter.string(from: settings.selectedDate) )") //The Double Star makes "Planner" Bold
                         .font(.title2)
                         .padding()
+                        .onAppear(){
+                            dateFormatter.dateFormat = "MMMM"
+                        }
                     Spacer()
                     EditButton()
                     Button { //Plus Button adding new random item (for testing)

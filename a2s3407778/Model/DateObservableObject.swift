@@ -9,8 +9,6 @@ import Foundation
 
 // EnvironmentObjects must be classes with @Published variables
 
-// We could rename this class to something else if we wanted to share other things in the environment
-
 final class DateObservableObject: ObservableObject {
     @Published var selectedDate: Date = Date()
     @Published var showActionMenu = false
@@ -21,4 +19,6 @@ final class DateObservableObject: ObservableObject {
     @Published var animateActionMenu = false
     @Published var activateSheetPosition: CGPoint = .zero
     @Published var selectedEvent: EventCore = EventCore()
+    @Published var selectedPickupCard : EventCore?
+    @Published var cardPosition: CGPoint = CGPoint(x: 0, y: 0)
 }

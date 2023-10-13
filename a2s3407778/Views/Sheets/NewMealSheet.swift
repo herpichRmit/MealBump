@@ -76,9 +76,6 @@ struct NewMealSheet: View {
                 settings.showCreateMealSheet = false
             }))
             .onAppear(){
-                print(settings.selectedEvent)
-                print(settings.selectedEvent.itemArray)
-                
                 items = settings.selectedEvent.itemArray
                 
                 // Use current selected meal, else use default values
