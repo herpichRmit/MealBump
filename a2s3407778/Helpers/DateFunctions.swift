@@ -70,39 +70,3 @@ func generateDateArray(selectedDate: Date) -> [Date] {
     
     return weekArray
 }
-
-func endOfWeek(selectedDate: Date) -> Date {
-    
-    // Setting a calendar that starts on monday rather than gregorian
-    let myCalendar = Calendar(identifier: .iso8601)
-    
-    // Getting the year from the current date
-    let yearForWeekOfYear = myCalendar.component(.yearForWeekOfYear, from: selectedDate)
-    
-    //Getting the week number from current date
-    let weekNumber  = myCalendar.component(.weekOfYear, from: selectedDate)
-    
-    //Calculating the date of the monday of the week that the selected date is in
-    let mondayOfWeek = DateComponents(calendar: myCalendar, weekOfYear: weekNumber, yearForWeekOfYear: yearForWeekOfYear).date!
-    
-    let sundayOfWeek = Calendar.current.date(byAdding: .day, value: 6, to: mondayOfWeek)
-    
-    return sundayOfWeek!
-}
-
-func startOfWeek (selectedDate: Date) -> Date {
-    
-    // Setting a calendar that starts on monday rather than gregorian
-    let myCalendar = Calendar(identifier: .iso8601)
-    
-    // Getting the year from the current date
-    let yearForWeekOfYear = myCalendar.component(.yearForWeekOfYear, from: selectedDate)
-    
-    //Getting the week number from current date
-    let weekNumber  = myCalendar.component(.weekOfYear, from: selectedDate)
-    
-    //Calculating the date of the monday of the week that the selected date is in
-    let mondayOfWeek = DateComponents(calendar: myCalendar, weekOfYear: weekNumber, yearForWeekOfYear: yearForWeekOfYear).date!
-    
-    return mondayOfWeek
-}
