@@ -98,12 +98,15 @@ struct DayView: View {
         newEvent.archived = false
         
         // Saving data
-        do {
-            try viewContext.save() //Saving data to the persistent store
-        } catch {
-            let nserror = error as NSError
-            fatalError("Saving Error: \(nserror), \(nserror.userInfo)")
+        if viewContext.hasChanges {
+            do {
+                try viewContext.save() //Saving data to the persistent store
+            } catch {
+                let nserror = error as NSError
+                fatalError("Saving Error: \(nserror), \(nserror.userInfo)")
+            }
         }
+        
     }
     
 }
