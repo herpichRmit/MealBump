@@ -13,7 +13,6 @@ import SwiftUI
  struct a1s3407778App: App {
      
      let persistenceController = PersistenceController.shared
-     
      @StateObject var settings = DateObservableObject()
      
      var body: some Scene {

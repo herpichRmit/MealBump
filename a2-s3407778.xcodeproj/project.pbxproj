@@ -19,6 +19,7 @@
 		A83880402AD4C77E00C4FB77 /* ShoppingItemCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A838803C2AD4C77E00C4FB77 /* ShoppingItemCore+CoreDataClass.swift */; };
 		A83880412AD4C77E00C4FB77 /* ShoppingItemCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A838803D2AD4C77E00C4FB77 /* ShoppingItemCore+CoreDataProperties.swift */; };
 		A841AF4B2A89CC3200EE109B /* ShoppingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A841AF4A2A89CC3200EE109B /* ShoppingView.swift */; };
+		A87F08B52AD93193003D76F5 /* ButtonPressAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87F08B42AD93193003D76F5 /* ButtonPressAction.swift */; };
 		A8A03AFD2A91E5A2003EF9B9 /* NewFoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A03AFC2A91E5A2003EF9B9 /* NewFoodView.swift */; };
 		A8A03B002A930336003EF9B9 /* SwiftUIReorderableForEach in Frameworks */ = {isa = PBXBuildFile; productRef = A8A03AFF2A930336003EF9B9 /* SwiftUIReorderableForEach */; };
 		A8A03B032A93054B003EF9B9 /* WeekEventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A03B022A93054B003EF9B9 /* WeekEventCard.swift */; };
@@ -61,6 +62,7 @@
 		A838803C2AD4C77E00C4FB77 /* ShoppingItemCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShoppingItemCore+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A838803D2AD4C77E00C4FB77 /* ShoppingItemCore+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShoppingItemCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A841AF4A2A89CC3200EE109B /* ShoppingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingView.swift; sourceTree = "<group>"; };
+		A87F08B42AD93193003D76F5 /* ButtonPressAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonPressAction.swift; sourceTree = "<group>"; };
 		A8A03AFC2A91E5A2003EF9B9 /* NewFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFoodView.swift; sourceTree = "<group>"; };
 		A8A03B022A93054B003EF9B9 /* WeekEventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekEventCard.swift; sourceTree = "<group>"; };
 		A8A03B042A930575003EF9B9 /* PlusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButton.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 		CD8067D82AC1B09000A1ECC5 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				A87F08B42AD93193003D76F5 /* ButtonPressAction.swift */,
 				CD8067D92AC1B0AB00A1ECC5 /* DateFunctions.swift */,
 			);
 			path = Helpers;
@@ -355,6 +358,7 @@
 				A8A03B072A9305AC003EF9B9 /* WeekDayEntry.swift in Sources */,
 				A83880412AD4C77E00C4FB77 /* ShoppingItemCore+CoreDataProperties.swift in Sources */,
 				CD8067DA2AC1B0AB00A1ECC5 /* DateFunctions.swift in Sources */,
+				A87F08B52AD93193003D76F5 /* ButtonPressAction.swift in Sources */,
 				CD1740372AD7B0C300653B25 /* NewShoppingItemSheet.swift in Sources */,
 				CDCB4CD72AC3948C006F1F05 /* DayFilteredList.swift in Sources */,
 				CD96433E2ABC129000A1D990 /* DayEventTile.swift in Sources */,

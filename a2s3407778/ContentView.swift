@@ -11,24 +11,28 @@ import SwiftUI
 struct ContentView: View {
     
     var body: some View {
-                 
-        TabView{
-            ShoppingView()
-                .tabItem(){
-                    Image(systemName: "cart")
-                    Text("Shopping List")
-                }
-            DayView()
-                .tabItem(){
-                    Image(systemName: "sun.min")
-                    Text("Daily")
-                }
-            WeekPlannerView()
-                .tabItem(){
-                    Image(systemName: "clock")
-                    Text("Weekly")
-                }
+        ZStack{
+            TabView{
+                ShoppingView()
+                    .tabItem(){
+                        Image(systemName: "cart")
+                        Text("Shopping List")
+                    }
+                DayView()
+                    .tabItem(){
+                        Image(systemName: "sun.min")
+                        Text("Daily")
+                    }
+                WeekPlannerView()
+                    .tabItem(){
+                        Image(systemName: "clock")
+                        Text("Weekly")
+                    }
+            }
+            // When the plus button in WeekDayEntry is pressed, the menu animation and menu is shown as an overlay to the screen.
+            AnimationOverlay()
         }
+        
     }
 }
 
