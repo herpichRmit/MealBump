@@ -12,13 +12,13 @@ struct NewFoodView: View {
     
     // Managed Object Context to read the coredata objects
     @Environment(\.managedObjectContext) private var viewContext
-    
     @Environment(\.dismiss) var dismiss
     
     @State var name : String = ""
     @State var note : String = ""
-    @State var category : String = ""
-    let types = ["None","Dairy", "Fruit", "Vegetables", "Meat", "Bakery", "Other"]
+    @State var category : ShopItemCategory = .None
+    
+    @EnvironmentObject var settings: DateObservableObject
     
     var body: some View {
         NavigationStack{
@@ -30,15 +30,12 @@ struct NewFoodView: View {
                 }
                 Section(){
                     Picker("Category", selection: $category){
-                        ForEach(ShopItemCategory.allCases, id: \.self) {
-                            Text(String(describing:$0))
+                        ForEach(ShopItemCategory.allCases, id: \.self) { category in
+                            Text(category.rawValue)
                         }
                     }
-                    
                 }
-                
             }
-
             .navigationTitle("Edit food")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(trailing: Button("Add", action: {
@@ -53,9 +50,9 @@ struct NewFoodView: View {
         let newShoppingItem = ShoppingItemCore(context: viewContext)
         newShoppingItem.name = name
         newShoppingItem.measure = note
-        newShoppingItem.category = category
-        newShoppingItem.checked = false
+        newShoppingItem.category = category.rawValue
         
+        settings.selectedEvent.addToShoppingItemCore(newShoppingItem)
         saveData()
     }
     

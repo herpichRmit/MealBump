@@ -21,9 +21,9 @@ struct NewMealSheet: View {
     @State private var mealKind : String = ""
     @State private var note : String = ""
 
-    // when entity is viewed -> create it
-    // when done is pressed update it
-    // if back is pressed, delete
+    @State private var items : [ShoppingItemCore] = []
+    @State private var itemToRemove : ShoppingItemCore?
+    
     
     var body: some View {
         NavigationStack(){
@@ -47,19 +47,21 @@ struct NewMealSheet: View {
                 }
                 
                 // List food in meal
-                Section(){
-                    
-                    // get all items that are under relationship with this EventCore entity
-                    //ForEach(eventObject.selectedEvent.itemArray, id: \.self) { item in
-                    //    Text(item.wrappedName)
-                    //}
-    
+                List {
+                    if items != [] {
+                        ForEach(settings.selectedEvent.itemArray, id: \.self) { item in
+                            NavigationLink(destination: EditFoodView(item: item)) {
+                                Text(item.wrappedName)
+                            }
+                        }
+                        .onDelete(perform: deleteItem)
+                    }
                     // allows user to search for a food
                     NavigationLink(destination: SearchFoodView()) {
                         Text("Add food").foregroundColor(.blue)
-                    }   // -> add food to selectedEvent
-                
+                    } // -> add food to selectedEvent
                 }
+                
             }
             .navigationTitle("Create meal")
             .navigationBarTitleDisplayMode(.inline)
@@ -67,19 +69,35 @@ struct NewMealSheet: View {
                 
                 settings.selectedEvent = EventCore()
                 settings.showCreateMealSheet.toggle()
-            } ))
+            }))
             .navigationBarItems(trailing: Button("Done", action: {
                 saveItem()
                 settings.showCreateMealSheet = false
             }))
             .onAppear(){
-                print("here")
-                let event = EventCore(context: viewContext)
-                settings.selectedEvent = event
+                print(settings.selectedEvent)
+                print(settings.selectedEvent.itemArray)
                 
+                items = settings.selectedEvent.itemArray
             }
         }
-        
+    }
+    
+    
+    func deleteItem(at offsets: IndexSet) {
+        // get item that is being removed
+        offsets.forEach { (i) in
+            itemToRemove = settings.selectedEvent.itemArray[i]
+        }
+        settings.selectedEvent.removeFromShoppingItemCore(itemToRemove!)
+
+        do {
+            try viewContext.save() //Saving data to the persistent store
+        } catch {
+            let nserror = error as NSError
+            fatalError("Saving Error: \(nserror), \(nserror.userInfo)")
+        }
+
     }
     
     func saveItem() {

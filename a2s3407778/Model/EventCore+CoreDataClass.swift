@@ -32,9 +32,8 @@ public class EventCore: NSManagedObject, Codable {
         self.order = try container.decode(Int16.self, forKey: .order)
         self.mealKind = try container.decode(String.self, forKey: .mealKind)
         self.archived = try container.decode(Bool.self, forKey: .archived)
-        
-        
     }
+    
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(eventID, forKey: .eventID)
@@ -45,7 +44,6 @@ public class EventCore: NSManagedObject, Codable {
         try container.encode(order, forKey: .order)
         try container.encode(mealKind, forKey: .mealKind)
         try container.encode(archived, forKey: .archived)
-        
       }
    }
 

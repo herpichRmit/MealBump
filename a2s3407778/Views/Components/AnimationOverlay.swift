@@ -10,6 +10,9 @@ import SwiftUI
 struct AnimationOverlay: View {
     @EnvironmentObject var settings: DateObservableObject
     
+    // Managed Object Context to read the coredata objects
+    @Environment(\.managedObjectContext) private var viewContext
+    
     var body: some View {
         
         // Used to exit blur background and exit popup if tapped outside of buttons
@@ -34,8 +37,6 @@ struct AnimationOverlay: View {
         
         if settings.showActionMenu {
             
-            
-            
             // we want to build initial layout after button is pressed
             // then we want to switch instanly
             let layout = settings.showActionMenu ? AnyLayout(RadialLayout()) : AnyLayout(InitialLayout())
@@ -47,7 +48,6 @@ struct AnimationOverlay: View {
                         settings.showSearchMealSheet.toggle()
                     }
                     .onAppear(){
-                        print("testB")
                         print(settings.activateSheetPosition)
                     }
                     .layoutValue(key: StartPosition.self, value: settings.activateSheetPosition)
@@ -57,7 +57,6 @@ struct AnimationOverlay: View {
                         settings.showCreateShopSheet.toggle()
                     }
                     .onAppear(){
-                        print("testB")
                         print(settings.activateSheetPosition)
                     }
                     .layoutValue(key: StartPosition.self, value: settings.activateSheetPosition)
@@ -65,6 +64,12 @@ struct AnimationOverlay: View {
                     .onTapGesture{
                         settings.showActionMenu.toggle() //Hides the buttons once pressed
                         settings.showCreateMealSheet.toggle()
+                        
+                        // need to initalise a new eventCore
+                        let event = EventCore(context: viewContext)
+                        settings.selectedEvent = event
+                        
+                        
                     }
                     .onAppear(){
                         print("testB")

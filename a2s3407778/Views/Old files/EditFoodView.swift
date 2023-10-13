@@ -10,18 +10,17 @@ import SwiftUI
 
 struct EditFoodView: View {
     
-    @EnvironmentObject var settings: DateObservableObject
-    
+    // Managed Object Context to read the coredata objects
+    @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.dismiss) var dismiss
     
-    // Fetch Request for ALL Items in the shopping list
-    @FetchRequest(sortDescriptors: []) private var allShoppingItems: FetchedResults<ShoppingItemCore>
-    
+    @State var item : ShoppingItemCore
     @State var name : String = ""
     @State var note : String = ""
-    @State var category : String = ""
-    let types = ["None", "Dairy", "Fruit", "Vegetables", "Meat", "Bakery", "Other"]
+    @State var category : ShopItemCategory = .None
     
+    
+    @EnvironmentObject var settings: DateObservableObject
     
     var body: some View {
         NavigationStack{
@@ -32,51 +31,39 @@ struct EditFoodView: View {
                     TextField("Amount", text: $note)
                 }
                 Section(){
-                    //ForEach(allShoppingItems, id: \.self) { item in
-                    //    Text(item)
-                    //}
-                }
-                Section(){
                     Picker("Category", selection: $category){
-                        ForEach(types, id: \.self) {
-                            Text($0)
+                        ForEach(ShopItemCategory.allCases, id: \.self) { category in
+                            Text(category.rawValue)
                         }
-                    }
-                    
+                    }   
                 }
-                
-            }
-            .onAppear {
-                self.useExistingItem()
             }
             .navigationTitle("Edit food")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(trailing: Button("Save", action: {
-                updateExisting()
+                updateFood()
                 dismiss()
             }))
-            
+        }
+        .onAppear(){
+            name = item.name ?? ""
+            note = item.measure ?? ""
+            category = ShopItemCategory(rawValue: item.category ?? "None") ?? .None
         }
     }
     
-    func useExistingItem() {
-        /*
-         
-         Functionality to update the
-         
-         */
+    func updateFood() {
         
-    }
-    
-    func updateExisting() {
+        item.name = name
+        item.category = category.rawValue
+        item.measure = note
         
-        let newItem = ShoppingItemCore()
-        newItem.name = name
-        newItem.category = category
-        newItem.measure = note
-        newItem.checked = false
-        
-        settings.selectedEvent.addToShoppingItemCore(newItem)
+        do {
+            try viewContext.save() //Saving data to the persistent store
+        } catch {
+            let nserror = error as NSError
+            fatalError("Saving Error: \(nserror), \(nserror.userInfo)")
+        }
         
         
     }

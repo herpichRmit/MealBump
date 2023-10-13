@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 enum ShopItemCategory: String, CaseIterable {
-    case Dairy, Produce, Meat, Pasta, Fish, Lollies, Drinks, Other, Stationary, Cleaning, Household, Personal, Spices, Bakery
+    case Dairy, Produce, Meat, Pasta, Fish, Lollies, Drinks, Other, Stationary, Cleaning, Household, Personal, Spices, Bakery, None
 }
 
 enum EventType: String, CaseIterable {

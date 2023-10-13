@@ -52,45 +52,41 @@ class AutocompleteViewModel: ObservableObject {
         }
 }
 
+
+
 struct SearchFoodView: View {
     @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
+    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var settings: DateObservableObject
     
     @ObservedObject var viewModel = AutocompleteViewModel()
     let apiKey = "a6591f4c9d2346aabe241d5abe293dd4" // Add your API key here
     @State private var searchText = ""
     
-    // Fetch Request for ALL Items in the shopping list
-    //@FetchRequest(sortDescriptors: []) private var allShoppingItems: FetchedResults<ShoppingItemCore>
-    @EnvironmentObject var settings: DateObservableObject
-        
-    
-    
     var body: some View {
         NavigationView {
             VStack{
                 List() {
-                
                     ForEach(viewModel.autocompleteData, id: \.id) { item in
-                        NavigationLink(destination: EditFoodView()) {
+                        NavigationLink(destination: NewFoodView(name: item.name, note: item.possibleUnits[0], category: .None)) {
                             Text(item.name)
                         }
                     }
-                    NavigationLink(destination: NewFoodView()){
+                    NavigationLink(destination: NewFoodView(name: searchText)) {
                         searchText != "" ? Text("Add as \(searchText)").foregroundColor(.blue) : Text("Add as new item").foregroundColor(.blue)
                     }
                 }
             }
-            .navigationTitle("Food")
-            .navigationBarTitleDisplayMode(.inline)
-            .onAppear {
-                // When the list appears ask the view model to fetch the data
-                viewModel.fetchAutocomplete(keyword: searchText, apiKey: apiKey)
-                
-            }
-            .onDisappear {
-                viewModel.cancelSubscription() // Call a method to cancel the subscription
-            }
             
+        }
+        .navigationTitle("Food")
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            // When the list appears ask the view model to fetch the data
+            viewModel.fetchAutocomplete(keyword: searchText, apiKey: apiKey)
+        }
+        .onDisappear {
+            viewModel.cancelSubscription() // Call a method to cancel the subscription
         }
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for food...")
         .onChange(of: searchText) { newValue in
@@ -99,12 +95,7 @@ struct SearchFoodView: View {
                 viewModel.fetchAutocomplete(keyword: searchText, apiKey: apiKey)
             }
         }
-        
-        
     }
 
-            
-        
-        
 }
     
