@@ -10,7 +10,8 @@
 import Foundation
 import CoreData
 
-
+/// The CoreData Class which represents the ShoppingItem Entity in the CoreData Model. 'Core' suffix to differenciate between Event Objects used in earlier versions of app
+@objc(ShoppingItemCore)
 final public class ShoppingItemCore: NSManagedObject {
 
     

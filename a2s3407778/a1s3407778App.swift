@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-@main
 
 /// Main App Starting Point
- struct a1s3407778App: App {
+@main
+struct a2s3407778App: App {
      
      // Initialising the objects which will be inserted into the App's environment
      let persistenceController = PersistenceController.shared

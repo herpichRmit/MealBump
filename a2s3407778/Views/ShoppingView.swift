@@ -201,6 +201,7 @@ struct showHideCheckedButton: View {
     }
 }
 
+/// Struct to enable Canvas/Live Preview for this view
 struct ShoppingView_Previews: PreviewProvider {
     static var previews: some View {
         ShoppingView()

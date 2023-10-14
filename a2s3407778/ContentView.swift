@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// Base View which contains the TabView for switching between the 3 Main views
+/// Base View which contains the TabView for switching between the 3 Main views: ShoppingView, DayView, WeekPlannerView
 struct ContentView: View {
     
     @EnvironmentObject var settings: DateObservableObject
@@ -60,6 +60,7 @@ struct ContentView: View {
     }
 }
 
+/// Struct to enable Canvas/Live Preview for this view
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()

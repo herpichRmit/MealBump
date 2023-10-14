@@ -136,3 +136,10 @@ struct AnimationOverlay: View {
         }
     }
 }
+
+/// Struct to enable Canvas/Live Preview for this view
+struct AnimationOverlay_Previews: PreviewProvider {
+    static var previews: some View {
+        AnimationOverlay()
+    }
+}
