@@ -47,7 +47,7 @@ struct NewMealSheet: View {
                 // List all food items that have been added to a meal
                 List {
                     if items != [] {
-                        ForEach(settings.selectedEvent.itemArray, id: \.self) { item in
+                        ForEach((settings.selectedEvent?.itemArray)!, id: \.self) { item in
                             NavigationLink(destination: EditFoodView(item: item)) {
                                 Text(item.wrappedName)
                             }
@@ -73,13 +73,13 @@ struct NewMealSheet: View {
                 settings.showCreateMealSheet = false
             }))
             .onAppear(){
-                items = settings.selectedEvent.itemArray
+                items = settings.selectedEvent?.itemArray ?? []
                 
                 // Use current selected meal, else use default values
-                name = settings.selectedEvent.name ?? ""
-                mealKind = settings.selectedEvent.mealKind ?? ""
-                note = settings.selectedEvent.note ?? ""
-                date = settings.selectedEvent.date ?? settings.selectedDate
+                name = settings.selectedEvent?.name ?? ""
+                mealKind = settings.selectedEvent?.mealKind ?? ""
+                note = settings.selectedEvent?.note ?? ""
+                date = settings.selectedEvent?.date ?? settings.selectedDate
             }
         }
     }
@@ -90,9 +90,9 @@ struct NewMealSheet: View {
     func deleteItem(at offsets: IndexSet) {
         // get item that is being removed
         offsets.forEach { (i) in
-            itemToRemove = settings.selectedEvent.itemArray[i]
+            itemToRemove = settings.selectedEvent?.itemArray[i]
         }
-        settings.selectedEvent.removeFromShoppingItemCore(itemToRemove!)
+        settings.selectedEvent?.removeFromShoppingItemCore(itemToRemove!)
 
         do {
             try viewContext.save() //Saving data to the persistent store
@@ -120,7 +120,7 @@ struct NewMealSheet: View {
     
     /// Removes EventCore stored in global variable `selectedEvent` from ``EventCore`` CoreData storage.
     func deleteEvent() {
-        viewContext.delete(settings.selectedEvent)
+        viewContext.delete(settings.selectedEvent!)
         
         // Saving data
         saveData()

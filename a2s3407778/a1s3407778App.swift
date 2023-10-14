@@ -17,6 +17,7 @@ import SwiftUI
      
      var body: some Scene {
          WindowGroup {
+             
              ContentView()
                  .environmentObject(settings)
                  .environment(\.managedObjectContext, persistenceController.container.viewContext)

@@ -10,9 +10,11 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State private var selection = "default"
+    
     var body: some View {
         ZStack{
-            TabView{
+            TabView(selection:$selection){
                 ShoppingView()
                     .tabItem(){
                         Image(systemName: "cart")
@@ -23,11 +25,22 @@ struct ContentView: View {
                         Image(systemName: "sun.min")
                         Text("Daily")
                     }
+                    .tag("default")
                 WeekPlannerView()
                     .tabItem(){
                         Image(systemName: "clock")
                         Text("Weekly")
                     }
+            }
+            .onAppear {
+                // correct the transparency bug for Tab bars
+                let tabBarAppearance = UITabBarAppearance()
+                tabBarAppearance.configureWithOpaqueBackground()
+                UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+                // correct the transparency bug for Navigation bars
+                let navigationBarAppearance = UINavigationBarAppearance()
+                navigationBarAppearance.configureWithOpaqueBackground()
+                UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
             }
             // When the plus button in WeekDayEntry is pressed, the menu animation and menu is shown as an overlay to the screen.
             AnimationOverlay()

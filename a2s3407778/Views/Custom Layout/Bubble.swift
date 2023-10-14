@@ -16,11 +16,13 @@ struct Bubble: View {
     var body: some View {
         ZStack {
             Circle()
-                .strokeBorder(.gray, lineWidth: 3)
+                .strokeBorder(.white, lineWidth: 3)
                 .background(Circle().fill(colour))
                 .frame(width: active ? 70 : 0, height: active ? 70 : 0)
-            Text(text)
+            Image(systemName: text)
+                .imageScale(.large)
                 .multilineTextAlignment(.center)
+                .foregroundColor(.white)
                 .frame(width: 70, height: 70)
                 .foregroundStyle(.black)
                 .font(Font.custom("SF Pro", size: active ? 12 : 1))

@@ -10,18 +10,64 @@ import Foundation
 import CoreData
 
 @objc(EventCore)
-public class EventCore: NSManagedObject, Codable {
+final public class EventCore: NSManagedObject, NSItemProviderWriting, NSItemProviderReading, Codable {
     
+    
+    // For NSItemProviderWriting
+    public static var writableTypeIdentifiersForItemProvider: [String] {
+        return ["EventCore"]
+    }
+    
+    public func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping @Sendable (Data?, Error?) -> Void) -> Progress? {
+        let progress = Progress(totalUnitCount: 100)
+        do {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            let data = try encoder.encode(self)
+            let json = String(data: data, encoding: String.Encoding.utf8)
+            progress.completedUnitCount = 100
+            completionHandler(data, nil)
+        } catch {
+            completionHandler(nil, error)
+        }
+        return progress
+    }
+    
+    // For NSItemProviderReading
+    public static var readableTypeIdentifiersForItemProvider: [String] {
+        return ["EventCore"]
+    }
+    
+    public static func object(withItemProviderData data: Data, typeIdentifier: String) throws -> EventCore {
+        let decoder = JSONDecoder()
+        do {
+            let myJSON = try decoder.decode(EventCore.self, from: data)
+            return myJSON // may give errors
+        } catch {
+            fatalError("Err")
+        }
+    }
+    
+    
+    // For Codable
     enum CodingKeys: CodingKey {
-        case eventID, date, name, note, order, mealKind, eventType, archived
+        case eventID, date, name, note, order, mealKind, eventType, archived, timePeriod, type, shoppingItemCore
      }
-
+    
+    /*
+    public required init(context: NSManagedObjectContext) {
+        let entity = NSEntityDescription.entity(forEntityName: "EventCore", in: context)
+        super.init(entity: entity!, insertInto: context)
+    }
+     */
+    
     required convenience public init(from decoder: Decoder) throws {
         guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
             throw DecoderConfigurationError.missingManagedObjectContext
         }
         
-        self.init(context: context)
+        self.init(entity: NSEntityDescription.entity(forEntityName: "EventCore", in: context)!, insertInto: context)
+        //self.init(context: context)
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.eventID = try container.decode(UUID.self, forKey: .eventID)
@@ -32,6 +78,9 @@ public class EventCore: NSManagedObject, Codable {
         self.order = try container.decode(Int16.self, forKey: .order)
         self.mealKind = try container.decode(String.self, forKey: .mealKind)
         self.archived = try container.decode(Bool.self, forKey: .archived)
+        self.timePeriod = try container.decode(String.self, forKey: .timePeriod) // new
+        self.type = try container.decode(String.self, forKey: .type) // new
+        self.shoppingItemCore = try container.decode(Set<ShoppingItemCore>.self, forKey: .shoppingItemCore) as NSSet // new, do i need?
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -44,8 +93,15 @@ public class EventCore: NSManagedObject, Codable {
         try container.encode(order, forKey: .order)
         try container.encode(mealKind, forKey: .mealKind)
         try container.encode(archived, forKey: .archived)
-      }
-   }
+        try container.encode(timePeriod, forKey: .timePeriod)
+        try container.encode(type, forKey: .type)
+        if let shoppingItems = shoppingItemCore {
+            try container.encode(shoppingItemCore?.allObjects as! [ShoppingItemCore], forKey: .shoppingItemCore)
+        }
+    }
+    
+    
+}
 
 enum DecoderConfigurationError: Error {
   case missingManagedObjectContext

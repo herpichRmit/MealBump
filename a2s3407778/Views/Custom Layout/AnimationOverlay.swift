@@ -52,7 +52,7 @@ struct AnimationOverlay: View {
             let layout = settings.showActionMenu ? AnyLayout(RadialLayout()) : AnyLayout(InitialLayout())
             
             layout {
-                Bubble(colour: Color("Color 1"), text: "Archive", active: settings.showActionMenu)
+                Bubble(colour: Color(.black), text: "folder.fill" /*"Archive"*/, active: settings.showActionMenu)
                     .onTapGesture{
                         settings.showActionMenu = false
                         settings.animateActionMenu = false
@@ -70,7 +70,7 @@ struct AnimationOverlay: View {
                         }
                     }
                     .layoutValue(key: StartPosition.self, value: settings.activateSheetPosition)
-                Bubble(colour: Color("Color 2"), text: "Shopping", active: settings.showActionMenu)
+                Bubble(colour: Color(.black), text: "cart.fill" /*"Shopping"*/, active: settings.showActionMenu)
                     .onTapGesture{
                         settings.showActionMenu = false
                         settings.animateActionMenu = false
@@ -88,7 +88,7 @@ struct AnimationOverlay: View {
                         }
                     }
                     .layoutValue(key: StartPosition.self, value: settings.activateSheetPosition)
-                Bubble(colour: Color("Color 3"), text: "Meal", active: settings.showActionMenu)
+                Bubble(colour: Color(.black), text: "fork.knife" /*"Meal"*/, active: settings.showActionMenu)
                     .onTapGesture{
                         settings.showActionMenu = false
                         settings.animateActionMenu = false
@@ -110,7 +110,7 @@ struct AnimationOverlay: View {
                         }
                     }
                     .layoutValue(key: StartPosition.self, value: settings.activateSheetPosition)
-                Bubble(colour: Color("Color 4"), text: "Other", active: settings.showActionMenu)
+                Bubble(colour: Color(.black), text: "questionmark.folder.fill" /*"Other"*/, active: settings.showActionMenu)
                     .onTapGesture{
                         settings.showActionMenu = false
                         settings.animateActionMenu = false

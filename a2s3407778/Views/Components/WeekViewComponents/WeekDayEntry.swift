@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 
 /// WeekDayEntry contains rows of card views with different events, for a specific day each
@@ -36,6 +37,9 @@ struct WeekDayEntry: View {
             predicate: predicate)
     }
     
+    @State var arrayMeals : [EventCore] = []
+    @State var draggedItem : EventCore?
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             
@@ -49,14 +53,18 @@ struct WeekDayEntry: View {
             
             // Row of cards
             ScrollView(.horizontal, showsIndicators: false){
-                HStack {
-                    ForEach(events) { item in
-                        HStack{
+                LazyHStack {
+                    ForEach(arrayMeals) { item in
                             WeekEventCard(
                                     title: item.name ?? "Unknown Name",
                                     mealKind: item.mealKind ?? "Unknown Time Period",
                                     type: item.eventType ?? "Unknown Type"
                                 )
+                                .onDrag({
+                                    self.draggedItem = item
+                                    return NSItemProvider(object: item)
+                                })
+                                .onDrop(of: [UTType.event], delegate: WeekCardDropDelegate(item: item, items: $arrayMeals, draggedItem: $draggedItem))
                                 .onTapGesture(count: 2, coordinateSpace: .global) { location in
                                     settings.cardPosition = location
                                     settings.selectedPickupCard = item
@@ -68,20 +76,24 @@ struct WeekDayEntry: View {
                                     }
                                 }
                                 Spacer()
-                        }
-                        .listRowSeparator(.hidden)
+                        
                     }
                     .onDelete(perform: deleteEvent)
                     
                     // Contains links to all sheets though the pop-up menu
                     CustomMenu()
                 }
-                .frame(height: 140, alignment: .top)
+                .frame(height: 110, alignment: .top)
                 .padding([.top, .leading], 2)
                 .padding([.trailing], 10)
+                .onAppear(){
+                    arrayMeals = events.map { $0 }
+                    print(arrayMeals)
+                    //print(arrayMeals[0].name)
+                }
             }
         }
-        .frame(height: 150, alignment: .topLeading)
+        .frame(height: 155, alignment: .topLeading)
     }
     
     /// Removes event from ``EventCore`` using `indexSet` provided by forEach
@@ -105,5 +117,23 @@ struct WeekDayEntry: View {
 }
 
 
-
-
+struct WeekCardDropDelegate : DropDelegate {
+    let item : EventCore
+    @Binding var items : [EventCore]
+    @Binding var draggedItem : EventCore?
+    func performDrop(info: DropInfo) -> Bool {
+        return true
+    }
+    func dropEntered(info: DropInfo) {
+        guard let draggedItem = self.draggedItem else {
+            return
+        }
+        if draggedItem != item {
+            let from = items.firstIndex(of: draggedItem)!
+            let to = items.firstIndex(of: item)!
+            withAnimation(.default) {
+                self.items.move(fromOffsets: IndexSet(integer: from), toOffset: to > from ? to + 1 : to)
+            }
+        }
+    }
+}

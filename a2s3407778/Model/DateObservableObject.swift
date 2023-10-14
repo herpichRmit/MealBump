@@ -18,7 +18,7 @@ final class DateObservableObject: ObservableObject {
     @Published var showSearchMealSheet = false
     @Published var animateActionMenu = false
     @Published var activateSheetPosition: CGPoint = .zero
-    @Published var selectedEvent: EventCore = EventCore()
+    @Published var selectedEvent: EventCore?
     @Published var selectedPickupCard : EventCore?
     @Published var cardPosition: CGPoint = CGPoint(x: 0, y: 0)
 }

@@ -51,7 +51,7 @@ struct NewFoodView: View {
         newShoppingItem.measure = note
         newShoppingItem.category = category.rawValue
         
-        settings.selectedEvent.addToShoppingItemCore(newShoppingItem)
+        settings.selectedEvent?.addToShoppingItemCore(newShoppingItem)
         
         do {
             try viewContext.save() //Saving data to the persistent store

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6C270EE131D53489DA12FB3A /* InitialLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F8CD21AC6ADFD6C9153CEB /* InitialLayout.swift */; };
-		7DAF2D198F67236D5224E040 /* ReorderableStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B047ACD973E8B3D48DBBF5D3 /* ReorderableStack.swift */; };
 		A838802C2AD3DB3600C4FB77 /* CustomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A838802B2AD3DB3600C4FB77 /* CustomMenu.swift */; };
 		A838802E2AD3DC3200C4FB77 /* AnimationOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A838802D2AD3DC3200C4FB77 /* AnimationOverlay.swift */; };
 		A83880312AD3E70200C4FB77 /* NewShoppingTripSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83880302AD3E70200C4FB77 /* NewShoppingTripSheet.swift */; };
@@ -72,7 +71,6 @@
 		A8C6F4762A8F0E6500ACC6C4 /* EditFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFoodView.swift; sourceTree = "<group>"; };
 		A8C6F4782A8F143E00ACC6C4 /* SearchFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFoodView.swift; sourceTree = "<group>"; };
 		A8D446E12A9B13DF00F77403 /* Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
-		B047ACD973E8B3D48DBBF5D3 /* ReorderableStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReorderableStack.swift; sourceTree = "<group>"; };
 		C4F8CD21AC6ADFD6C9153CEB /* InitialLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialLayout.swift; sourceTree = "<group>"; };
 		CD1740362AD7B0C300653B25 /* NewShoppingItemSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShoppingItemSheet.swift; sourceTree = "<group>"; };
 		CD17457B2A80D0DA00294186 /* a2-s3407778.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "a2-s3407778.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -246,7 +244,6 @@
 		CDCB4CD92AC39E69006F1F05 /* WeekViewComponents */ = {
 			isa = PBXGroup;
 			children = (
-				B047ACD973E8B3D48DBBF5D3 /* ReorderableStack.swift */,
 				A8A03B022A93054B003EF9B9 /* WeekEventCard.swift */,
 				A8A03B062A9305AC003EF9B9 /* WeekDayEntry.swift */,
 			);
@@ -368,7 +365,6 @@
 				CDB6BC7F2A8F3654009A05F7 /* CustomDatePicker.swift in Sources */,
 				CD202AC02AC2B4F000425AC0 /* Persistence.swift in Sources */,
 				6C270EE131D53489DA12FB3A /* InitialLayout.swift in Sources */,
-				7DAF2D198F67236D5224E040 /* ReorderableStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
