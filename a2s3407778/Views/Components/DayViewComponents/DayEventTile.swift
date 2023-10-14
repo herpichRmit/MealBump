@@ -56,12 +56,13 @@ struct DayEventTile: View {
                 Spacer()
             }
         }
-        .background(changeBackgrndColour(type: eventType).shadow(color: .black.opacity(0.3), radius: 3, x: 2, y: 2))
+        .background(/*changeBackgrndColour(type: eventType)*/Color.white.shadow(color: .black.opacity(0.3), radius: 3, x: 2, y: 2))
         .border(.gray)
     }
     
 }
 
+///Function for changing the background color of events to more clearly visually seperate different types. Currently unused in deployed code.
 func changeBackgrndColour(type: String?) -> Color{
     switch (type) {
     case "Meal":
