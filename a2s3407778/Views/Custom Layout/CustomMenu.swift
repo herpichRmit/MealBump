@@ -8,6 +8,7 @@
 import SwiftUI
 
 /// View which is used to display the CustomMenu of buttons and as a place to activate sheets for modifying data
+/// Contains custom button and sheets. Note that the menu itself is not encapsulated in this, instead it is contained in the `AnimationOverlay` view.
 struct CustomMenu: View {
     @EnvironmentObject var settings: DateObservableObject
     @State private var isPressed = false
@@ -35,7 +36,6 @@ struct CustomMenu: View {
                 }
             }
             
-        
 //    MARK: Create New Meal
             .sheet(isPresented: $settings.showCreateMealSheet) {
                 NewMealSheet()

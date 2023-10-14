@@ -18,10 +18,21 @@ struct MealFromArchiveSheet: View {
     @State private var searchText = ""
     
     // Fetch all past events of type meal
-    @FetchRequest(
-        sortDescriptors: []
-        //predicate: NSPredicate(format: "eventType == Meal") // MARK: fix this
-    ) var pastMeals: FetchedResults<EventCore>
+    @FetchRequest var pastMeals: FetchedResults<EventCore>
+    
+    init(){
+        
+        // Sort alphabetically
+        let orderSort = NSSortDescriptor(key: "name", ascending: true)
+        
+        // Constructing filter predicate
+        let predicate = NSPredicate(format: "name != nil AND eventType = 'Meal'")
+        
+        // Underscore means we are changing the wrapper itsself rather than the value stored
+        _pastMeals = FetchRequest<EventCore>(
+            sortDescriptors: [orderSort],
+            predicate: predicate)
+    }
     
     var body: some View {
         NavigationStack{
@@ -42,6 +53,9 @@ struct MealFromArchiveSheet: View {
             }
             .navigationTitle("Meals")
             .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(leading: Button("Back", action: {
+                settings.showSearchMealSheet = false
+            }))
         }
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for food...")
     }

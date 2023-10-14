@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 
 /// Provides an inital position for the CustomMenu buttons
+/// A layout that organises all subviews in a center positon. 
 struct InitialLayout: Layout {
     
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout Void) -> CGSize {
@@ -42,10 +43,12 @@ struct InitialLayout: Layout {
     
 }
 
+/// A layout value key that acts as an input parameter for the layout. Has a default value.
 struct StartPosition: LayoutValueKey {
     static var defaultValue: CGPoint = CGPoint(x: 0.0, y: 0.0)
 }
 
+/// Extension enables view to recieve CGPoint value using layout value key `StartPosition`
 extension View {
     func anchor(_ value: CGPoint) -> some View {
         layoutValue(key: StartPosition.self, value: value)

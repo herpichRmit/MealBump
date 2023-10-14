@@ -7,7 +7,11 @@
 
 import SwiftUI
 
+
+/// Contains a pop-up menu designed to sit on top of all content. 
 struct AnimationOverlay: View {
+    
+    // Published vairables accessible through environment
     @EnvironmentObject var settings: DateObservableObject
     
     // Managed Object Context to read the coredata objects
@@ -45,7 +49,6 @@ struct AnimationOverlay: View {
         }
         
         // When the plus button in WeekDayEntry or DayView is pressed, custom action sheet below is activated
-        
         if settings.animateActionMenu {
             // we want to build initial layout after button is pressed
             // then we want to switch instanly
@@ -131,11 +134,5 @@ struct AnimationOverlay: View {
             }
             .animation(.easeInOut(duration: 0.15))
         }
-    }
-}
-
-struct AnimationOverlay_Previews: PreviewProvider {
-    static var previews: some View {
-        AnimationOverlay()
     }
 }

@@ -14,7 +14,7 @@ import SwiftUI
      
      // Initialising the objects which will be inserted into the App's environment
      let persistenceController = PersistenceController.shared
-     @StateObject var settings = DateObservableObject()
+     @ObservedObject var settings = DateObservableObject()
      
      var body: some Scene {
          WindowGroup {

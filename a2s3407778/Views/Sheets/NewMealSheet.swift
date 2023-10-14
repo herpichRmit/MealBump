@@ -52,12 +52,33 @@ struct NewMealSheet: View {
                                 Text(item.wrappedName)
                             }
                         }
-                        .onDelete(perform: deleteItem)
+                        .onDelete(perform: deleteMeal)
+                        .simultaneousGesture(TapGesture()
+                            .onEnded { _ in
+                                settings.selectedEvent?.name = name
+                                settings.selectedEvent?.mealKind = mealKind
+                                settings.selectedEvent?.note = note
+                                settings.selectedEvent?.date = date
+                            }
+                        )
                     }
                     // allows user to search for a food
                     NavigationLink(destination: SearchFoodView()) {
                         Text("Add food").foregroundColor(.blue)
                     } // -> add food to selectedEvent
+                }
+                .onAppear(){
+                    items = settings.selectedEvent?.itemArray ?? []
+                    // Use current selected meal, else use default values
+                    name = settings.selectedEvent?.name ?? ""
+                    mealKind = settings.selectedEvent?.mealKind ?? ""
+                    note = settings.selectedEvent?.note ?? ""
+                    date = settings.selectedEvent?.date ?? settings.selectedDate
+                    
+                    
+                    // MARK: test when we select an item to edit set item to selectedEvent
+                    print("this is selectedEvent after opening")
+                    print(settings.selectedEvent)
                 }
                 
             }
@@ -65,29 +86,38 @@ struct NewMealSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button("Back", action: {
                 
-                settings.selectedEvent = EventCore()
+                // clear selectedEvent
+                settings.selectedEvent = EventCore(context: viewContext)
                 settings.showCreateMealSheet.toggle()
             }))
-            .navigationBarItems(trailing: Button("Done", action: {
-                saveItem()
+            .navigationBarItems(trailing: Button( settings.isEditing == true ? "Save" : "Done", action: {
+                if settings.isEditing == true {
+                    
+                    // when we select an item to edit set item to selectedEvent
+                    
+                    // if user is editing an existing item
+                    updateMeal()
+                    settings.isEditing = false
+                    
+                    // check if it is saving data correctly, maybe instance in global is a copy
+                    print("this is selectedEvent after save")
+                    print(settings.selectedEvent)
+                    
+                } else {
+                    
+                    // if this is a new item
+                    saveMeal()
+                }
+                
                 settings.showCreateMealSheet = false
             }))
-            .onAppear(){
-                items = settings.selectedEvent?.itemArray ?? []
-                
-                // Use current selected meal, else use default values
-                name = settings.selectedEvent?.name ?? ""
-                mealKind = settings.selectedEvent?.mealKind ?? ""
-                note = settings.selectedEvent?.note ?? ""
-                date = settings.selectedEvent?.date ?? settings.selectedDate
-            }
         }
     }
     
     
     /// Takes an IndexSet and removes respective ``ShoppingItemCore`` as a child of the ``EventCore`` object within CoreData storage.
     /// - Parameter offsets: An IndexSet from a forEach loop
-    func deleteItem(at offsets: IndexSet) {
+    func deleteMeal(at offsets: IndexSet) {
         // get item that is being removed
         offsets.forEach { (i) in
             itemToRemove = settings.selectedEvent?.itemArray[i]
@@ -104,16 +134,28 @@ struct NewMealSheet: View {
     }
     
     /// Instatiates a new EventCore object and assigns user input to properties.
-    func saveItem() {
+    func saveMeal() {
         // Adding data to new EventCore Object
         let newEvent = EventCore(context: viewContext)
-        newEvent.date = settings.selectedDate
+        newEvent.date = date
         newEvent.name = name
         newEvent.note = note
         newEvent.order = Int16(100)
         newEvent.mealKind = mealKind
         newEvent.eventType = EventType.Meal.rawValue // Use the enum to ensure consistent values.
         
+        // Saving data
+        saveData()
+    }
+    
+    /// Saves changes to an existing EventCore object.
+    func updateMeal() {
+        // Adding data to new EventCore Object
+        settings.selectedEvent?.name = name
+        settings.selectedEvent?.date = date
+        settings.selectedEvent?.mealKind = mealKind
+        settings.selectedEvent?.note = note
+
         // Saving data
         saveData()
     }

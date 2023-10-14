@@ -24,4 +24,6 @@ final class DateObservableObject: ObservableObject {
     @Published var cardPosition: CGPoint = CGPoint(x: 0, y: 0)
     
     @Published var showNewFoodSheet = false
+    @Published var isEditing = false
+    @Published var openTab = "daily"
 }
