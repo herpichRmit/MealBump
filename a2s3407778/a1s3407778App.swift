@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 
-// Created following Kodeko Guide
+/// Main App Starting Point
  struct a1s3407778App: App {
      
+     // Initialising the objects which will be inserted into the App's environment
      let persistenceController = PersistenceController.shared
      @StateObject var settings = DateObservableObject()
      
@@ -19,15 +20,12 @@ import SwiftUI
          WindowGroup {
              
              ContentView()
+             // Inserting the CoreData and Environment Object into the Environment
                  .environmentObject(settings)
                  .environment(\.managedObjectContext, persistenceController.container.viewContext)
          }
      }
  }
-
-
-
-
 
 
 // Created following Paul Hudson's Guide

@@ -12,6 +12,7 @@ import CoreData
 struct PersistenceController {
   static let shared = PersistenceController()
 
+    /// This variable is to allow the preview canvas to work while using CoreData. It has not been implemented in this project.
   static var preview: PersistenceController = {
     let result = PersistenceController(inMemory: true)
     let viewContext = result.container.viewContext
@@ -27,25 +28,32 @@ struct PersistenceController {
     return result
   }()
 
+    /// Creating the Managed Object Model and the Managed Object Context
   let container: NSPersistentContainer
 
   init(inMemory: Bool = false) {
+      
+      // Creating the Managed Object Context
     container = NSPersistentContainer(name: "Main")
+      
+      // Don't why we need this if statement, just following the guide
     if inMemory {
       // swiftlint:disable:next force_unwrapping
-      container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+      container.persistentStoreDescriptions.first!.url = 
+        URL(fileURLWithPath: "/dev/null")
     }
+      
+      // Completing the creation of the CoreData stack by loading the persistent store
     container.loadPersistentStores { _, error in
       if let error = error as NSError? {
         fatalError("Unresolved error \(error), \(error.userInfo)")
       }
     }
+      
+      // These commands are to help CoreData work asycronously. Not sure of the reason for most of them, following guide
     container.viewContext.automaticallyMergesChangesFromParent = true
-
     container.viewContext.name = "viewContext"
-    /// - Tag: viewContextMergePolicy
-    container.viewContext.mergePolicy =
-    NSMergeByPropertyObjectTrumpMergePolicy
+    container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     container.viewContext.undoManager = nil
     container.viewContext.shouldDeleteInaccessibleFaults = true
   }

@@ -9,6 +9,7 @@ import Foundation
 
 // EnvironmentObjects must be classes with @Published variables
 
+/// This class is a single Environment Object which we use to share data between views
 final class DateObservableObject: ObservableObject {
     @Published var selectedDate: Date = Date()
     @Published var showActionMenu = false

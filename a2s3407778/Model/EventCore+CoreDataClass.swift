@@ -4,10 +4,12 @@
 //
 //  Created by Charles Blyton on 2/10/2023.
 //
-//
+// For Refreshed on how this file works check Kodeco - https://www.kodeco.com/27468235-core-data-fundamentals/lessons/11
 
 import Foundation
 import CoreData
+
+
 
 @objc(EventCore)
 final public class EventCore: NSManagedObject, NSItemProviderWriting, NSItemProviderReading, Codable {
@@ -49,7 +51,7 @@ final public class EventCore: NSManagedObject, NSItemProviderWriting, NSItemProv
     }
     
     
-    // For Codable
+///     For Codable extension
     enum CodingKeys: CodingKey {
         case eventID, date, name, note, order, mealKind, eventType, archived, timePeriod, type, shoppingItemCore
      }

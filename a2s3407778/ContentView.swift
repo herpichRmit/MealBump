@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-
+/// Base View which contains the TabView for switching between the 3 Main views
 struct ContentView: View {
     
     @State private var selection = "default"

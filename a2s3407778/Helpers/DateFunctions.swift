@@ -7,7 +7,7 @@
 
 import Foundation
 
-// Function to convert a date to a string
+/// Function to convert a date to a string
 func dateToString(date: Date) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "YYYY-MM-dd"
@@ -15,7 +15,7 @@ func dateToString(date: Date) -> String {
     return timeString
 }
 
-// Function to convert a string to a date
+/// Function to convert a string to a date
 func stringToDate(dateString: String) -> Date {
   
     let dateFormatter = DateFormatter() // Create dateformatter object
@@ -28,11 +28,14 @@ func stringToDate(dateString: String) -> Date {
     }
 }
 
+/// Function to calculate which day of the week a particular date is and return the name of that day as a string
 func weekdayFromDate (date: Date) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.setLocalizedDateFormatFromTemplate("EEEE")
     return dateFormatter.string(from: date)
 }
+
+/// Function to that returns the day of the month as a string (1-31)
 func dayNumberFromDate (date: Date) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.setLocalizedDateFormatFromTemplate("d")
@@ -40,7 +43,7 @@ func dayNumberFromDate (date: Date) -> String {
     
 }
 
-// Calculating the 7 dates to be shown based on the selected date
+/// Function to return the 7 dates of the week (monday-sunday) that contains the selected date
 func generateDateArray(selectedDate: Date) -> [Date] {
     
     // Setting a calendar that starts on monday rather than gregorian

@@ -6,14 +6,14 @@
 //
 
 // Code is adapted from video
-// TODO: reference
-
 // https://www.youtube.com/watch?v=JdUs3GD2zzI
 
+/// Structs in this file add animations to the custom menu buttons
 
 import Foundation
 import SwiftUI
 
+///
 //  Written by SerialCoder.dev
 struct ButtonPress: ViewModifier {
     var onPress: () -> Void

@@ -4,7 +4,8 @@
 //
 //  Created by Ethan Herpich on 10/10/2023.
 //
-//
+// For Refreshed on how this file works check Kodeco - https://www.kodeco.com/27468235-core-data-fundamentals/lessons/11
+
 
 import Foundation
 import CoreData
@@ -27,7 +28,7 @@ extension ShoppingItemCore: Decodable {
         
          self.init(context: context)
            
-         var container = try decoder.container(keyedBy: CodingKeys.self)
+         let container = try decoder.container(keyedBy: CodingKeys.self)
          let category = try container.decode(String.self, forKey: .category)
          let checked = try container.decode(Bool.self, forKey: .checked)
          let itemID = try container.decode(UUID.self, forKey: .itemID)
