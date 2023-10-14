@@ -8,33 +8,42 @@ import Foundation
 import CoreData
 import SwiftUI
 
+/// Main Daily Planner View in app
 struct DayView: View {
-    //    MARK: - Variables and FetchRequests
+    //    MARK: - Variables
     @EnvironmentObject var settings: DateObservableObject
-            
-    @Environment(\.managedObjectContext) private var viewContext // For accessing CoreData
+    
+    // For accessing CoreData
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    // DateFormatter for making headings in view
+    let dateFormatter = DateFormatter()
     
     //    MARK: - View Body
     
-    // for month date
-    let dateFormatter = DateFormatter()
-    
     var body: some View {
+        
         VStack{
+            
             HStack{
-                Text("**Daily Planner** \(dateFormatter.string(from: settings.selectedDate) )") //The Double Star makes "Planner" Bold
+                
+                Text("**Daily Planner** \(dateFormatter.string(from: settings.selectedDate) )")
                     .font(.title2)
                     .padding()
                     .onAppear(){
                         dateFormatter.dateFormat = "MMMM"
                     }
+                
                 Spacer()
+                
                 EditButton()
-                Button { //Plus Button adding new random item (for testing)
-                    addRandomEventToToday()
-                } label: {
-                    Image(systemName: "plus")
-                }
+                
+//                Button { //Plus Button adding new random item (for testing)
+//                    addRandomEventToToday()
+//                } label: {
+//                    Image(systemName: "plus")
+//                }
+                
                 .padding()
             }
             
@@ -44,6 +53,7 @@ struct DayView: View {
             
             Spacer()
             
+            // Full Date subheading
             Text("\(settings.selectedDate.formatted(.dateTime.weekday(.wide).day().month().year()))").font(.callout)
             
             //Must pass the date from here to the DayFilteredList's init(), because we need to know the date first in order to construct the fetch request inside DayFilteredList()
@@ -57,7 +67,8 @@ struct DayView: View {
     
     //    MARK: - Helper Functions
     
-    fileprivate func addRandomEventToToday(){
+    /// Function for creating random events for testing. No Longer Used in deployed app
+    func addRandomEventToToday(){
         // Creates 4 random events on today's date and saves to viewContext
         
         // Setting random information to use to create events

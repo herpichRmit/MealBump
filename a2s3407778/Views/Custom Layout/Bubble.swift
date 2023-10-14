@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// View for the circular buttons in the CustomMenu
+/// View for the circular buttons within the CustomMenu
 struct Bubble: View {
     let colour: Color
     let borderColor = Color.gray

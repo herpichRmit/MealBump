@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// View which describes the formatting of the + button which is used to open the CustomMenu
 struct PlusButton: View{
     
     var body: some View {

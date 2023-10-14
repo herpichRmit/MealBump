@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// View for adding a new Event to the app which is not a meal or Shopping Trip. Works as a sheet overlay and saves the event to CoreData
+
 struct NewOtherEventSheet: View {
     @Environment(\.dismiss) var dismiss //a dismiss variable to be used inside a button later
     
@@ -48,7 +50,7 @@ struct NewOtherEventSheet: View {
         }
     }
     
-    
+    /// Function for saving event to CoreData
     func saveItem() {
         // Adding data to new EventCore Object
         let newEvent = EventCore(context: viewContext) //New object with the CoreData ViewContext

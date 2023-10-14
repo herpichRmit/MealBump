@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 
+/// Provides an inital position for the CustomMenu buttons
 struct InitialLayout: Layout {
     
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout Void) -> CGSize {

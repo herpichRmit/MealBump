@@ -19,7 +19,8 @@ enum CircleDirection {
     case bottomRight
 }
 
-
+/// Struct witch describes the properties of the custom layout. This layout is used within the CustomMenu.swift file.
+/// Will show any added views in a semi-circular pattern. Depending on where it's base location is on screen the semi circle in can be rotated in 8 different ways. 
 struct RadialLayout: Layout { // This is the actual layout.... everything else in this file is using this to create an example of how it can be used...
     
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout Void) -> CGSize {

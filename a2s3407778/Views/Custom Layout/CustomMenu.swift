@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// View which is used to display the CustomMenu of buttons and as a place to activate sheets for modifying data
 struct CustomMenu: View {
     @EnvironmentObject var settings: DateObservableObject
     @State private var isPressed = false

@@ -22,4 +22,6 @@ final class DateObservableObject: ObservableObject {
     @Published var selectedEvent: EventCore?
     @Published var selectedPickupCard : EventCore?
     @Published var cardPosition: CGPoint = CGPoint(x: 0, y: 0)
+    
+    @Published var showNewFoodSheet = false
 }

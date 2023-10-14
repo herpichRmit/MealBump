@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-
+/// View which describes the custom date picker used in the DayView
 struct CustomDatePicker: View {
     
     @EnvironmentObject var settings: DateObservableObject
@@ -35,6 +35,8 @@ struct CustomDatePicker: View {
     }
 }
 
+/// Struct which is the actual 7 dates listed in the picker. Displays blue circle with white text if day is selected. White background with black text if the day is visable and selectable,
+/// but is not currently selected. 
 struct DateTile: View  {
         
     @EnvironmentObject var settings: DateObservableObject

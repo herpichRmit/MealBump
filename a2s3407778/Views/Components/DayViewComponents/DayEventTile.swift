@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// View is used in DayFilteredList.Swift. View is a card of a particular event to be displayed in a list within DayView.swift
 struct DayEventTile: View {
     
     var title: String

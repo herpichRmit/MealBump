@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreData
 
+/// One of the core App Views. The Shopping list view. Will display all shopping items in the coredata store, and provides option to show only unchecked items or all items.
 struct ShoppingView: View {
     
     // Managed Object Context to read the coredata objects
@@ -24,6 +25,9 @@ struct ShoppingView: View {
     
     // State variable to show or hide the checked items in the list
     @State  var showCheckedInList = false
+    
+    // The environment variable which holds sheet activations and date
+    @EnvironmentObject var settings: DateObservableObject
     
     var body: some View {
         
@@ -46,10 +50,13 @@ struct ShoppingView: View {
                 
                 .padding()
                 
-                Button { //Plus Button adding new random item (for testing)
-                    addRandomItem()
+                Button {
+                    settings.showNewFoodSheet.toggle()
                 } label: {
                     Image(systemName: "plus")
+                }
+                .sheet(isPresented: $settings.showNewFoodSheet) {
+                    NewFoodView()
                 }
                 .padding()
             }
@@ -102,6 +109,7 @@ struct ShoppingView: View {
     
     // MARK: Supporting Methods
     
+    /// Function checks all items in the shopping list and creates an array of all the categories these items have, purpose is to dynamically generate only the headings needed in the shopping list and prevent headings with no items underneath
     func listAllTypes(allResults: FetchedResults<ShoppingItemCore>) -> [String] {
         var listOfCategories: [String] = []
         
@@ -112,7 +120,7 @@ struct ShoppingView: View {
         }
         return listOfCategories
     }
-    
+    /// Function for adding random items to the shopping list, was used for testing and not used in release version of app
     func addRandomItem(){
         let name = ["Prunes", "Pasta", "Beef", "Chicken", "Hummus", "Chilli", "Olive Oil", "Milk", "Bread", "Rice", "Ice Cream", "Washing Liquid", "Lemons", "Oranges", "Bananas", "Ginger Beer"]
         let checked = [true, false]
@@ -133,7 +141,7 @@ struct ShoppingView: View {
         saveData()
     }
     
-    //Method for deleting shoppingItem in coreData
+    /// Function for deleting a shoppingItem in coreData
     func deleteShoppingItem(at offsets: IndexSet) {
         for offset in offsets{ //Loop over all of the offsets that we are given
             let itemToDelete = allShoppingItems[offset] //Find the item in the array? I think
@@ -142,7 +150,7 @@ struct ShoppingView: View {
         saveData()
     }
     
-    // Method for removing all items on the shopping list
+    /// Function for removing all items on the shopping list or clearing the shopping list
     func removeAllShoppingItems(){
         
         for shoppingItem in allShoppingItems {
@@ -151,6 +159,7 @@ struct ShoppingView: View {
         saveData()
     }
     
+    /// Function to save data from Managed Object Context to persistant store
     func saveData(){
         do {
             try viewContext.save() //Saving data to the persistent store
@@ -160,7 +169,7 @@ struct ShoppingView: View {
         }    }
     
 }
-
+ /// View which creates a button to show or hide the checked items in the shopping list. Button will change it's text label to reflect what change it will make
 struct showHideCheckedButton: View {
     
     @Binding var showCheckedInList: Bool

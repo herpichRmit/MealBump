@@ -8,13 +8,19 @@
 import SwiftUI
 import CoreData
 
+/// View which displays each event as a DayEventTile within the DayView.swift. Seperated from the DayView.swift file to avoid fetch request issues. Date must be passed
+/// Into the init() in this file in order to generate the fetch request.
 struct DayFilteredList: View {
     
-    @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
+    //    MARK: Variables and Fetch Requests
     
-    @FetchRequest var fetchRequest: FetchedResults<EventCore> //New Request to initialize in init()
+    //For accessing CoreData
+    @Environment(\.managedObjectContext) private var viewContext
     
-//    @State private var activeItemIds: [Int] = []
+    //New Request to initialize in init()
+    @FetchRequest var fetchRequest: FetchedResults<EventCore>
+    
+    //    @State private var activeItemIds: [Int] = []
     
     init(filter: Date){
         // Sort order by order
@@ -38,7 +44,9 @@ struct DayFilteredList: View {
             predicate: predicate)
     }
     
+    //MARK: Main styling of the view
     var body: some View {
+        
         List {
             ForEach (fetchRequest) { item in
                 HStack{
@@ -49,13 +57,13 @@ struct DayFilteredList: View {
                         mealKind: (item.mealKind ?? ""))
                     .padding(.horizontal, 16.0)
                     .padding(.bottom, 4.0)
-//                    VStack{ // Added for testing date and order sorting
-//                        Text("\(item.order)") // To Test the order sorting is working
-//                        Text(dateToString(date: item.date!)) // TO Test date seperation is working
-//                    }
+                    //                    VStack{ // Added for testing date and order sorting
+                    //                        Text("\(item.order)") // To Test the order sorting is working
+                    //                        Text(dateToString(date: item.date!)) // TO Test date seperation is working
+                    //                    }
                 }
                 .listRowSeparator(.hidden)
-
+                
             }
             .onDelete(perform: deleteEvent)
             .onMove(perform: moveActiveTodos)
@@ -63,11 +71,8 @@ struct DayFilteredList: View {
         .listStyle(.plain)
     }
     
-    //    func moveActiveTodos(fromOffsets source: IndexSet, toOffset destination: Int) {
-    //      activeItemIds.move(fromOffsets: source, toOffset: destination)
-    //    }
-    
-    private func moveActiveTodos( from source: IndexSet, to destination: Int) {
+    /// Function to change the order value in each event when events are re-ordered by dragging and dropping
+    func moveActiveTodos( from source: IndexSet, to destination: Int) {
         // Make an array of items from fetched results
         var revisedItems: [ EventCore ] = fetchRequest.map{ $0 }
         
@@ -86,6 +91,7 @@ struct DayFilteredList: View {
         saveData()
     }
     
+    /// Function to delete events from CoreData when triggered in interface
     func deleteEvent(at offset: IndexSet) {
         //       Identifying the item to delete
         offset.map{fetchRequest[$0]}
@@ -94,6 +100,7 @@ struct DayFilteredList: View {
         saveData()
     }
     
+    /// Function to save the data from the Managed Object Context to persistent store
     func saveData() {
         do {
             try viewContext.save() //Saving data to the persistent store
