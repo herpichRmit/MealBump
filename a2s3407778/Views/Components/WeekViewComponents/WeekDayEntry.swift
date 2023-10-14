@@ -13,12 +13,13 @@ import UniformTypeIdentifiers
 struct WeekDayEntry: View {
     @Environment(\.managedObjectContext) private var viewContext //For accessing CoreData
     @FetchRequest var events: FetchedResults<EventCore> //New Request to initialize in init()
+    @FetchRequest var eventsAlternative: FetchedResults<EventCore> //New Request to initialize in init()
+    
     @EnvironmentObject var settings: DateObservableObject
     
     @Binding var refreshTrigger : Bool
 
     let dateToDisplay: Date
-    
     
     // Initalise fetch request to recieve data from a given variable date
     init(filter: Date, refreshTrigger: Binding<Bool>){
@@ -29,7 +30,8 @@ struct WeekDayEntry: View {
         // Sort order by order
         self.dateToDisplay = filter
         
-        let orderSort = NSSortDescriptor(key: "order", ascending: true)
+        let orderSortAsc = NSSortDescriptor(key: "order", ascending: true)
+        let orderSortDsc = NSSortDescriptor(key: "order", ascending: false)
         
         // Constructing filter predicate
         let calendar = Calendar.current
@@ -40,7 +42,11 @@ struct WeekDayEntry: View {
         
         // Underscore means we are changing the wrapper itsself rather than the value stored
         _events = FetchRequest<EventCore>(
-            sortDescriptors: [orderSort],
+            sortDescriptors: [orderSortAsc],
+            predicate: predicate)
+        
+        _eventsAlternative = FetchRequest<EventCore>(
+            sortDescriptors: [orderSortDsc],
             predicate: predicate)
     }
     
@@ -62,15 +68,7 @@ struct WeekDayEntry: View {
             ScrollView(.horizontal, showsIndicators: false){
                 LazyHStack {
                     
-                    // what is happening is that swiftUI is not updating the view until it is redrawn, such as the instance of changing tabs
-                    // changes in the parent don't update the child directly
-                    // in our instance the parent floating card is being updated as the event changes
-                    // the event changing days doesn't effect the child views directly, because swift doesn't know about it until fetchresults in ran again
-                    // can we force a fetchResults on command?
-                    
-                    // arrayMeals is a copy of
                     ForEach(arrayMeals) { item in
-                            refreshTrigger ? Text("") : Text("1")
                             WeekEventCard(
                                     title: item.name ?? "Unknown Name",
                                     mealKind: item.mealKind ?? "Unknown Time Period",
@@ -95,10 +93,6 @@ struct WeekDayEntry: View {
                                     // On tap set tapped meal as the selectedEvent and then open NewMealSheet with selectedEvent data
                                     settings.selectedEvent = item
                                     settings.isEditing = true
-                                    
-                                    // MARK: test when we select an item to edit set item to selectedEvent
-                                    print("this is selectedEvent before")
-                                    print(settings.selectedEvent)
                                     
                                     // Slight delay to preserve modal opening and closing animations
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -131,7 +125,15 @@ struct WeekDayEntry: View {
                 .padding([.trailing], 10)
                 .onAppear(){
                     arrayMeals = events.map { $0 }
-                    print(events)
+                }
+                .onChange(of: refreshTrigger) { newState in
+                    if refreshTrigger == true {
+                        arrayMeals = eventsAlternative.map { $0 }
+                        print("true")
+                    } else {
+                        arrayMeals = events.map { $0 }
+                        print("false")
+                    }
                 }
             }
         }
@@ -159,6 +161,7 @@ struct WeekDayEntry: View {
 }
 
 
+/// UIKit delegate function that hangles drag change and drop
 struct WeekCardDropDelegate : DropDelegate {
     let item : EventCore
     @Binding var items : [EventCore]

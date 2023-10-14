@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/// CircleDirection is an enum that controls 8 different options of direction to be used in `RadialLayout`
 enum CircleDirection {
     case top
     case bottom

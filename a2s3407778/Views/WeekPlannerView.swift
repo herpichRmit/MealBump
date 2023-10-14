@@ -92,18 +92,16 @@ struct WeekPlannerView: View {
                                                 refreshState.toggle()
                                                 // changing selectedEvent to have new date
                                                 settings.selectedPickupCard?.date = day
-                                                // MARK: update data ????
-                                                
+
                                                 saveData()
                                                 
                                                 // clear placeholder value
                                                 settings.selectedPickupCard = nil
                                                 
-                                                settings.openTab = "daily"
-                                                //settings.selectedDate = calendar.date(byAdding: .day, value: 365, to: settings.selectedDate) ?? Date()
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.0001) {
-                                                    //settings.selectedDate = calendar.date(byAdding: .day, value: -365, to: settings.selectedDate) ?? Date()
-                                                    settings.openTab = "weekly"
+                                                // this refresh triggers the view to reload the data
+                                                refreshState = true
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                                                    refreshState = false
                                                 }
                                             }
                                         }
@@ -174,6 +172,7 @@ struct WeekPlannerView: View {
 // Unwrapping tool used from stack overflow.
 // TODO: from https://stackoverflow.com/questions/57021722/swiftui-optional-textfield
 
+/// Operator overload that allows nil coleascing to occur in textfields. Allows for optional bindings as textfield values
 func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
     Binding(
         get: { lhs.wrappedValue ?? rhs },

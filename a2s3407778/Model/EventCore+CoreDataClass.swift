@@ -15,7 +15,7 @@ import CoreData
 final public class EventCore: NSManagedObject, NSItemProviderWriting, NSItemProviderReading, Codable {
     
     
-    // For NSItemProviderWriting
+    /// For NSItemProviderWriting
     public static var writableTypeIdentifiersForItemProvider: [String] {
         return ["EventCore"]
     }
@@ -35,7 +35,7 @@ final public class EventCore: NSManagedObject, NSItemProviderWriting, NSItemProv
         return progress
     }
     
-    // For NSItemProviderReading
+    /// For NSItemProviderReading
     public static var readableTypeIdentifiersForItemProvider: [String] {
         return ["EventCore"]
     }
@@ -51,17 +51,10 @@ final public class EventCore: NSManagedObject, NSItemProviderWriting, NSItemProv
     }
     
     
-///     For Codable extension
+    /// For Codable extension
     enum CodingKeys: CodingKey {
         case eventID, date, name, note, order, mealKind, eventType, archived, timePeriod, type, shoppingItemCore
      }
-    
-    /*
-    public required init(context: NSManagedObjectContext) {
-        let entity = NSEntityDescription.entity(forEntityName: "EventCore", in: context)
-        super.init(entity: entity!, insertInto: context)
-    }
-     */
     
     required convenience public init(from decoder: Decoder) throws {
         guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
@@ -69,7 +62,6 @@ final public class EventCore: NSManagedObject, NSItemProviderWriting, NSItemProv
         }
         
         self.init(entity: NSEntityDescription.entity(forEntityName: "EventCore", in: context)!, insertInto: context)
-        //self.init(context: context)
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.eventID = try container.decode(UUID.self, forKey: .eventID)
@@ -101,10 +93,9 @@ final public class EventCore: NSManagedObject, NSItemProviderWriting, NSItemProv
             try container.encode(shoppingItemCore?.allObjects as! [ShoppingItemCore], forKey: .shoppingItemCore)
         }
     }
-    
-    
 }
 
+/// Used to for readibility in `required convenience public init`
 enum DecoderConfigurationError: Error {
   case missingManagedObjectContext
 }

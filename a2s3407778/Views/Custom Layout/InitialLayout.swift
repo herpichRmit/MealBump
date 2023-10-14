@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-/// Provides an inital position for the CustomMenu buttons
+/// Provides an inital position for the CustomMenu buttons.
 /// A layout that organises all subviews in a center positon. 
 struct InitialLayout: Layout {
     
