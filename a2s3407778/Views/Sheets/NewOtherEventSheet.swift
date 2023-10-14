@@ -75,6 +75,7 @@ struct NewOtherEventSheet: View {
     }
 }
 
+/// Struct to enable Canvas/Live Preview for this view
 struct NewOtherEventSheet_Previews: PreviewProvider {
     static var previews: some View {
         NewOtherEventSheet()

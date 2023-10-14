@@ -96,6 +96,7 @@ struct DateTile: View  {
     }
 }
 
+/// Struct to enable Canvas/Live Preview for this view
 struct CustomDatePicker_Previews: PreviewProvider {
     static var previews: some View {
         DayView()

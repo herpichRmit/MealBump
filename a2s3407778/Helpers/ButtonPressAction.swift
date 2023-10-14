@@ -7,14 +7,13 @@
 
 // Code is adapted from video
 // https://www.youtube.com/watch?v=JdUs3GD2zzI
+//  Written by SerialCoder.dev
 
-/// Structs in this file add animations to the custom menu buttons
 
 import Foundation
 import SwiftUI
 
-///
-//  Written by SerialCoder.dev
+/// Structs in this file add animations to the custom menu buttons
 struct ButtonPress: ViewModifier {
     var onPress: () -> Void
     var onRelease: () -> Void
@@ -33,7 +32,6 @@ struct ButtonPress: ViewModifier {
     }
 }
 
-//  Written by SerialCoder.dev
 extension View {
     func pressEvents(onPress: @escaping (() -> Void), onRelease: @escaping (() -> Void)) -> some View {
         modifier(ButtonPress(onPress: {

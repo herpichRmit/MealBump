@@ -9,6 +9,7 @@
 
 import CoreData
 
+/// Struct which creates the app's CoreData Managed Object Model and Managed Object Context, to be injected into app as an environment variable
 struct PersistenceController {
   static let shared = PersistenceController()
 

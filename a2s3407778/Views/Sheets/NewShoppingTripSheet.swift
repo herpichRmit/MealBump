@@ -71,6 +71,7 @@ struct NewShoppingTripSheet: View {
     }
 }
 
+/// Struct to enable Canvas/Live Preview for this view
 struct NewShoppingTripSheet_Previews: PreviewProvider {
     static var previews: some View {
         NewShoppingTripSheet()

@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-
+/// The CoreData Class which represents the Event Entity in the CoreData Model. 'Core' suffix to differenciate between Event Objects used in earlier versions of app
 @objc(EventCore)
 final public class EventCore: NSManagedObject, NSItemProviderWriting, NSItemProviderReading, Codable {
     
