@@ -18,7 +18,6 @@
 		A83880402AD4C77E00C4FB77 /* ShoppingItemCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A838803C2AD4C77E00C4FB77 /* ShoppingItemCore+CoreDataClass.swift */; };
 		A83880412AD4C77E00C4FB77 /* ShoppingItemCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A838803D2AD4C77E00C4FB77 /* ShoppingItemCore+CoreDataProperties.swift */; };
 		A83AC4FD2ADABC1E00FB50C6 /* DropEventZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83AC4FC2ADABC1E00FB50C6 /* DropEventZone.swift */; };
-		A83AC4FF2ADB57D800FB50C6 /* SpoonacularAPI-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A83AC4FE2ADB57D800FB50C6 /* SpoonacularAPI-Info.plist */; };
 		A83AC5242ADB5C6700FB50C6 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A83AC5072ADB5C2900FB50C6 /* WidgetKit.framework */; };
 		A83AC5252ADB5C6700FB50C6 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A83AC5092ADB5C2900FB50C6 /* SwiftUI.framework */; };
 		A83AC5282ADB5C6700FB50C6 /* a2_s3407778_widgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83AC5272ADB5C6700FB50C6 /* a2_s3407778_widgetBundle.swift */; };
@@ -40,6 +39,8 @@
 		A8C6F4772A8F0E6500ACC6C4 /* EditFoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C6F4762A8F0E6500ACC6C4 /* EditFoodView.swift */; };
 		A8C6F4792A8F143E00ACC6C4 /* SearchFoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C6F4782A8F143E00ACC6C4 /* SearchFoodView.swift */; };
 		A8D446E22A9B13DF00F77403 /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D446E12A9B13DF00F77403 /* Bubble.swift */; };
+		A8EE606C2ADBADCF00E0776E /* SpoonacularAPI-Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = A8EE606B2ADBADCF00E0776E /* SpoonacularAPI-Secret.plist */; };
+		A8EE606E2ADBAE9800E0776E /* SpoonacularAPI-Secret-Sample.plist in Resources */ = {isa = PBXBuildFile; fileRef = A8EE606D2ADBAE9800E0776E /* SpoonacularAPI-Secret-Sample.plist */; };
 		CD17457F2A80D0DA00294186 /* a1s3407778App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD17457E2A80D0DA00294186 /* a1s3407778App.swift */; };
 		CD1745812A80D0DA00294186 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1745802A80D0DA00294186 /* ContentView.swift */; };
 		CD1745832A80D0DB00294186 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD1745822A80D0DB00294186 /* Assets.xcassets */; };
@@ -93,7 +94,6 @@
 		A838803C2AD4C77E00C4FB77 /* ShoppingItemCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShoppingItemCore+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A838803D2AD4C77E00C4FB77 /* ShoppingItemCore+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShoppingItemCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A83AC4FC2ADABC1E00FB50C6 /* DropEventZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropEventZone.swift; sourceTree = "<group>"; };
-		A83AC4FE2ADB57D800FB50C6 /* SpoonacularAPI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SpoonacularAPI-Info.plist"; sourceTree = "<group>"; };
 		A83AC5072ADB5C2900FB50C6 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		A83AC5092ADB5C2900FB50C6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		A83AC5232ADB5C6700FB50C6 /* a2-s3407778-widgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "a2-s3407778-widgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +116,8 @@
 		A8C6F4762A8F0E6500ACC6C4 /* EditFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFoodView.swift; sourceTree = "<group>"; };
 		A8C6F4782A8F143E00ACC6C4 /* SearchFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFoodView.swift; sourceTree = "<group>"; };
 		A8D446E12A9B13DF00F77403 /* Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
+		A8EE606B2ADBADCF00E0776E /* SpoonacularAPI-Secret.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SpoonacularAPI-Secret.plist"; sourceTree = "<group>"; };
+		A8EE606D2ADBAE9800E0776E /* SpoonacularAPI-Secret-Sample.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SpoonacularAPI-Secret-Sample.plist"; sourceTree = "<group>"; };
 		C4F8CD21AC6ADFD6C9153CEB /* InitialLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialLayout.swift; sourceTree = "<group>"; };
 		CD17457B2A80D0DA00294186 /* a2-s3407778.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "a2-s3407778.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD17457E2A80D0DA00294186 /* a1s3407778App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = a1s3407778App.swift; sourceTree = "<group>"; };
@@ -255,8 +257,9 @@
 				CD17457E2A80D0DA00294186 /* a1s3407778App.swift */,
 				CD1745802A80D0DA00294186 /* ContentView.swift */,
 				CD1745822A80D0DB00294186 /* Assets.xcassets */,
+				A8EE606B2ADBADCF00E0776E /* SpoonacularAPI-Secret.plist */,
+				A8EE606D2ADBAE9800E0776E /* SpoonacularAPI-Secret-Sample.plist */,
 				CD1745842A80D0DB00294186 /* Preview Content */,
-				A83AC4FE2ADB57D800FB50C6 /* SpoonacularAPI-Info.plist */,
 			);
 			path = a2s3407778;
 			sourceTree = "<group>";
@@ -424,9 +427,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8EE606C2ADBADCF00E0776E /* SpoonacularAPI-Secret.plist in Resources */,
 				CD1745862A80D0DB00294186 /* Preview Assets.xcassets in Resources */,
-				A83AC4FF2ADB57D800FB50C6 /* SpoonacularAPI-Info.plist in Resources */,
 				CD1745832A80D0DB00294186 /* Assets.xcassets in Resources */,
+				A8EE606E2ADBAE9800E0776E /* SpoonacularAPI-Secret-Sample.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
