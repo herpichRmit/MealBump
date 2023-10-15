@@ -31,8 +31,7 @@ struct WeekDayEntry: View {
         // Sort order by order
         self.dateToDisplay = filter
         
-        let orderSortAsc = NSSortDescriptor(key: "order", ascending: true)
-        let orderSortDsc = NSSortDescriptor(key: "order", ascending: false)
+        let orderSort = NSSortDescriptor(key: "order", ascending: true)
         
         // Constructing filter predicate
         let calendar = Calendar.current
@@ -40,15 +39,16 @@ struct WeekDayEntry: View {
         let end = calendar.date(byAdding: .day, value: 1, to: start)
         
         let predicate = NSPredicate(format: "date >= %@ AND date < %@", start as NSDate, end! as NSDate)
+        let predicateAlt = NSPredicate(format: "date >= %@ AND date < %@ AND name != nil", start as NSDate, end! as NSDate)
         
         // Underscore means we are changing the wrapper itsself rather than the value stored
         _events = FetchRequest<EventCore>(
-            sortDescriptors: [orderSortAsc],
+            sortDescriptors: [orderSort],
             predicate: predicate)
         
         _eventsAlternative = FetchRequest<EventCore>(
-            sortDescriptors: [orderSortDsc],
-            predicate: predicate)
+            sortDescriptors: [orderSort],
+            predicate: predicateAlt)
     }
     
     // This array is used to map results from the FetchRequest
@@ -153,17 +153,6 @@ struct WeekDayEntry: View {
             }
         }
         .frame(height: 155, alignment: .topLeading)
-        .onAppear(){
-            print("test for tests")
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZZZ"
-            let dateObject = dateFormatter.date(from: "2023-10-15 00:00:00 +0000")
-            
-            // When
-            let result = generateDateArray(selectedDate: dateObject!)
-            print(result)
-        }
     }
     
     /// Removes event from ``EventCore`` using `indexSet` provided by forEach

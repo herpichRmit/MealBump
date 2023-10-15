@@ -39,12 +39,6 @@ struct DayView: View {
                 
                 EditButton()
                 
-//                Button { //Plus Button adding new random item (for testing)
-//                    addRandomEventToToday()
-//                } label: {
-//                    Image(systemName: "plus")
-//                }
-                
                 .padding()
             }
             
@@ -59,8 +53,6 @@ struct DayView: View {
             
             //Must pass the date from here to the DayFilteredList's init(), because we need to know the date first in order to construct the fetch request inside DayFilteredList()
             DayFilteredList(filter: settings.selectedDate)
-            
-            CustomMenu()
             
         }
     }

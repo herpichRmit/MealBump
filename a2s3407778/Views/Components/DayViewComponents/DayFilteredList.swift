@@ -57,16 +57,14 @@ struct DayFilteredList: View {
                         mealKind: (item.mealKind ?? ""))
                     .padding(.horizontal, 16.0)
                     .padding(.bottom, 4.0)
-                    //                    VStack{ // Added for testing date and order sorting
-                    //                        Text("\(item.order)") // To Test the order sorting is working
-                    //                        Text(dateToString(date: item.date!)) // TO Test date seperation is working
-                    //                    }
                 }
                 .listRowSeparator(.hidden)
                 
             }
             .onDelete(perform: deleteEvent)
             .onMove(perform: moveActiveTodos)
+            
+            CustomMenu().frame(maxWidth: .infinity, alignment: .center)
         }
         .listStyle(.plain)
     }
