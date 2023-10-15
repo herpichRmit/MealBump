@@ -21,6 +21,7 @@ struct DayView: View {
     
     //    MARK: - View Body
     
+    
     var body: some View {
         
         VStack{
@@ -114,16 +115,6 @@ struct DayView: View {
         }
     }
     
+    
 }
-
-//struct DayView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        // All this stuff is to allow the preview to work with coredata
-//        let context = PersistenceController.preview.container.viewContext
-//        let newLaunch = EventCore(context: context)
-//        newLaunch.name = "Not sure what this is about here"
-//        return DayView()
-//    }
-//}
-
 

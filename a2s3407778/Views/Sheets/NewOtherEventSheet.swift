@@ -30,15 +30,19 @@ struct NewOtherEventSheet: View {
                     TextField("Name", text: $name)
                 }
                 Section(){
-                    //                    Date picker only allows option of dates in the future
-                    //                    Must use SwiftUI.DatePicker because of our custom View named DatePicker
-                    SwiftUI.DatePicker(selection: $date, in: Date.now..., displayedComponents: .date) {
+                    // Date picker only allows option of dates in the future
+                    // Must use SwiftUI.DatePicker because of our custom View named DatePicker
+                    DatePicker(selection: $date, displayedComponents: .date) {
                         Text("Select a date")
                     }
                     
                     TextField("Note", text: $note)
 
                 }
+                .onAppear(){
+                    date = settings.selectedDate
+                }
+                
             }
             .navigationBarTitle(Text("New Other Event"), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {

@@ -10,7 +10,7 @@ import SwiftUI
 
 /// ENUM for storing the typs of categories which foods/shoppingItems can be assigned
 enum ShopItemCategory: String, CaseIterable {
-    case Dairy, Produce, Meat, Pasta, Fish, Lollies, Drinks, Other, Stationary, Cleaning, Household, Personal, Spices, Bakery, None
+    case None, Dairy, Produce, Meat, Pasta, Fish, Lollies, Drinks, Other, Stationary, Cleaning, Household, Personal, Spices, Bakery, MilkEggsOtherDairy
 }
 
 /// ENUM for storing the different types which events may be assigned

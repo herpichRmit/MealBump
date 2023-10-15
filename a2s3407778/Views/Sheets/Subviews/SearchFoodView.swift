@@ -62,7 +62,6 @@ struct SearchFoodView: View {
     @EnvironmentObject var settings: DateObservableObject
     
     @ObservedObject var viewModel = AutocompleteViewModel()
-    let apiKey = "a6591f4c9d2346aabe241d5abe293dd4" // Add your API key here
     @State private var searchText = ""
     
     var body: some View {
@@ -71,8 +70,11 @@ struct SearchFoodView: View {
                 List() {
                     // List food entries from response
                     ForEach(viewModel.autocompleteData, id: \.id) { item in
-                        NavigationLink(destination: NewFoodView(name: item.name, note: item.possibleUnits[0], category: .None)) {
+                        NavigationLink(destination: NewFoodView(name: item.name, note: item.possibleUnits[0], category: ShopItemCategory(rawValue: item.aisle) ?? .None )) {
                             Text(item.name)
+                        }
+                        .onAppear(){
+                            print(item)
                         }
                     }
                     // Provide button to add a food item not using details from this list
@@ -102,5 +104,21 @@ struct SearchFoodView: View {
         }
     }
 
+}
+
+
+private var apiKey: String {
+  get {
+    // 1
+    guard let filePath = Bundle.main.path(forResource: "SpoonacularAPI-Info", ofType: "plist") else {
+      fatalError("Couldn't find file 'SpoonacularAPI-Info.plist'.")
+    }
+    // 2
+    let plist = NSDictionary(contentsOfFile: filePath)
+    guard let value = plist?.object(forKey: "API_KEY") as? String else {
+      fatalError("Couldn't find key 'API_KEY' in 'SpoonacularAPI-Info.plist'.")
+    }
+    return value
+  }
 }
     

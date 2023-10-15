@@ -19,6 +19,7 @@ struct WeekDayEntry: View {
     
     @Binding var refreshTrigger : Bool
 
+    // Storing date for formatting the weekday and weeknumber text
     let dateToDisplay: Date
     
     // Initalise fetch request to recieve data from a given variable date
@@ -50,7 +51,10 @@ struct WeekDayEntry: View {
             predicate: predicate)
     }
     
+    // This array is used to map results from the FetchRequest
     @State var arrayMeals : [EventCore] = []
+    
+    // This var stores the event whilst it is being dragged
     @State var draggedItem : EventCore?
     
     var body: some View {
@@ -79,46 +83,59 @@ struct WeekDayEntry: View {
                                     return NSItemProvider(object: item)
                                 })
                                 .onDrop(of: [UTType.event], delegate: WeekCardDropDelegate(item: item, items: $arrayMeals, draggedItem: $draggedItem))
-                                .onTapGesture(count: 2, coordinateSpace: .global) { location in
-                                    settings.cardPosition = location
-                                    settings.selectedPickupCard = item
                                 
-                                    // call function to remove event date temporarily
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                        settings.selectedPickupCard?.date = Date()
-                                        saveData()
-                                    }
-                                }
-                                .onTapGesture(count: 1, coordinateSpace: .global) { _ in
-                                    // On tap set tapped meal as the selectedEvent and then open NewMealSheet with selectedEvent data
-                                    settings.selectedEvent = item
-                                    settings.isEditing = true
+                                .onTapGesture(count: 2, coordinateSpace: .global) { location in
+                                    // allow only if a card isn't currently selected
+                                    if settings.selectedPickupCard == nil {
+                                        settings.cardPosition = location
+                                        settings.selectedPickupCard = item
                                     
-                                    // Slight delay to preserve modal opening and closing animations
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                        // Check event type and open respective sheet for editing
-                                        if item.eventType == "Meal" {
-                                            settings.showCreateMealSheet = true
-                                        } else if item.eventType == "ShoppingTrip" {
-                                            settings.showCreateShopSheet = true
-                                        } else if item.eventType == "Other" {
-                                            settings.showCreateOtherSheet = true
+                                        // call function to remove event date temporarily
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                            settings.selectedPickupCard?.date = Date()
+                                            saveData()
                                         }
                                     }
                                 }
-                                Spacer()
+                                .onTapGesture(count: 1, coordinateSpace: .global) { _ in
+                                    // allow only if a card isn't currently selected to be moved
+                                    if settings.selectedPickupCard == nil {
+                                        
+                                        // On tap set tapped meal as the selectedEvent and then open NewMealSheet with selectedEvent data
+                                        settings.selectedEvent = item
+                                        settings.isEditing = true
+                                        
+                                        // Slight delay to preserve modal opening and closing animations
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                            // Check event type and open respective sheet for editing
+                                            if item.eventType == "Meal" {
+                                                settings.showCreateMealSheet = true
+                                            } else if item.eventType == "ShoppingTrip" {
+                                                settings.showCreateShopSheet = true
+                                            } else if item.eventType == "Other" {
+                                                settings.showCreateOtherSheet = true
+                                            }
+                                        }
+                                    }
+                                }
+                        Spacer()
                         
                     }
                     .onDelete(perform: deleteEvent)
                     
-                    // Contains links to all sheets though the pop-up menu
-                    CustomMenu()
-                        .simultaneousGesture(TapGesture()
-                            .onEnded { _ in
-                                print(dateToDisplay)
-                                settings.selectedDate = dateToDisplay
-                            }
-                        )
+                    // Condition for if a user has selected a card to move
+                    if settings.selectedPickupCard == nil{
+                        // Contains links to all sheets though the pop-up menu
+                        CustomMenu()
+                            .simultaneousGesture(TapGesture()
+                                .onEnded { _ in
+                                    settings.selectedDate = dateToDisplay
+                                }
+                            )
+                    } else {
+                        // Visual for dropping a card
+                        DropEventZone()
+                    }
                 }
                 .frame(height: 110, alignment: .top)
                 .padding([.top, .leading], 2)
@@ -129,10 +146,8 @@ struct WeekDayEntry: View {
                 .onChange(of: refreshTrigger) { newState in
                     if refreshTrigger == true {
                         arrayMeals = eventsAlternative.map { $0 }
-                        print("true")
                     } else {
                         arrayMeals = events.map { $0 }
-                        print("false")
                     }
                 }
             }

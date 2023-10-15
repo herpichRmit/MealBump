@@ -74,11 +74,6 @@ struct NewMealSheet: View {
                     mealKind = settings.selectedEvent?.mealKind ?? ""
                     note = settings.selectedEvent?.note ?? ""
                     date = settings.selectedEvent?.date ?? settings.selectedDate
-                    
-                    
-                    // MARK: test when we select an item to edit set item to selectedEvent
-                    print("this is selectedEvent after opening")
-                    print(settings.selectedEvent)
                 }
                 
             }
@@ -93,15 +88,9 @@ struct NewMealSheet: View {
             .navigationBarItems(trailing: Button( settings.isEditing == true ? "Save" : "Done", action: {
                 if settings.isEditing == true {
                     
-                    // when we select an item to edit set item to selectedEvent
-                    
                     // if user is editing an existing item
                     updateMeal()
                     settings.isEditing = false
-                    
-                    // check if it is saving data correctly, maybe instance in global is a copy
-                    print("this is selectedEvent after save")
-                    print(settings.selectedEvent)
                     
                 } else {
                     
