@@ -5,9 +5,10 @@
 //  Created by Ethan Herpich on 13/10/2023.
 //
 
-// Code is adapted from video
-// https://www.youtube.com/watch?v=JdUs3GD2zzI
-//  Written by SerialCoder.dev
+
+
+// Reference
+// Indently (2022) How to animate Button Presses in SwiftUI Tutorial 2022, Youtube, accessed 12 October 2023. https://www.youtube.com/watch?v=JdUs3GD2zzI
 
 
 import Foundation

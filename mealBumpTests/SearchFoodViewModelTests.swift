@@ -83,7 +83,6 @@ final class SearchFoodViewModelTests: XCTestCase {
         // Then
         // Note: to reduce undue complexity, instead of doing a direct comparison through XCTAssertEqual, the size will be measured and the first item compared.
         XCTAssertEqual(autocompleteViemModel.autocompleteData.count, 10)
-        print(autocompleteViemModel.autocompleteData)
         XCTAssertEqual(autocompleteViemModel.autocompleteData[0].name, "apple juice")
         XCTAssertEqual(autocompleteViemModel.autocompleteData[0].image, "apple-juice.jpg")
         XCTAssertEqual(autocompleteViemModel.autocompleteData[0].id, 9016)

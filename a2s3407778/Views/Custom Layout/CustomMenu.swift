@@ -13,6 +13,8 @@ struct CustomMenu: View {
     @EnvironmentObject var settings: DateObservableObject
     @State private var isPressed = false
     
+    @Binding var refreshTrigger : Bool
+    
     var body: some View {
         PlusButton()
             .opacity(isPressed ? 0.4 : 1.0)
@@ -20,6 +22,9 @@ struct CustomMenu: View {
             .onTapGesture(coordinateSpace: .global) { location in
                 settings.animateActionMenu = true
                 settings.activateSheetPosition = location
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    refreshTrigger.toggle()
+                }
                 
                 // delay so animtion is applied
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -38,24 +43,24 @@ struct CustomMenu: View {
             
 //    MARK: Create New Meal
             .sheet(isPresented: $settings.showCreateMealSheet) {
-                NewMealSheet()
+                NewMealSheet(refreshTrigger : $refreshTrigger)
             }
         
 //    MARK: Search archive of past meals
             .sheet(isPresented: $settings.showSearchMealSheet) {
-                MealFromArchiveSheet()
+                MealFromArchiveSheet(refreshTrigger : $refreshTrigger)
             }
         
 //    MARK: Create new shopping Trip
             .sheet(isPresented: $settings.showCreateShopSheet) {
-                NewShoppingTripSheet()
+                NewShoppingTripSheet(refreshTrigger : $refreshTrigger)
                     .presentationDetents([.medium]) //Makes the sheet half height
                     .presentationDragIndicator(.visible)
             }
         
 //    MARK: Create some other kind of event
             .sheet(isPresented: $settings.showCreateOtherSheet) {
-                NewOtherEventSheet()
+                NewOtherEventSheet(refreshTrigger : $refreshTrigger)
                     .presentationDetents([.medium]) //Makes the sheet half height
                     .presentationDragIndicator(.visible)
             }

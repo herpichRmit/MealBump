@@ -17,11 +17,17 @@ struct MealFromArchiveSheet: View {
     @Environment(\.dismiss) var dismiss // For closing the window
     @State private var searchText = ""
     
+    @Binding var refreshTrigger : Bool
+    
     // Fetch all past events of type meal
     @FetchRequest var pastMeals: FetchedResults<EventCore>
     
-    init(){
+    
+    init(refreshTrigger: Binding<Bool>){
         
+        // init refresh trigger
+        self._refreshTrigger = refreshTrigger
+            
         // Sort alphabetically
         let orderSort = NSSortDescriptor(key: "name", ascending: true)
         
@@ -55,6 +61,9 @@ struct MealFromArchiveSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button("Back", action: {
                 settings.showSearchMealSheet = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    refreshTrigger.toggle()
+                }
             }))
         }
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for food...")

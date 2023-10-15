@@ -7,7 +7,10 @@
 
 import SwiftUI
 
-// MARK: reference https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-a-marching-ants-border-effect
+
+
+// Reference
+// Hudson P (2022) How to create a marching ants border effect, Hacking with swift website, accessed 13 October 2023. https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-a-marching-ants-border-effect
 
 /// Card used as placeholder value when user is deciding which day to move a selected card into.
 struct DropEventZone: View {

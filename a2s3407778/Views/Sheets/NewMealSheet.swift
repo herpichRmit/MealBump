@@ -22,6 +22,8 @@ struct NewMealSheet: View {
     @State private var items : [ShoppingItemCore] = []
     @State private var itemToRemove : ShoppingItemCore?
     
+    @Binding var refreshTrigger : Bool
+    
     
     var body: some View {
         NavigationStack(){
@@ -82,6 +84,7 @@ struct NewMealSheet: View {
             .navigationBarItems(leading: Button("Back", action: {
                 
                 // clear selectedEvent
+                refreshTrigger.toggle()
                 settings.selectedEvent = EventCore(context: viewContext)
                 settings.showCreateMealSheet.toggle()
             }))
@@ -91,11 +94,18 @@ struct NewMealSheet: View {
                     // if user is editing an existing item
                     updateMeal()
                     settings.isEditing = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        refreshTrigger.toggle()
+                    }
                     
                 } else {
                     
                     // if this is a new item
                     saveMeal()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        refreshTrigger.toggle()
+                    }
+                    
                 }
                 
                 settings.showCreateMealSheet = false

@@ -169,8 +169,9 @@ struct WeekPlannerView: View {
     }
 }
 
-// Unwrapping tool used from stack overflow.
-// TODO: from https://stackoverflow.com/questions/57021722/swiftui-optional-textfield
+
+// Reference
+// StackOverflow member Johnathan (2019) Swift Optional TextField, StackOverflow, accessed 12 October 2023. https://stackoverflow.com/questions/57021722/swiftui-optional-textfield
 
 /// Operator overload that allows nil coleascing to occur in textfields. Allows for optional bindings as textfield values
 func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {

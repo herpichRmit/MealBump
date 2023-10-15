@@ -32,9 +32,8 @@ class AutocompleteViewModel: ObservableObject {
     
     // Sends GET request to api based on keyword input
     func fetchAutocomplete(keyword: String, apiKey: String, completion: @escaping (Bool) -> Void) {
-        print(keyword)
         let keyword = keyword.replacingOccurrences(of: " ", with: "+")
-        let url = URL(string: "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=\(apiKey)&query=\(keyword)&number=10&metaInformation=true")!
+        let url = URL(string: "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=\(apiKey)&query=\(keyword)&number=1&metaInformation=true")!
         
         URLSession.shared.dataTaskPublisher(for: url)
             .map(\.data)
@@ -91,7 +90,9 @@ struct SearchFoodView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             // When the list appears ask the view model to fetch the data
-            viewModel.fetchAutocomplete(keyword: searchText, apiKey: apiKey){ _ in }
+            viewModel.isSuccessful = true
+            viewModel.fetchAutocomplete(keyword: searchText, apiKey: apiKey){ _ in
+            }
         }
         .onDisappear {
             viewModel.cancelSubscription() // Call a method to cancel the subscription
@@ -99,12 +100,16 @@ struct SearchFoodView: View {
         // As user input changes make more calls to the database
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for food...")
         .onChange(of: searchText) { newValue in
-            
+            viewModel.isSuccessful = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 viewModel.fetchAutocomplete(keyword: searchText, apiKey: apiKey){ _ in }
             }
         }
     }
+    
+    
+    // Reference
+    // Friese P (2020) Fetching API Keys from Property List Files, Peter Freise Personal Website, accessed 11 October 2023. https://peterfriese.dev/posts/reading-api-keys-from-plist-files/
     
     private var apiKey: String {
           get {

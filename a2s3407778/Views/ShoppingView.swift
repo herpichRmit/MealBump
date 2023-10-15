@@ -56,7 +56,7 @@ struct ShoppingView: View {
                     Image(systemName: "plus")
                 }
                 .sheet(isPresented: $settings.showNewFoodSheet) {
-                    NewFoodView()
+                    SearchFoodView()
                 }
                 .padding()
             }

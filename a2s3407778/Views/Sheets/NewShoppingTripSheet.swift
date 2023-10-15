@@ -19,6 +19,8 @@ struct NewShoppingTripSheet: View {
     @State private var note = ""
     @State private var date = Date.now
     
+    @Binding var refreshTrigger : Bool
+    
     var body: some View {
         
         NavigationStack(){
@@ -45,10 +47,15 @@ struct NewShoppingTripSheet: View {
             .navigationBarItems(trailing: Button(action: {
                 saveItem()
                 dismiss()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    refreshTrigger.toggle()
+                }
             }, label: {
                 Text("Done")
             }))
         }
+        
     }
     
     /// Function for saving the new event to CoreData
@@ -73,9 +80,3 @@ struct NewShoppingTripSheet: View {
     }
 }
 
-/// Struct to enable Canvas/Live Preview for this view
-struct NewShoppingTripSheet_Previews: PreviewProvider {
-    static var previews: some View {
-        NewShoppingTripSheet()
-    }
-}

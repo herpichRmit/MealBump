@@ -14,6 +14,8 @@ struct DayFilteredList: View {
     
     //    MARK: Variables and Fetch Requests
     
+    @State var refreshTrigger : Bool = false
+    
     //For accessing CoreData
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -64,7 +66,7 @@ struct DayFilteredList: View {
             .onDelete(perform: deleteEvent)
             .onMove(perform: moveActiveTodos)
             
-            CustomMenu().frame(maxWidth: .infinity, alignment: .center)
+            CustomMenu(refreshTrigger: $refreshTrigger).frame(maxWidth: .infinity, alignment: .center)
         }
         .listStyle(.plain)
     }

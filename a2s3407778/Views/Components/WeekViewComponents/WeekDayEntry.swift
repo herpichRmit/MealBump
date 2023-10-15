@@ -126,7 +126,7 @@ struct WeekDayEntry: View {
                     // Condition for if a user has selected a card to move
                     if settings.selectedPickupCard == nil{
                         // Contains links to all sheets though the pop-up menu
-                        CustomMenu()
+                        CustomMenu(refreshTrigger: $refreshTrigger)
                             .simultaneousGesture(TapGesture()
                                 .onEnded { _ in
                                     settings.selectedDate = dateToDisplay

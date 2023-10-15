@@ -34,7 +34,6 @@ struct Provider: IntentTimelineProvider {
             if let summary = summaryDecoded {
                 
                 // On successful retrieval
-                print("success")
                 let entry = SummaryEntry(date: Date(), configuration: configuration, events: summary.eventNames, shoppingItems: summary.shoppingItems)
                 entries.append(entry)
             }

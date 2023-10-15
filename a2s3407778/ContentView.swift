@@ -97,13 +97,19 @@ struct ContentView: View {
         var count = 0...3
         
         // Unless there is less than four results availble, then get all results
-        if events.endIndex < 4 {
+        if events.endIndex == 0 {
+            count = 0...0
+        } else if events.endIndex < 4 {
             count = 0...events.endIndex - 1
         }
         
-        // Create event summary
-        for i in count {
-            summaryEvents.append(events[i].name ?? "Save failed")
+        if count == 0...0 {
+            summaryEvents = []
+        } else {
+            // Create shopping item summary
+            for i in count {
+                summaryEvents.append(events[i].name ?? "Save failed")
+            }
         }
         
         /* Shopping items */
@@ -111,13 +117,19 @@ struct ContentView: View {
         count = 0...3
 
         // Unless there is less than four results availble, then get all results
-        if shoppingItems.endIndex < 4 {
+        if shoppingItems.endIndex == 0 {
+            count = 0...0
+        } else if shoppingItems.endIndex < 4 {
             count = 0...shoppingItems.endIndex - 1
         }
         
-        // Create shopping item summary
-        for i in count {
-            summaryItems.append(shoppingItems[i].name ?? "Save failed")
+        if count == 0...0 {
+            summaryItems = []
+        } else {
+            // Create shopping item summary
+            for i in count {
+                summaryItems.append(shoppingItems[i].name ?? "Save failed")
+            }
         }
         
         /* Summary */
