@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 /// Data structure to represent the format being accessed from the api
-struct Food: Codable {
+struct Food: Codable  {
     let name: String
     let image: String
     let id: Int
@@ -25,11 +25,15 @@ class AutocompleteViewModel: ObservableObject {
     // This property is updated from an asynchronous method running on a background thread.
     @Published var autocompleteData: [Food] = []
     
+    var isSuccessful: Bool!
+    
     // represents the subscription to a service
     private var cancellables = Set<AnyCancellable>()
     
     // Sends GET request to api based on keyword input
-    func fetchAutocomplete(keyword: String, apiKey: String) {
+    func fetchAutocomplete(keyword: String, apiKey: String, completion: @escaping (Bool) -> Void) {
+        print(keyword)
+        let keyword = keyword.replacingOccurrences(of: " ", with: "+")
         let url = URL(string: "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=\(apiKey)&query=\(keyword)&number=10&metaInformation=true")!
         
         URLSession.shared.dataTaskPublisher(for: url)
@@ -38,10 +42,11 @@ class AutocompleteViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 if case .failure(let error) = completion {
-                    print("Weather data fetching error: \(error)")
+                    print("Autocomplete data fetching error: \(error)")
                 }
             }, receiveValue: { data in
                 self.autocompleteData = data
+                completion(self.isSuccessful)
             })
             .store(in: &cancellables)
         
@@ -73,9 +78,6 @@ struct SearchFoodView: View {
                         NavigationLink(destination: NewFoodView(name: item.name, note: item.possibleUnits[0], category: ShopItemCategory(rawValue: item.aisle) ?? .None )) {
                             Text(item.name)
                         }
-                        .onAppear(){
-                            print(item)
-                        }
                     }
                     // Provide button to add a food item not using details from this list
                     NavigationLink(destination: NewFoodView(name: searchText)) {
@@ -89,7 +91,7 @@ struct SearchFoodView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             // When the list appears ask the view model to fetch the data
-            viewModel.fetchAutocomplete(keyword: searchText, apiKey: apiKey)
+            viewModel.fetchAutocomplete(keyword: searchText, apiKey: apiKey){ _ in }
         }
         .onDisappear {
             viewModel.cancelSubscription() // Call a method to cancel the subscription
@@ -99,27 +101,29 @@ struct SearchFoodView: View {
         .onChange(of: searchText) { newValue in
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                viewModel.fetchAutocomplete(keyword: searchText, apiKey: apiKey)
+                viewModel.fetchAutocomplete(keyword: searchText, apiKey: apiKey){ _ in }
             }
         }
     }
-
-}
-
-
-private var apiKey: String {
-      get {
-        guard let filePath = Bundle.main.path(forResource: "SpoonacularAPI-Info", ofType: "plist") else {
-          fatalError("Couldn't find file 'SpoonacularAPI-Info.plist'.")
-        }
-        let plist = NSDictionary(contentsOfFile: filePath)
-        guard let value = plist?.object(forKey: "API_KEY") as? String else {
-          fatalError("Couldn't find key 'API_KEY' in 'SpoonacularAPI-Info.plist'.")
-        }
-      if (value.starts(with: "_")) {
-        fatalError("Register for a TMDB developer account and get an API key at https://developers.themoviedb.org/3/getting-started/introduction.")
+    
+    private var apiKey: String {
+          get {
+              guard let filePath = Bundle.main.path(forResource: "SpoonacularAPI-Secret", ofType: "plist") else {
+                  fatalError("Couldn't find file 'SpoonacularAPI-Secret'.")
+              }
+              let plist = NSDictionary(contentsOfFile: filePath)
+              guard let value = plist?.object(forKey: "API_KEY") as? String else {
+                  fatalError("Couldn't find key 'API_KEY' in 'SpoonacularAPI-Info.plist'.")
+              }
+              if (value.starts(with: "_")) {
+                  fatalError("Please replace API_KEY with key from spoonacular.com")
+              }
+        return value
+      }
     }
-    return value
-  }
+
 }
+
+
+
     

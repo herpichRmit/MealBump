@@ -41,6 +41,9 @@
 		A8D446E22A9B13DF00F77403 /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D446E12A9B13DF00F77403 /* Bubble.swift */; };
 		A8EE606C2ADBADCF00E0776E /* SpoonacularAPI-Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = A8EE606B2ADBADCF00E0776E /* SpoonacularAPI-Secret.plist */; };
 		A8EE606E2ADBAE9800E0776E /* SpoonacularAPI-Secret-Sample.plist in Resources */ = {isa = PBXBuildFile; fileRef = A8EE606D2ADBAE9800E0776E /* SpoonacularAPI-Secret-Sample.plist */; };
+		A8EE60762ADBB4FB00E0776E /* mealBumpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8EE60752ADBB4FB00E0776E /* mealBumpTests.swift */; };
+		A8EE607D2ADBB54E00E0776E /* DateFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8EE607C2ADBB54E00E0776E /* DateFunctionTests.swift */; };
+		A8EE607F2ADBCBFB00E0776E /* SearchFoodViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8EE607E2ADBCBFB00E0776E /* SearchFoodViewModelTests.swift */; };
 		CD1493222ADAA97800511EEE /* DocumentationCatalog.docc in Sources */ = {isa = PBXBuildFile; fileRef = CD1493212ADAA97800511EEE /* DocumentationCatalog.docc */; };
 		CD17457F2A80D0DA00294186 /* a1s3407778App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD17457E2A80D0DA00294186 /* a1s3407778App.swift */; };
 		CD1745812A80D0DA00294186 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1745802A80D0DA00294186 /* ContentView.swift */; };
@@ -67,6 +70,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = A83AC5222ADB5C6700FB50C6;
 			remoteInfo = "a2-s3407778-widgetExtension";
+		};
+		A8EE60772ADBB4FB00E0776E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD1745732A80D0DA00294186 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD17457A2A80D0DA00294186;
+			remoteInfo = "a2-s3407778";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -119,6 +129,10 @@
 		A8D446E12A9B13DF00F77403 /* Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
 		A8EE606B2ADBADCF00E0776E /* SpoonacularAPI-Secret.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SpoonacularAPI-Secret.plist"; sourceTree = "<group>"; };
 		A8EE606D2ADBAE9800E0776E /* SpoonacularAPI-Secret-Sample.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SpoonacularAPI-Secret-Sample.plist"; sourceTree = "<group>"; };
+		A8EE60732ADBB4FB00E0776E /* mealBumpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mealBumpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8EE60752ADBB4FB00E0776E /* mealBumpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mealBumpTests.swift; sourceTree = "<group>"; };
+		A8EE607C2ADBB54E00E0776E /* DateFunctionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFunctionTests.swift; sourceTree = "<group>"; };
+		A8EE607E2ADBCBFB00E0776E /* SearchFoodViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFoodViewModelTests.swift; sourceTree = "<group>"; };
 		C4F8CD21AC6ADFD6C9153CEB /* InitialLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialLayout.swift; sourceTree = "<group>"; };
 		CD1493212ADAA97800511EEE /* DocumentationCatalog.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = DocumentationCatalog.docc; sourceTree = "<group>"; };
 		CD17457B2A80D0DA00294186 /* a2-s3407778.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "a2-s3407778.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,6 +161,13 @@
 			files = (
 				A83AC5252ADB5C6700FB50C6 /* SwiftUI.framework in Frameworks */,
 				A83AC5242ADB5C6700FB50C6 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8EE60702ADBB4FB00E0776E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +249,16 @@
 			path = Sheets;
 			sourceTree = "<group>";
 		};
+		A8EE60742ADBB4FB00E0776E /* mealBumpTests */ = {
+			isa = PBXGroup;
+			children = (
+				A8EE60752ADBB4FB00E0776E /* mealBumpTests.swift */,
+				A8EE607C2ADBB54E00E0776E /* DateFunctionTests.swift */,
+				A8EE607E2ADBCBFB00E0776E /* SearchFoodViewModelTests.swift */,
+			);
+			path = mealBumpTests;
+			sourceTree = "<group>";
+		};
 		CD1745722A80D0DA00294186 = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +266,7 @@
 				A887FC8F2ADB7D58001B58BE /* a2-s3407778.entitlements */,
 				CD17457D2A80D0DA00294186 /* a2s3407778 */,
 				A83AC5262ADB5C6700FB50C6 /* a2-s3407778-widget */,
+				A8EE60742ADBB4FB00E0776E /* mealBumpTests */,
 				A83AC5062ADB5C2900FB50C6 /* Frameworks */,
 				CD17457C2A80D0DA00294186 /* Products */,
 			);
@@ -245,6 +277,7 @@
 			children = (
 				CD17457B2A80D0DA00294186 /* a2-s3407778.app */,
 				A83AC5232ADB5C6700FB50C6 /* a2-s3407778-widgetExtension.appex */,
+				A8EE60732ADBB4FB00E0776E /* mealBumpTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -353,6 +386,24 @@
 			productReference = A83AC5232ADB5C6700FB50C6 /* a2-s3407778-widgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		A8EE60722ADBB4FB00E0776E /* mealBumpTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A8EE607B2ADBB4FB00E0776E /* Build configuration list for PBXNativeTarget "mealBumpTests" */;
+			buildPhases = (
+				A8EE606F2ADBB4FB00E0776E /* Sources */,
+				A8EE60702ADBB4FB00E0776E /* Frameworks */,
+				A8EE60712ADBB4FB00E0776E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A8EE60782ADBB4FB00E0776E /* PBXTargetDependency */,
+			);
+			name = mealBumpTests;
+			productName = mealBumpTests;
+			productReference = A8EE60732ADBB4FB00E0776E /* mealBumpTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CD17457A2A80D0DA00294186 /* a2-s3407778 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD1745892A80D0DB00294186 /* Build configuration list for PBXNativeTarget "a2-s3407778" */;
@@ -389,6 +440,10 @@
 					A83AC5222ADB5C6700FB50C6 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
+					A8EE60722ADBB4FB00E0776E = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = CD17457A2A80D0DA00294186;
+					};
 					CD17457A2A80D0DA00294186 = {
 						CreatedOnToolsVersion = 14.0.1;
 					};
@@ -413,6 +468,7 @@
 			targets = (
 				CD17457A2A80D0DA00294186 /* a2-s3407778 */,
 				A83AC5222ADB5C6700FB50C6 /* a2-s3407778-widgetExtension */,
+				A8EE60722ADBB4FB00E0776E /* mealBumpTests */,
 			);
 		};
 /* End PBXProject section */
@@ -423,6 +479,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A83AC52F2ADB5C6900FB50C6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8EE60712ADBB4FB00E0776E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +511,16 @@
 				A83AC52A2ADB5C6700FB50C6 /* a2_s3407778_widgetLiveActivity.swift in Sources */,
 				A83AC52C2ADB5C6700FB50C6 /* a2_s3407778_widget.swift in Sources */,
 				A83AC5282ADB5C6700FB50C6 /* a2_s3407778_widgetBundle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8EE606F2ADBB4FB00E0776E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8EE607F2ADBCBFB00E0776E /* SearchFoodViewModelTests.swift in Sources */,
+				A8EE60762ADBB4FB00E0776E /* mealBumpTests.swift in Sources */,
+				A8EE607D2ADBB54E00E0776E /* DateFunctionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,6 +575,11 @@
 			isa = PBXTargetDependency;
 			target = A83AC5222ADB5C6700FB50C6 /* a2-s3407778-widgetExtension */;
 			targetProxy = A83AC5332ADB5C6900FB50C6 /* PBXContainerItemProxy */;
+		};
+		A8EE60782ADBB4FB00E0776E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD17457A2A80D0DA00294186 /* a2-s3407778 */;
+			targetProxy = A8EE60772ADBB4FB00E0776E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -561,6 +639,44 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A8EE60792ADBB4FB00E0776E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q22YDM2KVH;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ethanherpich.mealBumpTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/a2-s3407778.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/a2-s3407778";
+			};
+			name = Debug;
+		};
+		A8EE607A2ADBB4FB00E0776E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q22YDM2KVH;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ethanherpich.mealBumpTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/a2-s3407778.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/a2-s3407778";
 			};
 			name = Release;
 		};
@@ -752,6 +868,15 @@
 			buildConfigurations = (
 				A83AC5372ADB5C6900FB50C6 /* Debug */,
 				A83AC5382ADB5C6900FB50C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A8EE607B2ADBB4FB00E0776E /* Build configuration list for PBXNativeTarget "mealBumpTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8EE60792ADBB4FB00E0776E /* Debug */,
+				A8EE607A2ADBB4FB00E0776E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

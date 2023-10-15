@@ -10,21 +10,23 @@ import Foundation
 /// Function to convert a date to a string
 func dateToString(date: Date) -> String {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "YYYY-MM-dd"
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
     let timeString = dateFormatter.string(from: date)
     return timeString
 }
 
 /// Function to convert a string to a date
-func stringToDate(dateString: String) -> Date {
+func stringToDate(dateString: String) throws -> Date {
   
     let dateFormatter = DateFormatter() // Create dateformatter object
     dateFormatter.dateFormat = "yyyy-MM-dd" // Set the date formatter format
+    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
     
     if let date = dateFormatter.date(from: dateString) {
         return date
     } else {
-        fatalError("Invalid date format") // If the conversion fails, crash the program
+        throw DateFormatError.invalidDateFormat
     }
 }
 
@@ -47,7 +49,9 @@ func dayNumberFromDate (date: Date) -> String {
 func generateDateArray(selectedDate: Date) -> [Date] {
     
     // Setting a calendar that starts on monday rather than gregorian
-    let myCalendar = Calendar(identifier: .iso8601)
+    var myCalendar = Calendar(identifier: .iso8601)
+
+    myCalendar.timeZone = TimeZone(secondsFromGMT: 0)!
     
     // Getting the year from the current date
     let yearForWeekOfYear = myCalendar.component(.yearForWeekOfYear, from: selectedDate)
@@ -72,4 +76,9 @@ func generateDateArray(selectedDate: Date) -> [Date] {
     }
     
     return weekArray
+}
+
+/// Enum to handle custom error case
+enum DateFormatError: Error {
+    case invalidDateFormat
 }

@@ -153,6 +153,17 @@ struct WeekDayEntry: View {
             }
         }
         .frame(height: 155, alignment: .topLeading)
+        .onAppear(){
+            print("test for tests")
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZZZ"
+            let dateObject = dateFormatter.date(from: "2023-10-15 00:00:00 +0000")
+            
+            // When
+            let result = generateDateArray(selectedDate: dateObject!)
+            print(result)
+        }
     }
     
     /// Removes event from ``EventCore`` using `indexSet` provided by forEach

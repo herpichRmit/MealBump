@@ -23,6 +23,7 @@ struct a2s3407778App: App {
              // Inserting the CoreData and Environment Object into the Environment
                  .environmentObject(settings)
                  .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                 .environment(\.timeZone, TimeZone(secondsFromGMT: 3600)!)
          }
      }
  }
